@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LibraryApi;
+using ReadDataExcel;
+using LinqToExcel;
 
 namespace QLBH.Forms
 {
@@ -22,21 +24,39 @@ namespace QLBH.Forms
         {
             try
             {
+                string file = @"C:\Users\Son Pham\Desktop\QLBH ver3\DataExcel.xlsx";
+                var excel = new ExcelQueryFactory(file);
+                var dt = from a in excel.Worksheet<ThemHangHoa>("HANG_HOA") select a;
                 var listHH = new List<ThemHangHoaPost>();
-                for (int i = 0; i < 20; i++)
+
+                foreach (var item in dt)
                 {
+                    if (string.IsNullOrEmpty(item.ten_hang_hoa))
+                    {
+                        continue;
+                    }
                     var hh = new ThemHangHoaPost();
-                    hh.id_nha_cung_cap = 1;
-                    hh.link_anh = new List<string> { "link1","link2" };
-                    hh.tag = new List<decimal> {1,4,12};
-                    hh.ten_hang_hoa = "Hàng hóa " + i.ToString();
-                    hh.mo_ta = "Dữ liệu test";
+                    hh.ten_hang_hoa = item.ten_hang_hoa;
+                    hh.id_nha_cung_cap = item.id_nha_cung_cap;
+                    var listLink = Common.TachID(item.link_anh);
+                    hh.link_anh = new List<string>();
+                    foreach (var link in listLink)
+                    {
+                        hh.link_anh.Add(link);
+                    }
+                    var listTag = Common.TachID(item.tag);
+                    hh.tag = new List<decimal>();
+                    foreach (var link in listTag)
+                    {
+                        hh.link_anh.Add(link);
+                    }
                     listHH.Add(hh);
                 }
-                MyNetwork.ThemHangHoa(listHH, this, data =>
-                {
-                    MessageBox.Show(data.Message);
-                });
+                MessageBox.Show(listHH.Count.ToString());
+                //MyNetwork.ThemHangHoa(listHH, this, data =>
+                //{
+                //    MessageBox.Show(data.Message);
+                //});
             }
             catch (Exception ex)
             {

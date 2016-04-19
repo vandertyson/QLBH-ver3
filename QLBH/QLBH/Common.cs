@@ -60,7 +60,20 @@ namespace QLBH
         {
             return ColorTranslator.FromHtml(ma_mau_html);
         }
+        public static List<string> TachID(string input)
+        {
+            var dsID = input.Split(';').ToList();
+            var listID = new List<string>();
+            foreach (var item in dsID)
+            {
+                if (string.IsNullOrEmpty(item))
+                {
+                    continue;
+                }
+                listID.Add(item);
+            }
+            return listID;
+        }
 
-        
     }
 }

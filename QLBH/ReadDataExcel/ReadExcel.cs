@@ -9,10 +9,13 @@ namespace ReadDataExcel
 {
     public class ReadExcel
     {
-        public static void FromFile<T>(string path)
+        public static object FromFile<T>(string path,string name)
         {
             var excel = new ExcelQueryFactory(path);
+            var list = from a in excel.Worksheet<T>(name) select a;
 
+            return list;
         }
+
     }
 }
