@@ -84,7 +84,7 @@ namespace LibraryApi
     }
     public class ThemHangHoaPost
     {
-        public string tenHangHoa { get; set; }
+        public string ten_hang_hoa { get; set; }
         public decimal id_nha_cung_cap { get; set; }
         public string mo_ta { get; set; }
         public List<string> link_anh { get; set; }

@@ -35,7 +35,7 @@ namespace LibraryApi
         {
             public bool Success { get; set; }
             public string Message { get; set; }
-            T Data { get; set; }
+            public T Data { get; set; }
         }
         static void requestDataWithParam<T>(Dictionary<string, object> param
             , string url
@@ -84,7 +84,7 @@ namespace LibraryApi
 
         public static void GetDanhSachLoaiHang(
             Form f,
-            CompleteHandle<TraVe<LoaiHang>> MyDelegate)
+            CompleteHandle<TraVe<List<LoaiHang>>> MyDelegate)
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             requestDataWithParam(param, URL_GET_LOAI_HANG, f, MyDelegate);

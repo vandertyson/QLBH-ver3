@@ -9,7 +9,6 @@ using System.Drawing.Imaging;
 using LibraryApi;
 using System.Drawing;
 using System.Windows.Forms;
-using Facebook;
 
 
 namespace QLBH

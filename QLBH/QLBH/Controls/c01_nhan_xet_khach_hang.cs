@@ -29,7 +29,7 @@ namespace QLBH.Controls
             InitializeComponent();
             MyNetwork.LayBaoCaoPhanHoiKhachHang(id_hang_hoa, bat_dau, so_thang, this.TopLevelControl as Form, data =>
                {
-                   v_bao_cao_phan_hoi = data;
+                   v_bao_cao_phan_hoi = data.Data;
                    data_to_chart();
                    data_to_nhan_xet_khach_hang();
                    data_to_thong_ke();

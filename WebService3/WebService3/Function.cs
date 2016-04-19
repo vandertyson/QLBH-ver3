@@ -829,34 +829,42 @@ namespace WebService3
         {
             using (var context = new TKHTQuanLyBanHangEntities())
             {
-                string ma = GenMaHangHoa(null);
+                
                 foreach (var item in list_hang_hoa)
                 {
                     var hang = new DM_HANG_HOA();
+                    string ma = GenMaHangHoa(null);
                     hang.MA_HANG_HOA = ma;
-                    ma = GenMaHangHoa(ma);
                     hang.TEN_HANG_HOA = item.ten_hang_hoa;
                     hang.ID_NHA_CUNG_CAP = item.id_nha_cung_cap;
                     hang.MO_TA = item.mo_ta;
                     hang.DA_XOA = "N";
-                    var hangHoa = context.DM_HANG_HOA.Add(hang);
-                    //var hangHoa = context.DM_HANG_HOA.Where(s => s.MA_HANG_HOA == ma).First();
-                    foreach (var link in item.link_anh)
+                    context.DM_HANG_HOA.Add(hang);
+                    context.SaveChanges();
+                    var hangHoa = context.DM_HANG_HOA.Where(s => s.MA_HANG_HOA == ma).First();
+                    if (item.link_anh != null)
                     {
-                        var linkAnh = new DM_LINK_ANH();
-                        linkAnh.ID_HANG_HOA = hangHoa.ID;
-                        linkAnh.LINK_ANH = link;
-                        context.DM_LINK_ANH.Add(linkAnh);
+                        foreach (var link in item.link_anh)
+                        {
+                            var linkAnh = new DM_LINK_ANH();
+                            linkAnh.ID_HANG_HOA = hangHoa.ID;
+                            linkAnh.LINK_ANH = link;
+                            context.DM_LINK_ANH.Add(linkAnh);
+                        }
                     }
-                    foreach (var tag in item.tag)
+                    if (item.tag != null)
                     {
-                        var tagHh = new GD_HANG_HOA_TAG();
-                        tagHh.ID_HANG_HOA = hangHoa.ID;
-                        tagHh.ID_TAG = tag;
-                        context.GD_HANG_HOA_TAG.Add(tagHh);
+                        foreach (var tag in item.tag)
+                        {
+                            var tagHh = new GD_HANG_HOA_TAG();
+                            tagHh.ID_HANG_HOA = hangHoa.ID;
+                            tagHh.ID_TAG = tag;
+                            context.GD_HANG_HOA_TAG.Add(tagHh);
+                        }
                     }
+                    context.SaveChanges();
                 }
-                context.SaveChanges();
+                
             }
         }
         #endregion
