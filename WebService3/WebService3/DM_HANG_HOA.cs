@@ -38,6 +38,7 @@ namespace WebService3
         public Nullable<decimal> ID_NHA_CUNG_CAP { get; set; }
         public string MO_TA { get; set; }
         public string DA_XOA { get; set; }
+        public string MA_TRA_CUU { get; set; }
     
         public virtual DM_NHA_CUNG_CAP DM_NHA_CUNG_CAP { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

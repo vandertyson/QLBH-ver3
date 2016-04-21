@@ -17,7 +17,7 @@ namespace WebService3
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DM_LOAI_TAG()
         {
-            this.GD_TAG = new HashSet<GD_TAG>();
+            this.GD_LOAI_TAG_CHI_TIET = new HashSet<GD_LOAI_TAG_CHI_TIET>();
         }
     
         public decimal ID { get; set; }
@@ -25,6 +25,6 @@ namespace WebService3
         public string TEN_LOAI_TAG { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GD_TAG> GD_TAG { get; set; }
+        public virtual ICollection<GD_LOAI_TAG_CHI_TIET> GD_LOAI_TAG_CHI_TIET { get; set; }
     }
 }

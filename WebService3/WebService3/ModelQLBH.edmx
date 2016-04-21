@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TKHTQuanLyBanHangModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TKHTQuanLyBanHangModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DM_CUA_HANG">
           <Key>
             <PropertyRef Name="ID" />
@@ -21,10 +21,11 @@
           </Key>
           <Property Name="ID" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MA_HANG_HOA" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="MA_TRA_CUU" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="MA_VACH" Type="nvarchar" MaxLength="50" />
           <Property Name="TEN_HANG_HOA" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="ID_NHA_CUNG_CAP" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="MO_TA" Type="ntext" />
+          <Property Name="MO_TA" Type="nvarchar" MaxLength="1000" />
           <Property Name="DA_XOA" Type="nvarchar" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="DM_KHACH_HANG">
@@ -68,6 +69,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MA_NHA_CUNG_CAP" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TEN_NHA_CUNG_CAP" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="SO_DIEN_THOAI" Type="nvarchar" MaxLength="15" />
           <Property Name="EMAIL" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -180,6 +182,14 @@
           <Property Name="ID_HANG_HOA" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="MUC_KHUYEN_MAI" Type="decimal" Precision="8" Scale="4" Nullable="false" />
         </EntityType>
+        <EntityType Name="GD_LOAI_TAG_CHI_TIET">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_LOAI_TAG" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ID_TAG" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
         <EntityType Name="GD_NHAN_XET">
           <Key>
             <PropertyRef Name="ID" />
@@ -233,18 +243,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ID_LOAI_TAG" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="MA_TAG" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="TEN_TAG" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="LINK_ANH" Type="nvarchar" MaxLength="1000" />
-        </EntityType>
-        <EntityType Name="GD_TAG_CHI_TIET">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ID_TAG_CHA" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="ID_TAG_CON" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="GD_TON_KHO">
           <Key>
@@ -542,6 +542,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_GD_LOAI_TAG_CHI_TIET_DM_LOAI_TAG">
+          <End Role="DM_LOAI_TAG" Type="Self.DM_LOAI_TAG" Multiplicity="1" />
+          <End Role="GD_LOAI_TAG_CHI_TIET" Type="Self.GD_LOAI_TAG_CHI_TIET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_LOAI_TAG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GD_LOAI_TAG_CHI_TIET">
+              <PropertyRef Name="ID_LOAI_TAG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GD_LOAI_TAG_CHI_TIET_GD_TAG">
+          <End Role="GD_TAG" Type="Self.GD_TAG" Multiplicity="1" />
+          <End Role="GD_LOAI_TAG_CHI_TIET" Type="Self.GD_LOAI_TAG_CHI_TIET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GD_TAG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GD_LOAI_TAG_CHI_TIET">
+              <PropertyRef Name="ID_TAG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_GD_NHAN_XET_DM_HANG_HOA">
           <End Role="DM_HANG_HOA" Type="Self.DM_HANG_HOA" Multiplicity="1" />
           <End Role="GD_NHAN_XET" Type="Self.GD_NHAN_XET" Multiplicity="*" />
@@ -638,42 +662,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_GD_TAG_CHI_TIET_GD_TAG">
-          <End Role="GD_TAG" Type="Self.GD_TAG" Multiplicity="1" />
-          <End Role="GD_TAG_CHI_TIET" Type="Self.GD_TAG_CHI_TIET" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GD_TAG">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="GD_TAG_CHI_TIET">
-              <PropertyRef Name="ID_TAG_CHA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_GD_TAG_CHI_TIET_GD_TAG1">
-          <End Role="GD_TAG" Type="Self.GD_TAG" Multiplicity="1" />
-          <End Role="GD_TAG_CHI_TIET" Type="Self.GD_TAG_CHI_TIET" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GD_TAG">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="GD_TAG_CHI_TIET">
-              <PropertyRef Name="ID_TAG_CON" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_GD_TAG_DM_LOAI_TAG">
-          <End Role="DM_LOAI_TAG" Type="Self.DM_LOAI_TAG" Multiplicity="1" />
-          <End Role="GD_TAG" Type="Self.GD_TAG" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DM_LOAI_TAG">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="GD_TAG">
-              <PropertyRef Name="ID_LOAI_TAG" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_GD_TON_KHO_DM_CUA_HANG">
           <End Role="DM_CUA_HANG" Type="Self.DM_CUA_HANG" Multiplicity="1" />
           <End Role="GD_TON_KHO" Type="Self.GD_TON_KHO" Multiplicity="*" />
@@ -729,13 +717,13 @@
           <EntitySet Name="GD_HOA_DON_CHI_TIET" EntityType="Self.GD_HOA_DON_CHI_TIET" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GD_KHUYEN_MAI" EntityType="Self.GD_KHUYEN_MAI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GD_KHUYEN_MAI_CHI_TIET" EntityType="Self.GD_KHUYEN_MAI_CHI_TIET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GD_LOAI_TAG_CHI_TIET" EntityType="Self.GD_LOAI_TAG_CHI_TIET" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GD_NHAN_XET" EntityType="Self.GD_NHAN_XET" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GD_PHIEU_NHAP_CHI_TIET" EntityType="Self.GD_PHIEU_NHAP_CHI_TIET" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GD_PHIEU_NHAP_XUAT" EntityType="Self.GD_PHIEU_NHAP_XUAT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GD_PHIEU_NHAP_XUAT_CHI_TIET" EntityType="Self.GD_PHIEU_NHAP_XUAT_CHI_TIET" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GD_SAN_PHAM_UA_THICH" EntityType="Self.GD_SAN_PHAM_UA_THICH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GD_TAG" EntityType="Self.GD_TAG" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="GD_TAG_CHI_TIET" EntityType="Self.GD_TAG_CHI_TIET" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GD_TON_KHO" EntityType="Self.GD_TON_KHO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_DM_HANG_HOA_DM_NHA_CUNG_CAP" Association="Self.FK_DM_HANG_HOA_DM_NHA_CUNG_CAP">
@@ -830,6 +818,14 @@
             <End Role="GD_KHUYEN_MAI" EntitySet="GD_KHUYEN_MAI" />
             <End Role="GD_KHUYEN_MAI_CHI_TIET" EntitySet="GD_KHUYEN_MAI_CHI_TIET" />
           </AssociationSet>
+          <AssociationSet Name="FK_GD_LOAI_TAG_CHI_TIET_DM_LOAI_TAG" Association="Self.FK_GD_LOAI_TAG_CHI_TIET_DM_LOAI_TAG">
+            <End Role="DM_LOAI_TAG" EntitySet="DM_LOAI_TAG" />
+            <End Role="GD_LOAI_TAG_CHI_TIET" EntitySet="GD_LOAI_TAG_CHI_TIET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GD_LOAI_TAG_CHI_TIET_GD_TAG" Association="Self.FK_GD_LOAI_TAG_CHI_TIET_GD_TAG">
+            <End Role="GD_TAG" EntitySet="GD_TAG" />
+            <End Role="GD_LOAI_TAG_CHI_TIET" EntitySet="GD_LOAI_TAG_CHI_TIET" />
+          </AssociationSet>
           <AssociationSet Name="FK_GD_NHAN_XET_DM_HANG_HOA" Association="Self.FK_GD_NHAN_XET_DM_HANG_HOA">
             <End Role="DM_HANG_HOA" EntitySet="DM_HANG_HOA" />
             <End Role="GD_NHAN_XET" EntitySet="GD_NHAN_XET" />
@@ -862,18 +858,6 @@
             <End Role="DM_TAI_KHOAN" EntitySet="DM_TAI_KHOAN" />
             <End Role="GD_SAN_PHAM_UA_THICH" EntitySet="GD_SAN_PHAM_UA_THICH" />
           </AssociationSet>
-          <AssociationSet Name="FK_GD_TAG_CHI_TIET_GD_TAG" Association="Self.FK_GD_TAG_CHI_TIET_GD_TAG">
-            <End Role="GD_TAG" EntitySet="GD_TAG" />
-            <End Role="GD_TAG_CHI_TIET" EntitySet="GD_TAG_CHI_TIET" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GD_TAG_CHI_TIET_GD_TAG1" Association="Self.FK_GD_TAG_CHI_TIET_GD_TAG1">
-            <End Role="GD_TAG" EntitySet="GD_TAG" />
-            <End Role="GD_TAG_CHI_TIET" EntitySet="GD_TAG_CHI_TIET" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GD_TAG_DM_LOAI_TAG" Association="Self.FK_GD_TAG_DM_LOAI_TAG">
-            <End Role="DM_LOAI_TAG" EntitySet="DM_LOAI_TAG" />
-            <End Role="GD_TAG" EntitySet="GD_TAG" />
-          </AssociationSet>
           <AssociationSet Name="FK_GD_TON_KHO_DM_CUA_HANG" Association="Self.FK_GD_TON_KHO_DM_CUA_HANG">
             <End Role="DM_CUA_HANG" EntitySet="DM_CUA_HANG" />
             <End Role="GD_TON_KHO" EntitySet="GD_TON_KHO" />
@@ -887,8 +871,7 @@
             <End Role="GD_TON_KHO" EntitySet="GD_TON_KHO" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TKHTQuanLyBanHangModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -914,7 +897,7 @@
           <Property Name="MA_VACH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TEN_HANG_HOA" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ID_NHA_CUNG_CAP" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="MO_TA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MO_TA" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="DA_XOA" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="DM_NHA_CUNG_CAP" Relationship="Self.FK_DM_HANG_HOA_DM_NHA_CUNG_CAP" FromRole="DM_HANG_HOA" ToRole="DM_NHA_CUNG_CAP" />
           <NavigationProperty Name="DM_LINK_ANH" Relationship="Self.FK_DM_LINK_ANH_DM_HANG_HOA" FromRole="DM_HANG_HOA" ToRole="DM_LINK_ANH" />
@@ -929,6 +912,7 @@
           <NavigationProperty Name="GD_PHIEU_NHAP_XUAT_CHI_TIET" Relationship="Self.FK_GD_PHIEU_NHAP_XUAT_CHI_TIET_DM_HANG_HOA" FromRole="DM_HANG_HOA" ToRole="GD_PHIEU_NHAP_XUAT_CHI_TIET" />
           <NavigationProperty Name="GD_SAN_PHAM_UA_THICH" Relationship="Self.FK_GD_SAN_PHAM_UA_THIC_DM_HANG_HOA" FromRole="DM_HANG_HOA" ToRole="GD_SAN_PHAM_UA_THICH" />
           <NavigationProperty Name="GD_TON_KHO" Relationship="Self.FK_GD_TON_KHO_DM_HANG_HOA" FromRole="DM_HANG_HOA" ToRole="GD_TON_KHO" />
+          <Property Name="MA_TRA_CUU" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DM_KHACH_HANG">
           <Key>
@@ -959,7 +943,7 @@
           <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MA_LOAI_TAG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TEN_LOAI_TAG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="GD_TAG" Relationship="Self.FK_GD_TAG_DM_LOAI_TAG" FromRole="DM_LOAI_TAG" ToRole="GD_TAG" />
+          <NavigationProperty Name="GD_LOAI_TAG_CHI_TIET" Relationship="Self.FK_GD_LOAI_TAG_CHI_TIET_DM_LOAI_TAG" FromRole="DM_LOAI_TAG" ToRole="GD_LOAI_TAG_CHI_TIET" />
         </EntityType>
         <EntityType Name="DM_LOAI_TAI_KHOAN">
           <Key>
@@ -981,6 +965,7 @@
           <Property Name="DIA_CHI" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TEN_NGUOI_DAI_DIEN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DM_HANG_HOA" Relationship="Self.FK_DM_HANG_HOA_DM_NHA_CUNG_CAP" FromRole="DM_NHA_CUNG_CAP" ToRole="DM_HANG_HOA" />
+          <Property Name="MA_NHA_CUNG_CAP" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DM_QUYEN">
           <Key>
@@ -1117,6 +1102,16 @@
           <NavigationProperty Name="DM_HANG_HOA" Relationship="Self.FK_GD_KHUYEN_MAI_CHI_TIET_DM_HANG_HOA" FromRole="GD_KHUYEN_MAI_CHI_TIET" ToRole="DM_HANG_HOA" />
           <NavigationProperty Name="GD_KHUYEN_MAI" Relationship="Self.FK_GD_KHUYEN_MAI_CHI_TIET_GD_KHUYEN_MAI" FromRole="GD_KHUYEN_MAI_CHI_TIET" ToRole="GD_KHUYEN_MAI" />
         </EntityType>
+        <EntityType Name="GD_LOAI_TAG_CHI_TIET">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_LOAI_TAG" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ID_TAG" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="DM_LOAI_TAG" Relationship="Self.FK_GD_LOAI_TAG_CHI_TIET_DM_LOAI_TAG" FromRole="GD_LOAI_TAG_CHI_TIET" ToRole="DM_LOAI_TAG" />
+          <NavigationProperty Name="GD_TAG" Relationship="Self.FK_GD_LOAI_TAG_CHI_TIET_GD_TAG" FromRole="GD_LOAI_TAG_CHI_TIET" ToRole="GD_TAG" />
+        </EntityType>
         <EntityType Name="GD_NHAN_XET">
           <Key>
             <PropertyRef Name="ID" />
@@ -1182,27 +1177,13 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ID_LOAI_TAG" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="MA_TAG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TEN_TAG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LINK_ANH" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DM_LOAI_TAG" Relationship="Self.FK_GD_TAG_DM_LOAI_TAG" FromRole="GD_TAG" ToRole="DM_LOAI_TAG" />
           <NavigationProperty Name="GD_HANG_HOA_TAG" Relationship="Self.FK_GD_HANG_HOA_TAG_GD_TAG" FromRole="GD_TAG" ToRole="GD_HANG_HOA_TAG" />
           <NavigationProperty Name="GD_HOA_DON_CHI_TIET" Relationship="Self.FK_GD_HOA_DON_CHI_TIET_GD_TAG" FromRole="GD_TAG" ToRole="GD_HOA_DON_CHI_TIET" />
+          <NavigationProperty Name="GD_LOAI_TAG_CHI_TIET" Relationship="Self.FK_GD_LOAI_TAG_CHI_TIET_GD_TAG" FromRole="GD_TAG" ToRole="GD_LOAI_TAG_CHI_TIET" />
           <NavigationProperty Name="GD_PHIEU_NHAP_XUAT_CHI_TIET" Relationship="Self.FK_GD_PHIEU_NHAP_XUAT_CHI_TIET_GD_TAG" FromRole="GD_TAG" ToRole="GD_PHIEU_NHAP_XUAT_CHI_TIET" />
-          <NavigationProperty Name="GD_TAG_CHI_TIET" Relationship="Self.FK_GD_TAG_CHI_TIET_GD_TAG" FromRole="GD_TAG" ToRole="GD_TAG_CHI_TIET" />
-          <NavigationProperty Name="GD_TAG_CHI_TIET1" Relationship="Self.FK_GD_TAG_CHI_TIET_GD_TAG1" FromRole="GD_TAG" ToRole="GD_TAG_CHI_TIET" />
           <NavigationProperty Name="GD_TON_KHO" Relationship="Self.FK_GD_TON_KHO_GD_TAG" FromRole="GD_TAG" ToRole="GD_TON_KHO" />
-        </EntityType>
-        <EntityType Name="GD_TAG_CHI_TIET">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ID_TAG_CHA" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="ID_TAG_CON" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <NavigationProperty Name="GD_TAG" Relationship="Self.FK_GD_TAG_CHI_TIET_GD_TAG" FromRole="GD_TAG_CHI_TIET" ToRole="GD_TAG" />
-          <NavigationProperty Name="GD_TAG1" Relationship="Self.FK_GD_TAG_CHI_TIET_GD_TAG1" FromRole="GD_TAG_CHI_TIET" ToRole="GD_TAG" />
         </EntityType>
         <EntityType Name="GD_TON_KHO">
           <Key>
@@ -1431,14 +1412,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_GD_TAG_DM_LOAI_TAG">
+        <Association Name="FK_GD_LOAI_TAG_CHI_TIET_DM_LOAI_TAG">
           <End Role="DM_LOAI_TAG" Type="Self.DM_LOAI_TAG" Multiplicity="1" />
-          <End Role="GD_TAG" Type="Self.GD_TAG" Multiplicity="*" />
+          <End Role="GD_LOAI_TAG_CHI_TIET" Type="Self.GD_LOAI_TAG_CHI_TIET" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DM_LOAI_TAG">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="GD_TAG">
+            <Dependent Role="GD_LOAI_TAG_CHI_TIET">
               <PropertyRef Name="ID_LOAI_TAG" />
             </Dependent>
           </ReferentialConstraint>
@@ -1599,6 +1580,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_GD_LOAI_TAG_CHI_TIET_GD_TAG">
+          <End Role="GD_TAG" Type="Self.GD_TAG" Multiplicity="1" />
+          <End Role="GD_LOAI_TAG_CHI_TIET" Type="Self.GD_LOAI_TAG_CHI_TIET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GD_TAG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GD_LOAI_TAG_CHI_TIET">
+              <PropertyRef Name="ID_TAG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_GD_GIA_NHAP_BINH_QUAN_GD_PHIEU_NHAP_XUAT">
           <End Role="GD_PHIEU_NHAP_XUAT" Type="Self.GD_PHIEU_NHAP_XUAT" Multiplicity="1" />
           <End Role="GD_PHIEU_NHAP_CHI_TIET" Type="Self.GD_PHIEU_NHAP_CHI_TIET" Multiplicity="*" />
@@ -1635,30 +1628,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_GD_TAG_CHI_TIET_GD_TAG">
-          <End Role="GD_TAG" Type="Self.GD_TAG" Multiplicity="1" />
-          <End Role="GD_TAG_CHI_TIET" Type="Self.GD_TAG_CHI_TIET" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GD_TAG">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="GD_TAG_CHI_TIET">
-              <PropertyRef Name="ID_TAG_CHA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_GD_TAG_CHI_TIET_GD_TAG1">
-          <End Role="GD_TAG" Type="Self.GD_TAG" Multiplicity="1" />
-          <End Role="GD_TAG_CHI_TIET" Type="Self.GD_TAG_CHI_TIET" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GD_TAG">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="GD_TAG_CHI_TIET">
-              <PropertyRef Name="ID_TAG_CON" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_GD_TON_KHO_GD_TAG">
           <End Role="GD_TAG" Type="Self.GD_TAG" Multiplicity="1" />
           <End Role="GD_TON_KHO" Type="Self.GD_TON_KHO" Multiplicity="*" />
@@ -1690,13 +1659,13 @@
           <EntitySet Name="GD_HOA_DON_CHI_TIET" EntityType="Self.GD_HOA_DON_CHI_TIET" />
           <EntitySet Name="GD_KHUYEN_MAI" EntityType="Self.GD_KHUYEN_MAI" />
           <EntitySet Name="GD_KHUYEN_MAI_CHI_TIET" EntityType="Self.GD_KHUYEN_MAI_CHI_TIET" />
+          <EntitySet Name="GD_LOAI_TAG_CHI_TIET" EntityType="Self.GD_LOAI_TAG_CHI_TIET" />
           <EntitySet Name="GD_NHAN_XET" EntityType="Self.GD_NHAN_XET" />
           <EntitySet Name="GD_PHIEU_NHAP_CHI_TIET" EntityType="Self.GD_PHIEU_NHAP_CHI_TIET" />
           <EntitySet Name="GD_PHIEU_NHAP_XUAT" EntityType="Self.GD_PHIEU_NHAP_XUAT" />
           <EntitySet Name="GD_PHIEU_NHAP_XUAT_CHI_TIET" EntityType="Self.GD_PHIEU_NHAP_XUAT_CHI_TIET" />
           <EntitySet Name="GD_SAN_PHAM_UA_THICH" EntityType="Self.GD_SAN_PHAM_UA_THICH" />
           <EntitySet Name="GD_TAG" EntityType="Self.GD_TAG" />
-          <EntitySet Name="GD_TAG_CHI_TIET" EntityType="Self.GD_TAG_CHI_TIET" />
           <EntitySet Name="GD_TON_KHO" EntityType="Self.GD_TON_KHO" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <AssociationSet Name="FK_DM_QUYEN_CHI_TIET_DM_CUA_HANG" Association="Self.FK_DM_QUYEN_CHI_TIET_DM_CUA_HANG">
@@ -1767,9 +1736,9 @@
             <End Role="DM_TAI_KHOAN" EntitySet="DM_TAI_KHOAN" />
             <End Role="DM_KHACH_HANG" EntitySet="DM_KHACH_HANG" />
           </AssociationSet>
-          <AssociationSet Name="FK_GD_TAG_DM_LOAI_TAG" Association="Self.FK_GD_TAG_DM_LOAI_TAG">
+          <AssociationSet Name="FK_GD_LOAI_TAG_CHI_TIET_DM_LOAI_TAG" Association="Self.FK_GD_LOAI_TAG_CHI_TIET_DM_LOAI_TAG">
             <End Role="DM_LOAI_TAG" EntitySet="DM_LOAI_TAG" />
-            <End Role="GD_TAG" EntitySet="GD_TAG" />
+            <End Role="GD_LOAI_TAG_CHI_TIET" EntitySet="GD_LOAI_TAG_CHI_TIET" />
           </AssociationSet>
           <AssociationSet Name="FK_DM_TAI_KHOAN_DM_LOAI_TAI_KHOAN" Association="Self.FK_DM_TAI_KHOAN_DM_LOAI_TAI_KHOAN">
             <End Role="DM_LOAI_TAI_KHOAN" EntitySet="DM_LOAI_TAI_KHOAN" />
@@ -1823,6 +1792,10 @@
             <End Role="GD_KHUYEN_MAI" EntitySet="GD_KHUYEN_MAI" />
             <End Role="GD_KHUYEN_MAI_CHI_TIET" EntitySet="GD_KHUYEN_MAI_CHI_TIET" />
           </AssociationSet>
+          <AssociationSet Name="FK_GD_LOAI_TAG_CHI_TIET_GD_TAG" Association="Self.FK_GD_LOAI_TAG_CHI_TIET_GD_TAG">
+            <End Role="GD_TAG" EntitySet="GD_TAG" />
+            <End Role="GD_LOAI_TAG_CHI_TIET" EntitySet="GD_LOAI_TAG_CHI_TIET" />
+          </AssociationSet>
           <AssociationSet Name="FK_GD_GIA_NHAP_BINH_QUAN_GD_PHIEU_NHAP_XUAT" Association="Self.FK_GD_GIA_NHAP_BINH_QUAN_GD_PHIEU_NHAP_XUAT">
             <End Role="GD_PHIEU_NHAP_XUAT" EntitySet="GD_PHIEU_NHAP_XUAT" />
             <End Role="GD_PHIEU_NHAP_CHI_TIET" EntitySet="GD_PHIEU_NHAP_CHI_TIET" />
@@ -1834,14 +1807,6 @@
           <AssociationSet Name="FK_GD_PHIEU_NHAP_XUAT_CHI_TIET_GD_TAG" Association="Self.FK_GD_PHIEU_NHAP_XUAT_CHI_TIET_GD_TAG">
             <End Role="GD_TAG" EntitySet="GD_TAG" />
             <End Role="GD_PHIEU_NHAP_XUAT_CHI_TIET" EntitySet="GD_PHIEU_NHAP_XUAT_CHI_TIET" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GD_TAG_CHI_TIET_GD_TAG" Association="Self.FK_GD_TAG_CHI_TIET_GD_TAG">
-            <End Role="GD_TAG" EntitySet="GD_TAG" />
-            <End Role="GD_TAG_CHI_TIET" EntitySet="GD_TAG_CHI_TIET" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GD_TAG_CHI_TIET_GD_TAG1" Association="Self.FK_GD_TAG_CHI_TIET_GD_TAG1">
-            <End Role="GD_TAG" EntitySet="GD_TAG" />
-            <End Role="GD_TAG_CHI_TIET" EntitySet="GD_TAG_CHI_TIET" />
           </AssociationSet>
           <AssociationSet Name="FK_GD_TON_KHO_GD_TAG" Association="Self.FK_GD_TON_KHO_GD_TAG">
             <End Role="GD_TAG" EntitySet="GD_TAG" />
@@ -1868,6 +1833,7 @@
           <EntitySetMapping Name="DM_HANG_HOA">
             <EntityTypeMapping TypeName="TKHTQuanLyBanHangModel.DM_HANG_HOA">
               <MappingFragment StoreEntitySet="DM_HANG_HOA">
+                <ScalarProperty Name="MA_TRA_CUU" ColumnName="MA_TRA_CUU" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="MA_HANG_HOA" ColumnName="MA_HANG_HOA" />
                 <ScalarProperty Name="MA_VACH" ColumnName="MA_VACH" />
@@ -1921,6 +1887,7 @@
           <EntitySetMapping Name="DM_NHA_CUNG_CAP">
             <EntityTypeMapping TypeName="TKHTQuanLyBanHangModel.DM_NHA_CUNG_CAP">
               <MappingFragment StoreEntitySet="DM_NHA_CUNG_CAP">
+                <ScalarProperty Name="MA_NHA_CUNG_CAP" ColumnName="MA_NHA_CUNG_CAP" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TEN_NHA_CUNG_CAP" ColumnName="TEN_NHA_CUNG_CAP" />
                 <ScalarProperty Name="SO_DIEN_THOAI" ColumnName="SO_DIEN_THOAI" />
@@ -2047,6 +2014,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="GD_LOAI_TAG_CHI_TIET">
+            <EntityTypeMapping TypeName="TKHTQuanLyBanHangModel.GD_LOAI_TAG_CHI_TIET">
+              <MappingFragment StoreEntitySet="GD_LOAI_TAG_CHI_TIET">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_LOAI_TAG" ColumnName="ID_LOAI_TAG" />
+                <ScalarProperty Name="ID_TAG" ColumnName="ID_TAG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="GD_NHAN_XET">
             <EntityTypeMapping TypeName="TKHTQuanLyBanHangModel.GD_NHAN_XET">
               <MappingFragment StoreEntitySet="GD_NHAN_XET">
@@ -2104,19 +2080,8 @@
             <EntityTypeMapping TypeName="TKHTQuanLyBanHangModel.GD_TAG">
               <MappingFragment StoreEntitySet="GD_TAG">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ID_LOAI_TAG" ColumnName="ID_LOAI_TAG" />
-                <ScalarProperty Name="MA_TAG" ColumnName="MA_TAG" />
                 <ScalarProperty Name="TEN_TAG" ColumnName="TEN_TAG" />
                 <ScalarProperty Name="LINK_ANH" ColumnName="LINK_ANH" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="GD_TAG_CHI_TIET">
-            <EntityTypeMapping TypeName="TKHTQuanLyBanHangModel.GD_TAG_CHI_TIET">
-              <MappingFragment StoreEntitySet="GD_TAG_CHI_TIET">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ID_TAG_CHA" ColumnName="ID_TAG_CHA" />
-                <ScalarProperty Name="ID_TAG_CON" ColumnName="ID_TAG_CON" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

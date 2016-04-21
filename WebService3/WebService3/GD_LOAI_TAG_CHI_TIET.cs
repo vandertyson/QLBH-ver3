@@ -12,13 +12,13 @@ namespace WebService3
     using System;
     using System.Collections.Generic;
     
-    public partial class GD_TAG_CHI_TIET
+    public partial class GD_LOAI_TAG_CHI_TIET
     {
         public decimal ID { get; set; }
-        public decimal ID_TAG_CHA { get; set; }
-        public decimal ID_TAG_CON { get; set; }
+        public decimal ID_LOAI_TAG { get; set; }
+        public decimal ID_TAG { get; set; }
     
+        public virtual DM_LOAI_TAG DM_LOAI_TAG { get; set; }
         public virtual GD_TAG GD_TAG { get; set; }
-        public virtual GD_TAG GD_TAG1 { get; set; }
     }
 }

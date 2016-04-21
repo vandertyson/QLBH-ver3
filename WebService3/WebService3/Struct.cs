@@ -27,7 +27,6 @@ namespace WebService3
     public class Tag
     {
         public decimal id { get; set; }
-        public string ma_tag { get; set; }
         public string ten_tag { get; set; }
     }
     public class LoaiTag
@@ -118,10 +117,11 @@ namespace WebService3
     public class ThemHangHoa
     {
         public string ten_hang_hoa { get; set; }
-        public decimal id_nha_cung_cap { get; set; }
+        public string ma_tra_cuu { get; set; }
+        public string ma_nha_cung_cap { get; set; }
         public string mo_ta { get; set; }
         public List<string> link_anh { get; set; }
-        public List<decimal> tag { get; set; }
+        public List<string> tag { get; set; }
     }
     #endregion
     namespace ChiTietHangHoa
@@ -185,6 +185,25 @@ namespace WebService3
                 public int tong_doanh_so { get; set; }
             }
         }
+    }
+    #endregion
+    #region Quản lý bán hàng
+    namespace PhieuNhap
+    {
+        public class HangHoa
+        {
+            public string ma_tra_cuu_hang_hoa { get; set; }
+            public string ten_size { get; set; }
+            public int so_luong { get; set; }
+            public decimal gia_nhap { get; set; }
+        }
+        public class PhieuNhap
+        {
+            public string ma_phieu { get; set; }
+            public DateTime ngay_nhap { get; set; }
+            public string ten_tai_khoan { get; set; }
+            public List<HangHoa> list_hang_hoa { get; set; }
+        }   
     }
     #endregion
     #region Quản lý thành viên

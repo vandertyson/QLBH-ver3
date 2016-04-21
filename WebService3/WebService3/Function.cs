@@ -5,6 +5,8 @@ using System.Web;
 using System.IO;
 using WebService3.ChiTietHangHoa.BaoCaoPhanHoi;
 using WebService3.ChiTietHangHoa.BaoCaoKhuyenMai;
+using System.Transactions;
+using System.Data;
 
 namespace WebService3
 {
@@ -75,69 +77,68 @@ namespace WebService3
             {
                 var idLoaiTag = context.DM_LOAI_TAG.Where(s => s.MA_LOAI_TAG == DANH_MUC_SP).First().ID;
                 var listDs = new List<LoaiHang>();
-                var dsLoaiHang = context.GD_TAG.Where(s => s.ID_LOAI_TAG == idLoaiTag).ToList();
+                var dsLoaiHang = context.GD_LOAI_TAG_CHI_TIET.Where(s => s.ID_LOAI_TAG == idLoaiTag).ToList();
                 foreach (var item in dsLoaiHang)
                 {
                     var loaiHang = new LoaiHang();
                     loaiHang.id = item.ID;
-                    loaiHang.ma_tag = item.MA_TAG;
-                    loaiHang.ten_tag = item.TEN_TAG;
-                    loaiHang.link_anh = item.LINK_ANH;
+                    loaiHang.ten_tag = item.GD_TAG.TEN_TAG;
+                    loaiHang.link_anh = item.GD_TAG.LINK_ANH;
                     listDs.Add(loaiHang);
                 }
                 return listDs;
             }
         }
-        public static List<HangHoaMaster> TimKiemHangHoa(string ma_hang_hoa, string ten_hang_hoa, string list_id_loai_tag)
-        {
-            using (var context = new TKHTQuanLyBanHangEntities())
-            {
-                if (ma_hang_hoa != null && ma_hang_hoa != "")
-                {
-                    var listHangHoa = context.DM_HANG_HOA.Where(s => s.MA_HANG_HOA == ma_hang_hoa).ToList();
-                    return toListHangHoaMaster(listHangHoa);
-                }
-                if (ten_hang_hoa != null && ten_hang_hoa != "")
-                {
-                    var listHangHoa = context.DM_HANG_HOA.Where(s => s.TEN_HANG_HOA.Contains(ten_hang_hoa)).ToList();
-                    return toListHangHoaMaster(listHangHoa);
-                }
-                if (list_id_loai_tag != null && list_id_loai_tag != "")
-                {
-                    var listHangHoa = new List<DM_HANG_HOA>();
-                    var listTag = Common.TachID(list_id_loai_tag);
-                    listTag = layHetIDTag(listTag);
-                    var dsHangHoa = context.DM_HANG_HOA.ToList();
-                    foreach (var hangHoa in dsHangHoa)
-                    {
-                        var idHangHoa = hangHoa.ID;
-                        var hangHoaTag = context.GD_HANG_HOA_TAG
-                            .Where(s => s.ID_HANG_HOA == idHangHoa).ToList();
-                        var listHhTag = new List<decimal>();
-                        foreach (var tag in hangHoaTag)
-                        {
-                            listHhTag.Add(tag.ID_TAG);
-                        }
-                        int flag = 1;
-                        foreach (var tag in listTag)
-                        {
-                            if (!listHhTag.Contains(tag))
-                            {
-                                flag = 0;
-                                break;
-                            }
-                        }
-                        if (flag == 0)
-                        {
-                            continue;
-                        }
-                        listHangHoa.Add(hangHoa);
-                    }
-                    return toListHangHoaMaster(listHangHoa);
-                }
-                return null;
-            }
-        }
+        //public static List<HangHoaMaster> TimKiemHangHoa(string ma_hang_hoa, string ten_hang_hoa, string list_id_loai_tag)
+        //{
+        //    using (var context = new TKHTQuanLyBanHangEntities())
+        //    {
+        //        if (ma_hang_hoa != null && ma_hang_hoa != "")
+        //        {
+        //            var listHangHoa = context.DM_HANG_HOA.Where(s => s.MA_HANG_HOA == ma_hang_hoa).ToList();
+        //            return toListHangHoaMaster(listHangHoa);
+        //        }
+        //        if (ten_hang_hoa != null && ten_hang_hoa != "")
+        //        {
+        //            var listHangHoa = context.DM_HANG_HOA.Where(s => s.TEN_HANG_HOA.Contains(ten_hang_hoa)).ToList();
+        //            return toListHangHoaMaster(listHangHoa);
+        //        }
+        //        if (list_id_loai_tag != null && list_id_loai_tag != "")
+        //        {
+        //            var listHangHoa = new List<DM_HANG_HOA>();
+        //            var listTag = Common.TachID(list_id_loai_tag);
+        //            listTag = layHetIDTag(listTag);
+        //            var dsHangHoa = context.DM_HANG_HOA.ToList();
+        //            foreach (var hangHoa in dsHangHoa)
+        //            {
+        //                var idHangHoa = hangHoa.ID;
+        //                var hangHoaTag = context.GD_HANG_HOA_TAG
+        //                    .Where(s => s.ID_HANG_HOA == idHangHoa).ToList();
+        //                var listHhTag = new List<decimal>();
+        //                foreach (var tag in hangHoaTag)
+        //                {
+        //                    listHhTag.Add(tag.ID_TAG);
+        //                }
+        //                int flag = 1;
+        //                foreach (var tag in listTag)
+        //                {
+        //                    if (!listHhTag.Contains(tag))
+        //                    {
+        //                        flag = 0;
+        //                        break;
+        //                    }
+        //                }
+        //                if (flag == 0)
+        //                {
+        //                    continue;
+        //                }
+        //                listHangHoa.Add(hangHoa);
+        //            }
+        //            return toListHangHoaMaster(listHangHoa);
+        //        }
+        //        return null;
+        //    }
+        //}
         static List<HangHoaMaster> toListHangHoaMaster(List<DM_HANG_HOA> dsHangHoa)
         {
             var listHh = new List<HangHoaMaster>();
@@ -170,7 +171,6 @@ namespace WebService3
                 {
                     var t = new Tag();
                     t.id = tag.ID_TAG;
-                    t.ma_tag = tag.GD_TAG.MA_TAG;
                     t.ten_tag = tag.GD_TAG.TEN_TAG;
                     listTag.Add(t);
                 }
@@ -191,33 +191,33 @@ namespace WebService3
             }
             return gia[0].GIA;
         }
-        public static List<decimal> layHetIDTag(List<decimal> listTag)
-        {
-            using (var context = new TKHTQuanLyBanHangEntities())
-            {
-                var xet = new List<decimal>();
-                foreach (var item in listTag)
-                {
-                    xet.Add(item);
-                }
-                while (xet.Count > 0)
-                {
-                    var id = xet[0];
-                    var tagCon = context.GD_TAG_CHI_TIET.Where(s => s.ID_TAG_CHA == id).ToList();
-                    foreach (var item in tagCon)
-                    {
-                        if (xet.Contains(item.ID_TAG_CON))
-                        {
-                            continue;
-                        }
-                        xet.Add(item.ID_TAG_CON);
-                        listTag.Add(item.ID_TAG_CON);
-                    }
-                    xet.RemoveAt(0);
-                }
-                return listTag;
-            }
-        }
+        //public static List<decimal> layHetIDTag(List<decimal> listTag)
+        //{
+        //    using (var context = new TKHTQuanLyBanHangEntities())
+        //    {
+        //        var xet = new List<decimal>();
+        //        foreach (var item in listTag)
+        //        {
+        //            xet.Add(item);
+        //        }
+        //        while (xet.Count > 0)
+        //        {
+        //            var id = xet[0];
+        //            var tagCon = context.GD_TAG_CHI_TIET.Where(s => s.ID_TAG_CHA == id).ToList();
+        //            foreach (var item in tagCon)
+        //            {
+        //                if (xet.Contains(item.ID_TAG_CON))
+        //                {
+        //                    continue;
+        //                }
+        //                xet.Add(item.ID_TAG_CON);
+        //                listTag.Add(item.ID_TAG_CON);
+        //            }
+        //            xet.RemoveAt(0);
+        //        }
+        //        return listTag;
+        //    }
+        //}
         public static List<LoaiTag> LayDanhSachTag()
         {
             using (var context = new TKHTQuanLyBanHangEntities())
@@ -231,12 +231,11 @@ namespace WebService3
                     loaiTag.ma_loai_tag = item.MA_LOAI_TAG;
                     loaiTag.ten_loai_tag = item.TEN_LOAI_TAG;
                     var listTag = new List<Tag>();
-                    foreach (var item2 in item.GD_TAG)
+                    foreach (var item2 in item.GD_LOAI_TAG_CHI_TIET)
                     {
                         var tag = new Tag();
                         tag.id = item2.ID;
-                        tag.ten_tag = item2.TEN_TAG;
-                        tag.ma_tag = item2.MA_TAG;
+                        tag.ten_tag = item2.GD_TAG.TEN_TAG;
                         listTag.Add(tag);
                     }
                     loaiTag.ds_tag = listTag;
@@ -307,7 +306,6 @@ namespace WebService3
                 {
                     var t = new Tag();
                     t.id = tag.ID_TAG;
-                    t.ma_tag = tag.GD_TAG.MA_TAG;
                     t.ten_tag = tag.GD_TAG.TEN_TAG;
                     listTag.Add(t);
                 }
@@ -333,13 +331,13 @@ namespace WebService3
                     ch.id = cuaHang.ID;
                     ch.ten_cua_hang = cuaHang.TEN_CUA_HANG;
                     var listSoLuong = new List<SoLuong>();
-                    var dsSize = context.DM_LOAI_TAG.Where(s => s.MA_LOAI_TAG == SIZE).First().GD_TAG;
+                    var dsSize = context.DM_LOAI_TAG.Where(s => s.MA_LOAI_TAG == SIZE).First().GD_LOAI_TAG_CHI_TIET;
                     foreach (var item in dsSize)
                     {
                         var soLuong = new SoLuong();
                         var idSize = item.ID;
                         soLuong.id_size = idSize;
-                        soLuong.ten_size = item.TEN_TAG;
+                        soLuong.ten_size = item.GD_TAG.TEN_TAG;
                         var sl = context.GD_TON_KHO
                             .Where(s => s.ID_HANG_HOA == id && s.ID_SIZE == idSize)
                             .ToList();
@@ -360,19 +358,19 @@ namespace WebService3
                 return hangHoa;
             }
         }
-        public static List<HangHoa> DanhSachHangHoa(decimal id_loai_hang)
-        {
-            using (var context = new TKHTQuanLyBanHangEntities())
-            {
-                var ket_qua = new List<HangHoa>();
-                var ket_qua1 = TimKiemHangHoa("", "", id_loai_hang.ToString());
-                foreach (var item in ket_qua1)
-                {
-                    ket_qua.Add(ChiTietHangHoa(item.id));
-                }
-                return ket_qua;
-            }
-        }
+        //public static List<HangHoa> DanhSachHangHoa(decimal id_loai_hang)
+        //{
+        //    using (var context = new TKHTQuanLyBanHangEntities())
+        //    {
+        //        var ket_qua = new List<HangHoa>();
+        //        var ket_qua1 = TimKiemHangHoa("", "", id_loai_hang.ToString());
+        //        foreach (var item in ket_qua1)
+        //        {
+        //            ket_qua.Add(ChiTietHangHoa(item.id));
+        //        }
+        //        return ket_qua;
+        //    }
+        //}
         #endregion
         #region Chi tiết hàng hóa - Tình trạng kinh doanh
         public static object tinh_trang_kinh_doanh(decimal id_hang_hoa, DateTime bd, DateTime kt)
@@ -797,10 +795,10 @@ namespace WebService3
             using (var context = new TKHTQuanLyBanHangEntities())
             {
                 string lastMaHangHoa = "H000001";
-                if (ma==null)
+                if (ma == null)
                 {
                     var lastHangHoa = context.DM_HANG_HOA.OrderByDescending(s => s.MA_HANG_HOA).FirstOrDefault();
-                    
+
                     if (lastHangHoa != null)
                     {
                         lastMaHangHoa = lastHangHoa.MA_HANG_HOA;
@@ -824,48 +822,175 @@ namespace WebService3
                 return hangHoaMoi;
             }
         }
-        public static void ThemHangHoa(
+        public static object ThemHangHoa(
             List<ThemHangHoa> list_hang_hoa)
         {
-            using (var context = new TKHTQuanLyBanHangEntities())
+            using (var scope = new TransactionScope())
             {
-                
-                foreach (var item in list_hang_hoa)
+                try
                 {
-                    var hang = new DM_HANG_HOA();
-                    string ma = GenMaHangHoa(null);
-                    hang.MA_HANG_HOA = ma;
-                    hang.TEN_HANG_HOA = item.ten_hang_hoa;
-                    hang.ID_NHA_CUNG_CAP = item.id_nha_cung_cap;
-                    hang.MO_TA = item.mo_ta;
-                    hang.DA_XOA = "N";
-                    context.DM_HANG_HOA.Add(hang);
-                    context.SaveChanges();
-                    var hangHoa = context.DM_HANG_HOA.Where(s => s.MA_HANG_HOA == ma).First();
-                    if (item.link_anh != null)
+                    using (var context = new TKHTQuanLyBanHangEntities())
                     {
-                        foreach (var link in item.link_anh)
+                        var listMaTraCuuSai = new List<string>();
+                        var listMaNhaCungCapSai = new List<string>();
+                        foreach (var item in list_hang_hoa)
                         {
-                            var linkAnh = new DM_LINK_ANH();
-                            linkAnh.ID_HANG_HOA = hangHoa.ID;
-                            linkAnh.LINK_ANH = link;
-                            context.DM_LINK_ANH.Add(linkAnh);
+                            var ma = item.ma_tra_cuu;
+                            var temp = context.DM_HANG_HOA.Where(s => s.MA_TRA_CUU == ma).FirstOrDefault();
+                            if (temp != null)
+                            {
+                                listMaTraCuuSai.Add(ma);
+                            }
+                            var ma2 = item.ma_nha_cung_cap;
+                            var temp2 = context.DM_NHA_CUNG_CAP.Where(s => s.MA_NHA_CUNG_CAP == ma2).FirstOrDefault();
+                            if (temp2 == null)
+                            {
+                                listMaNhaCungCapSai.Add(ma2);
+                            }
                         }
-                    }
-                    if (item.tag != null)
-                    {
-                        foreach (var tag in item.tag)
+                        if (listMaNhaCungCapSai.Count > 0 || listMaTraCuuSai.Count > 0)
                         {
-                            var tagHh = new GD_HANG_HOA_TAG();
-                            tagHh.ID_HANG_HOA = hangHoa.ID;
-                            tagHh.ID_TAG = tag;
-                            context.GD_HANG_HOA_TAG.Add(tagHh);
+                            var dic = new Dictionary<string, object>();
+                            dic["ma_tra_cuu_sai"] = listMaTraCuuSai;
+                            dic["ma_nha_cung_cap_sai"] = listMaNhaCungCapSai;
+                            return dic;
                         }
+                        foreach (var item in list_hang_hoa)
+                        {
+                            var hang = new DM_HANG_HOA();
+                            string ma = GenMaHangHoa(null);
+                            hang.MA_HANG_HOA = ma;
+                            hang.TEN_HANG_HOA = item.ten_hang_hoa;
+                            var macc = item.ma_nha_cung_cap;
+                            var nhaCC = context.DM_NHA_CUNG_CAP.Where(s => s.MA_NHA_CUNG_CAP == macc).First();
+                            hang.ID_NHA_CUNG_CAP = nhaCC.ID;
+                            hang.MA_TRA_CUU = item.ma_tra_cuu;
+                            hang.MO_TA = item.mo_ta;
+                            hang.DA_XOA = "N";
+                            context.DM_HANG_HOA.Add(hang);
+                            context.SaveChanges();
+                            var hangHoa = context.DM_HANG_HOA.Where(s => s.MA_HANG_HOA == ma).First();
+                            if (item.link_anh != null)
+                            {
+                                foreach (var link in item.link_anh)
+                                {
+                                    var linkAnh = new DM_LINK_ANH();
+                                    linkAnh.ID_HANG_HOA = hangHoa.ID;
+                                    linkAnh.LINK_ANH = link;
+                                    context.DM_LINK_ANH.Add(linkAnh);
+                                }
+                            }
+                            if (item.tag != null)
+                            {
+                                foreach (var tag in item.tag)
+                                {
+                                    var old = context.GD_TAG.Where(s => s.TEN_TAG == tag).FirstOrDefault();
+                                    var hhTag = new GD_HANG_HOA_TAG();
+                                    hhTag.ID_HANG_HOA = hangHoa.ID;
+                                    if (old != null)
+                                    {
+                                        hhTag.ID_TAG = old.ID;
+                                    }
+                                    else
+                                    {
+                                        var ne = new GD_TAG();
+                                        ne.TEN_TAG = tag;
+                                        context.GD_TAG.Add(ne);
+                                        context.SaveChanges();
+                                        var neww = context.GD_TAG.Where(s => s.TEN_TAG == tag).First();
+                                        hhTag.ID_TAG = neww.ID;
+                                    }
+                                    context.GD_HANG_HOA_TAG.Add(hhTag);
+                                }
+                            }
+                            context.SaveChanges();
+                        }
+                        scope.Complete();
                     }
-                    context.SaveChanges();
+                    return null;
                 }
-                
+
+                catch (Exception v_e)
+                {
+                    scope.Dispose();
+                    throw;
+                }
+
+
+
+                // }
+                //dbContextTransaction.Commit();
+
+                //}
+                //catch (Exception e)
+                //{
+                //    dbContextTransaction.Rollback();
+                //    throw e;
+                //}
             }
+
+
+        }
+        #endregion
+        #endregion
+        #region Quản lý bán hàng
+        #region Quản lý nhập xuất kho
+        public static object ThemPhieuNhapXuat(
+           List<PhieuNhap.PhieuNhap> list_phieu_nhap)
+        {
+            using (var scope = new TransactionScope())
+            {
+                try
+                {
+                    using (var context = new TKHTQuanLyBanHangEntities())
+                    {                       
+                        //
+                        var gd_phieu_nhap_xuat = new GD_PHIEU_NHAP_XUAT();
+                        //
+
+                        foreach (var item in list_phieu_nhap)
+                        {
+                            //Nhap phieu
+                            gd_phieu_nhap_xuat.LOAI_PHIEU = "N";
+                            gd_phieu_nhap_xuat.MA_PHIEU = item.ma_phieu;
+                            gd_phieu_nhap_xuat.ID_TAI_KHOAN = context.DM_TAI_KHOAN.Where(s => s.TEN_TAI_KHOAN == item.ten_tai_khoan).First().ID;
+                            gd_phieu_nhap_xuat.NGAY_NHAP = item.ngay_nhap;
+                            context.GD_PHIEU_NHAP_XUAT.Add(gd_phieu_nhap_xuat);
+                            context.SaveChanges();
+
+                            //Nhap chi tiet phieu
+                            foreach (var item2 in item.list_hang_hoa)
+                            {
+                                var gd_phieu_nhap_xuat_chi_tiet = new GD_PHIEU_NHAP_XUAT_CHI_TIET();
+                                gd_phieu_nhap_xuat_chi_tiet.ID_PHIEU_NHAP_XUAT = gd_phieu_nhap_xuat.ID;
+                                gd_phieu_nhap_xuat_chi_tiet.ID_HANG_HOA = context.DM_HANG_HOA.Where(s => s.MA_TRA_CUU == item2.ma_tra_cuu_hang_hoa).First().ID;
+                                gd_phieu_nhap_xuat_chi_tiet.ID_SIZE = context.GD_TAG.Where(s => s.TEN_TAG == item2.ten_size).First().ID;
+                                gd_phieu_nhap_xuat_chi_tiet.SO_LUONG = item2.so_luong;
+                                context.GD_PHIEU_NHAP_XUAT_CHI_TIET.Add(gd_phieu_nhap_xuat_chi_tiet);
+
+                                //Nhap binh quan gia nhap
+                                var gd_phieu_nhap_chi_tiet = new GD_PHIEU_NHAP_CHI_TIET();
+                                gd_phieu_nhap_chi_tiet.ID_PHIEU_NHAP_XUAT = gd_phieu_nhap_xuat.ID;
+                                gd_phieu_nhap_chi_tiet.ID_HANG_HOA = gd_phieu_nhap_xuat_chi_tiet.ID_HANG_HOA;
+                                gd_phieu_nhap_chi_tiet.GIA_NHAP = item2.gia_nhap;
+                                gd_phieu_nhap_chi_tiet.GIA_NHAP_BINH_QUAN = tinh_gia_nhap_binh_quan(gd_phieu_nhap_chi_tiet.ID_HANG_HOA, item2.gia_nhap);
+                            }
+                        }
+                    }
+                    scope.Complete();
+                    return null;
+                }
+                catch (Exception v_e)
+                {
+                    scope.Dispose();
+                    throw v_e;
+                }
+            }
+        }
+
+        private static decimal tinh_gia_nhap_binh_quan(decimal iD_HANG_HOA, decimal gia_nhap)
+        {
+            return 0;
         }
         #endregion
         #endregion
@@ -958,5 +1083,6 @@ namespace WebService3
             }
         }
         #endregion
+
     }
 }

@@ -85,10 +85,11 @@ namespace LibraryApi
     public class ThemHangHoaPost
     {
         public string ten_hang_hoa { get; set; }
-        public decimal id_nha_cung_cap { get; set; }
+        public string ma_tra_cuu { get; set; }
+        public string ma_nha_cung_cap { get; set; }
         public string mo_ta { get; set; }
         public List<string> link_anh { get; set; }
-        public List<decimal> tag { get; set; }
+        public List<string> tag { get; set; }
     }
     namespace ChiTietHangHoa
     {

@@ -58,6 +58,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -103,7 +104,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="QLBanHang.asmx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common.cs" />
@@ -162,6 +165,9 @@
     <Compile Include="GD_KHUYEN_MAI_CHI_TIET.cs">
       <DependentUpon>ModelQLBH.tt</DependentUpon>
     </Compile>
+    <Compile Include="GD_LOAI_TAG_CHI_TIET.cs">
+      <DependentUpon>ModelQLBH.tt</DependentUpon>
+    </Compile>
     <Compile Include="GD_NHAN_XET.cs">
       <DependentUpon>ModelQLBH.tt</DependentUpon>
     </Compile>
@@ -178,9 +184,6 @@
       <DependentUpon>ModelQLBH.tt</DependentUpon>
     </Compile>
     <Compile Include="GD_TAG.cs">
-      <DependentUpon>ModelQLBH.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GD_TAG_CHI_TIET.cs">
       <DependentUpon>ModelQLBH.tt</DependentUpon>
     </Compile>
     <Compile Include="GD_TON_KHO.cs">

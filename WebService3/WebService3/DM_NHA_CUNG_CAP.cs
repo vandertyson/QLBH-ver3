@@ -26,6 +26,7 @@ namespace WebService3
         public string EMAIL { get; set; }
         public string DIA_CHI { get; set; }
         public string TEN_NGUOI_DAI_DIEN { get; set; }
+        public string MA_NHA_CUNG_CAP { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DM_HANG_HOA> DM_HANG_HOA { get; set; }

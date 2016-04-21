@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LibraryApi;
-using ReadDataExcel;
 using LinqToExcel;
 
 namespace QLBH.Forms
@@ -25,38 +24,40 @@ namespace QLBH.Forms
             try
             {
                 string file = @"C:\Users\Son Pham\Desktop\QLBH ver3\DataExcel.xlsx";
+                string path = @"http://quanlybanhang.somee.com/docx/";
                 var excel = new ExcelQueryFactory(file);
                 var dt = from a in excel.Worksheet<ThemHangHoa>("HANG_HOA") select a;
                 var listHH = new List<ThemHangHoaPost>();
 
                 foreach (var item in dt)
                 {
-                    if (string.IsNullOrEmpty(item.ten_hang_hoa))
+                    if (string.IsNullOrEmpty(item.Ten))
                     {
                         continue;
                     }
                     var hh = new ThemHangHoaPost();
-                    hh.ten_hang_hoa = item.ten_hang_hoa;
-                    hh.id_nha_cung_cap = item.id_nha_cung_cap;
-                    var listLink = Common.TachID(item.link_anh);
+                    hh.ten_hang_hoa = item.Ten;
+                    hh.ma_nha_cung_cap = item.MaNhaCungCap;
+                    hh.ma_tra_cuu = item.MaTraCuu;
+                    var listLink = Common.TachID(item.Link);
                     hh.link_anh = new List<string>();
                     foreach (var link in listLink)
                     {
                         hh.link_anh.Add(link);
                     }
-                    var listTag = Common.TachID(item.tag);
-                    hh.tag = new List<decimal>();
-                    foreach (var link in listTag)
+                    var listTag = Common.TachID(item.Tag);
+                    hh.tag = new List<string>();
+                    foreach (var t in listTag)
                     {
-                        hh.link_anh.Add(link);
+                        hh.tag.Add(t);
                     }
                     listHH.Add(hh);
+
                 }
-                MessageBox.Show(listHH.Count.ToString());
-                //MyNetwork.ThemHangHoa(listHH, this, data =>
-                //{
-                //    MessageBox.Show(data.Message);
-                //});
+                MyNetwork.ThemHangHoa(listHH, this, data =>
+                {
+                    MessageBox.Show(data.Message);
+                });
             }
             catch (Exception ex)
             {

@@ -58,9 +58,9 @@ namespace WebService3
                 var ma_hang_hoa = Context.Request["ma_hang_hoa"];
                 var ten_hang_hoa = Context.Request["ten_hang_hoa"];
                 var list_id_loai_tag = Context.Request["list_id_loai_tag"];
-                var data = Function.TimKiemHangHoa(ma_hang_hoa, ten_hang_hoa, list_id_loai_tag);
-                var result = new KetQuaTraVe(true, "Thành công", data);
-                TraKetQua(result);
+                //var data = Function.TimKiemHangHoa(ma_hang_hoa, ten_hang_hoa, list_id_loai_tag);
+                //var result = new KetQuaTraVe(true, "Thành công", data);
+                //TraKetQua(result);
             }
             catch (Exception e)
             {
@@ -106,9 +106,9 @@ namespace WebService3
         {
             try
             {
-                var data = Function.DanhSachHangHoa(id_loai_hang_hoa);
-                var result = new KetQuaTraVe(true, "Thành công", data);
-                TraKetQua(result);
+                //var data = Function.DanhSachHangHoa(id_loai_hang_hoa);
+                //var result = new KetQuaTraVe(true, "Thành công", data);
+                //TraKetQua(result);
             }
             catch (Exception e)
             {
