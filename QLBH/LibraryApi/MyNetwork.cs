@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System.Windows.Forms;
 using LibraryApi.ChiTietHangHoa.BaoCaoKhuyenMai;
 using LibraryApi.ChiTietHangHoa.BaoCaoPhanHoi;
+using LibraryApi.QuanLyBanHang;
 namespace LibraryApi
 {
     public class MyNetwork
@@ -25,7 +26,9 @@ namespace LibraryApi
         #region Chi tiết hàng hóa
         public const string URL_LAY_BAO_CAO_PHAN_HOI_KHACH_HANG = URL_SERVICE + @"BaoCaoPhanHoiKhachHang";
         public const string URL_LAY_BAO_CAO_CHI_TIET_KHUYEN_MAI = URL_SERVICE + @"BaoCaoChiTietKhuyenMai";
-       
+        #endregion
+        #region Quản lý bán hàng
+        public const string URL_THEM_PHIEU_NHAP_EXCEL = URL_SERVICE + @"ThemPhieuNhapExcel";
         #endregion
         #endregion
 
@@ -122,6 +125,17 @@ namespace LibraryApi
             requestDataWithParam(param, URL_THEM_HANG_HOA, f, MyDelegate);
         }
         #endregion
+        #endregion
+        #region Quản lý bán hàng
+        public static void ThemPhieuNhapTuExcel(
+            List<PhieuNhap> list_phieu_nhap,
+            Form f,
+            CompleteHandle<TraVe<string>> MyDelegate)
+        {
+            Dictionary<string, object> param = new Dictionary<string, object>();
+            param["list_phieu_nhap"] = JsonConvert.SerializeObject(list_phieu_nhap);
+            requestDataWithParam(param, URL_THEM_PHIEU_NHAP_EXCEL, f, MyDelegate);
+        }
         #endregion
 
 

@@ -38,6 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnThem = new System.Windows.Forms.Button();
+            this.m_btn_phieu_nhap = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtMa
@@ -122,11 +123,22 @@
             this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
+            // m_btn_phieu_nhap
+            // 
+            this.m_btn_phieu_nhap.Location = new System.Drawing.Point(618, 309);
+            this.m_btn_phieu_nhap.Name = "m_btn_phieu_nhap";
+            this.m_btn_phieu_nhap.Size = new System.Drawing.Size(75, 23);
+            this.m_btn_phieu_nhap.TabIndex = 10;
+            this.m_btn_phieu_nhap.Text = "Phiếu nhập";
+            this.m_btn_phieu_nhap.UseVisualStyleBackColor = true;
+            this.m_btn_phieu_nhap.Click += new System.EventHandler(this.m_btn_phieu_nhap_Click);
+            // 
             // Test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(867, 350);
+            this.Controls.Add(this.m_btn_phieu_nhap);
             this.Controls.Add(this.btnThem);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -156,5 +168,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnThem;
+        private System.Windows.Forms.Button m_btn_phieu_nhap;
     }
 }

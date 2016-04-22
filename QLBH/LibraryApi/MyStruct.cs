@@ -156,6 +156,23 @@ namespace LibraryApi
 
         #endregion
     }
+    namespace QuanLyBanHang
+    {
+        public class HangHoa
+        {
+            public string ma_tra_cuu_hang_hoa { get; set; }
+            public string ten_size { get; set; }
+            public int so_luong { get; set; }
+            public decimal gia_nhap { get; set; }
+        }
+        public class PhieuNhap
+        {
+            public DateTime ngay_nhap { get; set; }
+            public string ten_tai_khoan { get; set; }
+            public decimal id_cua_hang { get; set; }
+            public List<HangHoa> list_hang_hoa { get; set; }
+        }
+    }
 }
 
 
