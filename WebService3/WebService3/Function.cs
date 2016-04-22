@@ -790,35 +790,31 @@ namespace WebService3
 
         #endregion
         #region Cập nhật danh mục hàng hóa
-        public static string GenMaHangHoa(string ma)
+        public static string GenMa(string key,int num,string last)
         {
             using (var context = new TKHTQuanLyBanHangEntities())
             {
-                string lastMaHangHoa = "H000001";
-                if (ma == null)
+                string lastMaHangHoa = key;
+                for (int i = 0; i < num-1; i++)
                 {
-                    var lastHangHoa = context.DM_HANG_HOA.OrderByDescending(s => s.MA_HANG_HOA).FirstOrDefault();
-
-                    if (lastHangHoa != null)
-                    {
-                        lastMaHangHoa = lastHangHoa.MA_HANG_HOA;
-                    }
+                    lastMaHangHoa += "0";
                 }
-                else
+                lastMaHangHoa += "1";
+                if (last!=null)
                 {
-                    lastMaHangHoa = ma;
+                    lastMaHangHoa = last;
                 }
                 while (char.IsLetter(lastMaHangHoa[0]))
                 {
-                    lastMaHangHoa = lastMaHangHoa.Substring(1);
+                    lastMaHangHoa = lastMaHangHoa.Substring(key.Length);
                 }
                 var iden = (long.Parse(lastMaHangHoa) + 1).ToString();
                 string space = "";
-                for (int i = 0; i < 6 - iden.Length; i++)
+                for (int i = 0; i < num - iden.Length; i++)
                 {
                     space += "0";
                 }
-                string hangHoaMoi = "H" + space + iden;
+                string hangHoaMoi = key + space + iden;
                 return hangHoaMoi;
             }
         }
@@ -858,7 +854,9 @@ namespace WebService3
                         foreach (var item in list_hang_hoa)
                         {
                             var hang = new DM_HANG_HOA();
-                            string ma = GenMaHangHoa(null);
+                            var lastHangHoa = context.DM_HANG_HOA.OrderByDescending(s => s.MA_HANG_HOA).FirstOrDefault();
+                            var maCu = lastHangHoa == null ? null : lastHangHoa.MA_HANG_HOA;
+                            string ma = GenMa("H",6,maCu);
                             hang.MA_HANG_HOA = ma;
                             hang.TEN_HANG_HOA = item.ten_hang_hoa;
                             var macc = item.ma_nha_cung_cap;
@@ -943,7 +941,7 @@ namespace WebService3
                 try
                 {
                     using (var context = new TKHTQuanLyBanHangEntities())
-                    {                       
+                    {
                         //
                         var gd_phieu_nhap_xuat = new GD_PHIEU_NHAP_XUAT();
                         //
@@ -952,7 +950,9 @@ namespace WebService3
                         {
                             //Nhap phieu
                             gd_phieu_nhap_xuat.LOAI_PHIEU = "N";
-                            gd_phieu_nhap_xuat.MA_PHIEU = item.ma_phieu;
+                            var lastPhieu = context.GD_PHIEU_NHAP_XUAT.OrderByDescending(s => s.MA_PHIEU).FirstOrDefault();
+                            var maCu = lastPhieu == null ? null : lastPhieu.MA_PHIEU;
+                            gd_phieu_nhap_xuat.MA_PHIEU = GenMa("P",7,maCu);
                             gd_phieu_nhap_xuat.ID_TAI_KHOAN = context.DM_TAI_KHOAN.Where(s => s.TEN_TAI_KHOAN == item.ten_tai_khoan).First().ID;
                             gd_phieu_nhap_xuat.NGAY_NHAP = item.ngay_nhap;
                             context.GD_PHIEU_NHAP_XUAT.Add(gd_phieu_nhap_xuat);
@@ -988,8 +988,21 @@ namespace WebService3
             }
         }
 
-        private static decimal tinh_gia_nhap_binh_quan(decimal iD_HANG_HOA, decimal gia_nhap)
+        private static decimal tinh_gia_nhap_binh_quan(decimal id_cua_hang, decimal iD_HANG_HOA, decimal gia_nhap)
         {
+            using (var context = new TKHTQuanLyBanHangEntities())
+            {
+                var temp = context.GD_PHIEU_NHAP_CHI_TIET
+                    .Where(s => s.ID_HANG_HOA == iD_HANG_HOA).FirstOrDefault();
+                if (temp == null)
+                {
+                    return gia_nhap;
+                }
+                var slDu = context.GD_TON_KHO
+                    .Where(s => s.ID_CUA_HANG == id_cua_hang && s.ID_HANG_HOA == iD_HANG_HOA)
+                    .Sum(s => s.SO_LUONG_TON_KHO);
+                var giaBinhQuanCu = context.GD_PHIEU_NHAP_CHI_TIET.Where(s => s.)
+            }
             return 0;
         }
         #endregion
