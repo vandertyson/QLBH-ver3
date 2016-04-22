@@ -20,6 +20,7 @@ namespace WebService3
             this.DM_QUYEN_CHI_TIET = new HashSet<DM_QUYEN_CHI_TIET>();
             this.GD_HOA_DON = new HashSet<GD_HOA_DON>();
             this.GD_TON_KHO = new HashSet<GD_TON_KHO>();
+            this.GD_PHIEU_NHAP_XUAT = new HashSet<GD_PHIEU_NHAP_XUAT>();
         }
     
         public decimal ID { get; set; }
@@ -34,5 +35,7 @@ namespace WebService3
         public virtual ICollection<GD_HOA_DON> GD_HOA_DON { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GD_TON_KHO> GD_TON_KHO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GD_PHIEU_NHAP_XUAT> GD_PHIEU_NHAP_XUAT { get; set; }
     }
 }

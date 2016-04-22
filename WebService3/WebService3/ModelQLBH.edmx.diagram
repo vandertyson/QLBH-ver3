@@ -68,6 +68,7 @@
         <AssociationConnector Association="TKHTQuanLyBanHangModel.FK_GD_PHIEU_NHAP_XUAT_CHI_TIET_GD_PHIEU_NHAP_XUAT" ManuallyRouted="false" />
         <AssociationConnector Association="TKHTQuanLyBanHangModel.FK_GD_PHIEU_NHAP_XUAT_CHI_TIET_GD_TAG" ManuallyRouted="false" />
         <AssociationConnector Association="TKHTQuanLyBanHangModel.FK_GD_TON_KHO_GD_TAG" ManuallyRouted="false" />
+        <AssociationConnector Association="TKHTQuanLyBanHangModel.FK_GD_PHIEU_NHAP_XUAT_DM_CUA_HANG" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -234,5 +234,24 @@ namespace WebService3
                 TraKetQua(result);
             }
         }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void ThemPhieuNhapExcel(string list_phieu_nhap)
+        {
+            try
+            {
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                var listPhieu = js.Deserialize<List<PhieuNhap.PhieuNhap>>(list_phieu_nhap);
+                Function.ThemPhieuNhapXuat(listPhieu);
+                var result = new KetQuaTraVe(true, "Thành công", null);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, e.Message, null);
+                TraKetQua(result);
+            }
+        }
     }
 }

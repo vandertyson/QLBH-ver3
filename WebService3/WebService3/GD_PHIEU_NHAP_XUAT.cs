@@ -26,11 +26,13 @@ namespace WebService3
         public System.DateTime NGAY_NHAP { get; set; }
         public string LOAI_PHIEU { get; set; }
         public Nullable<decimal> ID_TAI_KHOAN { get; set; }
+        public decimal ID_CUA_HANG { get; set; }
     
         public virtual DM_TAI_KHOAN DM_TAI_KHOAN { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GD_PHIEU_NHAP_CHI_TIET> GD_PHIEU_NHAP_CHI_TIET { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GD_PHIEU_NHAP_XUAT_CHI_TIET> GD_PHIEU_NHAP_XUAT_CHI_TIET { get; set; }
+        public virtual DM_CUA_HANG DM_CUA_HANG { get; set; }
     }
 }

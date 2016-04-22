@@ -219,6 +219,7 @@
           <Property Name="NGAY_NHAP" Type="datetime" Nullable="false" />
           <Property Name="LOAI_PHIEU" Type="nvarchar" MaxLength="1" Nullable="false" />
           <Property Name="ID_TAI_KHOAN" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ID_CUA_HANG" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="GD_PHIEU_NHAP_XUAT_CHI_TIET">
           <Key>
@@ -626,6 +627,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_GD_PHIEU_NHAP_XUAT_DM_CUA_HANG">
+          <End Role="DM_CUA_HANG" Type="Self.DM_CUA_HANG" Multiplicity="1" />
+          <End Role="GD_PHIEU_NHAP_XUAT" Type="Self.GD_PHIEU_NHAP_XUAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_CUA_HANG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GD_PHIEU_NHAP_XUAT">
+              <PropertyRef Name="ID_CUA_HANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_GD_PHIEU_NHAP_XUAT_DM_TAI_KHOAN">
           <End Role="DM_TAI_KHOAN" Type="Self.DM_TAI_KHOAN" Multiplicity="0..1" />
           <End Role="GD_PHIEU_NHAP_XUAT" Type="Self.GD_PHIEU_NHAP_XUAT" Multiplicity="*" />
@@ -846,6 +859,10 @@
             <End Role="GD_TAG" EntitySet="GD_TAG" />
             <End Role="GD_PHIEU_NHAP_XUAT_CHI_TIET" EntitySet="GD_PHIEU_NHAP_XUAT_CHI_TIET" />
           </AssociationSet>
+          <AssociationSet Name="FK_GD_PHIEU_NHAP_XUAT_DM_CUA_HANG" Association="Self.FK_GD_PHIEU_NHAP_XUAT_DM_CUA_HANG">
+            <End Role="DM_CUA_HANG" EntitySet="DM_CUA_HANG" />
+            <End Role="GD_PHIEU_NHAP_XUAT" EntitySet="GD_PHIEU_NHAP_XUAT" />
+          </AssociationSet>
           <AssociationSet Name="FK_GD_PHIEU_NHAP_XUAT_DM_TAI_KHOAN" Association="Self.FK_GD_PHIEU_NHAP_XUAT_DM_TAI_KHOAN">
             <End Role="DM_TAI_KHOAN" EntitySet="DM_TAI_KHOAN" />
             <End Role="GD_PHIEU_NHAP_XUAT" EntitySet="GD_PHIEU_NHAP_XUAT" />
@@ -887,6 +904,7 @@
           <NavigationProperty Name="DM_QUYEN_CHI_TIET" Relationship="Self.FK_DM_QUYEN_CHI_TIET_DM_CUA_HANG" FromRole="DM_CUA_HANG" ToRole="DM_QUYEN_CHI_TIET" />
           <NavigationProperty Name="GD_HOA_DON" Relationship="Self.FK_GD_HOA_DON_DM_CUA_HANG" FromRole="DM_CUA_HANG" ToRole="GD_HOA_DON" />
           <NavigationProperty Name="GD_TON_KHO" Relationship="Self.FK_GD_TON_KHO_DM_CUA_HANG" FromRole="DM_CUA_HANG" ToRole="GD_TON_KHO" />
+          <NavigationProperty Name="GD_PHIEU_NHAP_XUAT" Relationship="TKHTQuanLyBanHangModel.FK_GD_PHIEU_NHAP_XUAT_DM_CUA_HANG" FromRole="DM_CUA_HANG" ToRole="GD_PHIEU_NHAP_XUAT" />
         </EntityType>
         <EntityType Name="DM_HANG_HOA">
           <Key>
@@ -1148,6 +1166,8 @@
           <NavigationProperty Name="DM_TAI_KHOAN" Relationship="Self.FK_GD_PHIEU_NHAP_XUAT_DM_TAI_KHOAN" FromRole="GD_PHIEU_NHAP_XUAT" ToRole="DM_TAI_KHOAN" />
           <NavigationProperty Name="GD_PHIEU_NHAP_CHI_TIET" Relationship="Self.FK_GD_GIA_NHAP_BINH_QUAN_GD_PHIEU_NHAP_XUAT" FromRole="GD_PHIEU_NHAP_XUAT" ToRole="GD_PHIEU_NHAP_CHI_TIET" />
           <NavigationProperty Name="GD_PHIEU_NHAP_XUAT_CHI_TIET" Relationship="Self.FK_GD_PHIEU_NHAP_XUAT_CHI_TIET_GD_PHIEU_NHAP_XUAT" FromRole="GD_PHIEU_NHAP_XUAT" ToRole="GD_PHIEU_NHAP_XUAT_CHI_TIET" />
+          <Property Name="ID_CUA_HANG" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="DM_CUA_HANG" Relationship="TKHTQuanLyBanHangModel.FK_GD_PHIEU_NHAP_XUAT_DM_CUA_HANG" FromRole="GD_PHIEU_NHAP_XUAT" ToRole="DM_CUA_HANG" />
         </EntityType>
         <EntityType Name="GD_PHIEU_NHAP_XUAT_CHI_TIET">
           <Key>
@@ -1812,7 +1832,23 @@
             <End Role="GD_TAG" EntitySet="GD_TAG" />
             <End Role="GD_TON_KHO" EntitySet="GD_TON_KHO" />
           </AssociationSet>
+          <AssociationSet Name="FK_GD_PHIEU_NHAP_XUAT_DM_CUA_HANG" Association="TKHTQuanLyBanHangModel.FK_GD_PHIEU_NHAP_XUAT_DM_CUA_HANG">
+            <End Role="DM_CUA_HANG" EntitySet="DM_CUA_HANG" />
+            <End Role="GD_PHIEU_NHAP_XUAT" EntitySet="GD_PHIEU_NHAP_XUAT" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_GD_PHIEU_NHAP_XUAT_DM_CUA_HANG">
+          <End Type="TKHTQuanLyBanHangModel.DM_CUA_HANG" Role="DM_CUA_HANG" Multiplicity="1" />
+          <End Type="TKHTQuanLyBanHangModel.GD_PHIEU_NHAP_XUAT" Role="GD_PHIEU_NHAP_XUAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DM_CUA_HANG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GD_PHIEU_NHAP_XUAT">
+              <PropertyRef Name="ID_CUA_HANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2048,6 +2084,7 @@
           <EntitySetMapping Name="GD_PHIEU_NHAP_XUAT">
             <EntityTypeMapping TypeName="TKHTQuanLyBanHangModel.GD_PHIEU_NHAP_XUAT">
               <MappingFragment StoreEntitySet="GD_PHIEU_NHAP_XUAT">
+                <ScalarProperty Name="ID_CUA_HANG" ColumnName="ID_CUA_HANG" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="MA_PHIEU" ColumnName="MA_PHIEU" />
                 <ScalarProperty Name="NGAY_NHAP" ColumnName="NGAY_NHAP" />
