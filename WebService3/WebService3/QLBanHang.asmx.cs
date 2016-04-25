@@ -25,12 +25,19 @@ namespace WebService3
         }
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void HelloName(string first_name)
+        public void Test()
         {
-            string last_name = Context.Request["last_name"];
-            string name = first_name + " " + last_name;
-            var result = new KetQuaTraVe(true, "Thành công", "Xin chào " + name);
-            TraKetQua(result);
+            try
+            {
+                Function.Test();
+                var result = new KetQuaTraVe(true, "Thành công", null);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, "Thất bại", e.Message);
+                TraKetQua(result);
+            }
         }
         [WebMethod]
         #region Quản lý danh mục hàng hóa

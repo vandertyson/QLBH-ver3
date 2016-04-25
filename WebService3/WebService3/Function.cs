@@ -68,6 +68,63 @@ namespace WebService3
             File.WriteAllBytes(path, bin);
             return WEB_ADDRESS + path + @"/" + file_name;
         }
+        public static void Test()
+        {
+            using (var scope = new TransactionScope())
+            {
+                try
+                {
+                    using (var context = new TKHTQuanLyBanHangEntities())
+                    {
+                        var ran = new Random();
+                        var listHH = context.DM_HANG_HOA;
+                        foreach (var item in listHH)
+                        {
+                            var idHH = item.ID;
+                            var gia = context.GD_GIA.Where(s => s.ID_HANG_HOA == idHH).FirstOrDefault();
+                            if (gia == null)
+                            {
+                                var phieuNhap = context.GD_PHIEU_NHAP_CHI_TIET.Where(s => s.ID_HANG_HOA == idHH).First();
+                                var g = new GD_GIA();
+                                g.ID_HANG_HOA = idHH;
+                                g.NGAY_LUU_HANH = phieuNhap.GD_PHIEU_NHAP_XUAT.NGAY_NHAP;
+                                g.GIA = phieuNhap.GIA_NHAP + ran.Next(1, 5) * 10;
+                                context.GD_GIA.Add(g);
+                                context.SaveChanges();
+                            }
+                            else
+                            {
+                                var length = ran.Next(1, 5);
+                                for (int i = 0; i < length; i++)
+                                {
+                                    var g = new GD_GIA();
+                                    var giaCu = context.GD_GIA.Where(s => s.ID_HANG_HOA == idHH)
+                                        .OrderByDescending(s => s.NGAY_LUU_HANH)
+                                        .First();
+                                    g.ID_HANG_HOA = idHH;
+                                    g.NGAY_LUU_HANH = giaCu.NGAY_LUU_HANH.AddMonths(ran.Next(0, 1)).AddDays(ran.Next(1, 20));
+                                    var giaBinhQuan = context.GD_PHIEU_NHAP_CHI_TIET
+                                        .Where(s => s.ID_HANG_HOA == idHH)
+                                        .OrderByDescending(s => s.GD_PHIEU_NHAP_XUAT.NGAY_NHAP)
+                                        .First()
+                                        .GIA_NHAP_BINH_QUAN;
+                                    var giaMoi = giaCu.GIA + ran.Next(-2, 5) * 10;
+                                    g.GIA = giaMoi > giaBinhQuan ? giaMoi : giaBinhQuan + ran.Next(1, 2) * 10;
+                                    context.GD_GIA.Add(g);
+                                    context.SaveChanges();
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception v_e)
+                {
+                    scope.Dispose();
+                    throw v_e;
+                    throw;
+                }
+            }
+        }
         #endregion
         #region Quản lý danh mục hàng hóa
         #region Danh mục hàng hóa
@@ -953,7 +1010,8 @@ namespace WebService3
                             gd_phieu_nhap_xuat.MA_PHIEU = maMoi;
                             gd_phieu_nhap_xuat.ID_TAI_KHOAN = context.DM_TAI_KHOAN.Where(s => s.TEN_TAI_KHOAN == item.ten_tai_khoan).First().ID;
                             gd_phieu_nhap_xuat.NGAY_NHAP = item.ngay_nhap;
-                            gd_phieu_nhap_xuat.ID_CUA_HANG = item.id_cua_hang;
+                            var id_cua_hang = item.id_cua_hang;
+                            gd_phieu_nhap_xuat.ID_CUA_HANG = id_cua_hang;
                             context.GD_PHIEU_NHAP_XUAT.Add(gd_phieu_nhap_xuat);
                             context.SaveChanges();
 
@@ -964,8 +1022,10 @@ namespace WebService3
                                 var gd_phieu_nhap_xuat_chi_tiet = new GD_PHIEU_NHAP_XUAT_CHI_TIET();
                                 var id = context.GD_PHIEU_NHAP_XUAT.Where(s => s.MA_PHIEU == maMoi).First().ID;
                                 gd_phieu_nhap_xuat_chi_tiet.ID_PHIEU_NHAP_XUAT = id;
-                                gd_phieu_nhap_xuat_chi_tiet.ID_HANG_HOA = context.DM_HANG_HOA.Where(s => s.MA_TRA_CUU == item2.ma_tra_cuu_hang_hoa).First().ID;
-                                gd_phieu_nhap_xuat_chi_tiet.ID_SIZE = context.GD_TAG.Where(s => s.TEN_TAG == item2.ten_size).First().ID;
+                                var id_hang_hoa = context.DM_HANG_HOA.Where(s => s.MA_TRA_CUU == item2.ma_tra_cuu_hang_hoa).First().ID;
+                                gd_phieu_nhap_xuat_chi_tiet.ID_HANG_HOA = id_hang_hoa;
+                                var id_size = context.GD_TAG.Where(s => s.TEN_TAG == item2.ten_size).First().ID;
+                                gd_phieu_nhap_xuat_chi_tiet.ID_SIZE = id_size;
                                 gd_phieu_nhap_xuat_chi_tiet.SO_LUONG = item2.so_luong;
                                 so_luong += item2.so_luong;
                                 context.GD_PHIEU_NHAP_XUAT_CHI_TIET.Add(gd_phieu_nhap_xuat_chi_tiet);
@@ -981,6 +1041,24 @@ namespace WebService3
                                 gd_phieu_nhap_chi_tiet.GIA_NHAP = item2.gia_nhap;
 
                                 gd_phieu_nhap_chi_tiet.GIA_NHAP_BINH_QUAN = tinh_gia_nhap_binh_quan(item.id_cua_hang, gd_phieu_nhap_chi_tiet.ID_HANG_HOA, item2.gia_nhap, so_luong);
+
+                                // Nhập tồn kho
+                                var tonKho = context.GD_TON_KHO
+                                    .Where(s => s.ID_CUA_HANG == id_cua_hang && s.ID_HANG_HOA == id_hang_hoa && s.ID_SIZE == id_size)
+                                    .FirstOrDefault();
+                                if (tonKho == null)
+                                {
+                                    var gdTonKho = new GD_TON_KHO();
+                                    gdTonKho.ID_CUA_HANG = id_cua_hang;
+                                    gdTonKho.ID_HANG_HOA = id_hang_hoa;
+                                    gdTonKho.ID_SIZE = id_size;
+                                    gdTonKho.SO_LUONG_TON_KHO = item2.so_luong;
+                                    context.GD_TON_KHO.Add(gdTonKho);
+                                }
+                                else
+                                {
+                                    tonKho.SO_LUONG_TON_KHO += item2.so_luong;
+                                }
                                 context.SaveChanges();
                             }
 
