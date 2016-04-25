@@ -970,6 +970,10 @@ namespace WebService3
                                 so_luong += item2.so_luong;
                                 context.GD_PHIEU_NHAP_XUAT_CHI_TIET.Add(gd_phieu_nhap_xuat_chi_tiet);
 
+                                //Cap nhat ton kho
+                             
+                                
+
                                 //Nhap binh quan gia nhap
                                 var gd_phieu_nhap_chi_tiet = new GD_PHIEU_NHAP_CHI_TIET();
                                 gd_phieu_nhap_chi_tiet.ID_PHIEU_NHAP_XUAT = id;
