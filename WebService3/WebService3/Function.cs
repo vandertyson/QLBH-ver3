@@ -953,7 +953,8 @@ namespace WebService3
                             gd_phieu_nhap_xuat.MA_PHIEU = maMoi;
                             gd_phieu_nhap_xuat.ID_TAI_KHOAN = context.DM_TAI_KHOAN.Where(s => s.TEN_TAI_KHOAN == item.ten_tai_khoan).First().ID;
                             gd_phieu_nhap_xuat.NGAY_NHAP = item.ngay_nhap;
-                            gd_phieu_nhap_xuat.ID_CUA_HANG = item.id_cua_hang;
+                            var id_cua_hang = item.id_cua_hang;
+                            gd_phieu_nhap_xuat.ID_CUA_HANG = id_cua_hang;
                             context.GD_PHIEU_NHAP_XUAT.Add(gd_phieu_nhap_xuat);
                             context.SaveChanges();
 
@@ -964,8 +965,10 @@ namespace WebService3
                                 var gd_phieu_nhap_xuat_chi_tiet = new GD_PHIEU_NHAP_XUAT_CHI_TIET();
                                 var id = context.GD_PHIEU_NHAP_XUAT.Where(s => s.MA_PHIEU == maMoi).First().ID;
                                 gd_phieu_nhap_xuat_chi_tiet.ID_PHIEU_NHAP_XUAT = id;
-                                gd_phieu_nhap_xuat_chi_tiet.ID_HANG_HOA = context.DM_HANG_HOA.Where(s => s.MA_TRA_CUU == item2.ma_tra_cuu_hang_hoa).First().ID;
-                                gd_phieu_nhap_xuat_chi_tiet.ID_SIZE = context.GD_TAG.Where(s => s.TEN_TAG == item2.ten_size).First().ID;
+                                var id_hang_hoa = context.DM_HANG_HOA.Where(s => s.MA_TRA_CUU == item2.ma_tra_cuu_hang_hoa).First().ID;
+                                gd_phieu_nhap_xuat_chi_tiet.ID_HANG_HOA = id_hang_hoa;
+                                var id_size = context.GD_TAG.Where(s => s.TEN_TAG == item2.ten_size).First().ID;
+                                gd_phieu_nhap_xuat_chi_tiet.ID_SIZE = id_size;
                                 gd_phieu_nhap_xuat_chi_tiet.SO_LUONG = item2.so_luong;
                                 so_luong += item2.so_luong;
                                 context.GD_PHIEU_NHAP_XUAT_CHI_TIET.Add(gd_phieu_nhap_xuat_chi_tiet);
@@ -977,6 +980,24 @@ namespace WebService3
                                 gd_phieu_nhap_chi_tiet.GIA_NHAP = item2.gia_nhap;
 
                                 gd_phieu_nhap_chi_tiet.GIA_NHAP_BINH_QUAN = tinh_gia_nhap_binh_quan(item.id_cua_hang, gd_phieu_nhap_chi_tiet.ID_HANG_HOA, item2.gia_nhap, so_luong);
+
+                                // Nhập tồn kho
+                                var tonKho = context.GD_TON_KHO
+                                    .Where(s => s.ID_CUA_HANG == id_cua_hang&&s.ID_HANG_HOA == id_hang_hoa&&s.ID_SIZE==id_size)
+                                    .FirstOrDefault();
+                                if (tonKho==null)
+                                {
+                                    var gdTonKho = new GD_TON_KHO();
+                                    gdTonKho.ID_CUA_HANG = id_cua_hang;
+                                    gdTonKho.ID_HANG_HOA = id_hang_hoa;
+                                    gdTonKho.ID_SIZE = id_size;
+                                    gdTonKho.SO_LUONG_TON_KHO = item2.so_luong;
+                                    context.GD_TON_KHO.Add(gdTonKho);
+                                }
+                                else
+                                {
+                                    tonKho.SO_LUONG_TON_KHO += item2.so_luong;
+                                }
                                 context.SaveChanges();
                             }
 
