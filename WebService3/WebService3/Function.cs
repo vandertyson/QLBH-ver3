@@ -94,7 +94,7 @@ namespace WebService3
                             }
                             else
                             {
-                                var length = ran.Next(1, 5);
+                                var length = ran.Next(1, 6);
                                 for (int i = 0; i < length; i++)
                                 {
                                     var g = new GD_GIA();
@@ -102,13 +102,13 @@ namespace WebService3
                                         .OrderByDescending(s => s.NGAY_LUU_HANH)
                                         .First();
                                     g.ID_HANG_HOA = idHH;
-                                    g.NGAY_LUU_HANH = giaCu.NGAY_LUU_HANH.AddMonths(ran.Next(0, 1)).AddDays(ran.Next(1, 20));
+                                    g.NGAY_LUU_HANH = giaCu.NGAY_LUU_HANH.AddMonths(2).AddDays(ran.Next(1, 20));
                                     var giaBinhQuan = context.GD_PHIEU_NHAP_CHI_TIET
                                         .Where(s => s.ID_HANG_HOA == idHH)
                                         .OrderByDescending(s => s.GD_PHIEU_NHAP_XUAT.NGAY_NHAP)
                                         .First()
                                         .GIA_NHAP_BINH_QUAN;
-                                    var giaMoi = giaCu.GIA + ran.Next(-2, 5) * 10;
+                                    var giaMoi = giaCu.GIA + ran.Next(-2, 4) * 10;
                                     g.GIA = giaMoi > giaBinhQuan ? giaMoi : Math.Ceiling(giaBinhQuan) + ran.Next(1, 2) * 10;
                                     context.GD_GIA.Add(g);
                                     context.SaveChanges();
@@ -124,6 +124,78 @@ namespace WebService3
                     throw v_e;
                     throw;
                 }
+            }
+        }
+        public static void Test2()
+        {
+            var ran = new Random();
+            DateTime beginDay = new DateTime(2015, 01, 01);
+            using (var scope = new TransactionScope())
+            {
+                using (var context = new TKHTQuanLyBanHangEntities())
+                {
+                    for (int i = 0; i < 100; i++)
+                    {
+
+                        try
+                        {
+                            var hoaDon = new GD_HOA_DON();
+                            var lastHoaDon = context.GD_HOA_DON.OrderByDescending(s => s.MA_HOA_DON).FirstOrDefault();
+                            string lastMa = lastHoaDon == null ? null : lastHoaDon.MA_HOA_DON;
+                            var maHD = GenMa("HD", 6, lastMa);
+                            hoaDon.MA_HOA_DON = maHD;
+                            var listTK = context.DM_TAI_KHOAN.ToList();
+                            var tk = listTK[ran.Next(0, listTK.Count - 1)];
+                            hoaDon.ID_CUA_HANG = 1;
+                            hoaDon.ID_TAI_KHOAN = tk.ID;
+                            hoaDon.LOAI_THANH_TOAN = new string[] { "TT", "OL" }[ran.Next(0, 1)];
+                            var pt = ran.Next(2, 11);
+                            beginDay = beginDay.AddDays(pt < 7 ? 0 : pt < 8 ? 1 : pt < 9 ? 2 : 3);
+                            hoaDon.THOI_GIAN_TAO = beginDay;
+                            context.GD_HOA_DON.Add(hoaDon);
+                            context.SaveChanges();
+                            var hd = context.GD_HOA_DON.Where(s => s.MA_HOA_DON == maHD).First();
+                            bool coHang = false;
+                            for (int j = 0; j < ran.Next(1, 6); j++)
+                            {
+                                var listTonKho = context.GD_TON_KHO.Where(s => s.SO_LUONG_TON_KHO > 0).ToList();
+                                var hdct = new GD_HOA_DON_CHI_TIET();
+                                hdct.DA_THANH_TOAN = "Y";
+                                hdct.ID_HOA_DON = hd.ID;
+                                var k = ran.Next(0, listTonKho.Count - 1);
+                                var ton = listTonKho[k];
+                                var idhh = ton.ID_HANG_HOA;
+                                hdct.ID_HANG_HOA = idhh;
+                                hdct.ID_SIZE = ton.ID_SIZE;
+                                hdct.SO_LUONG = ran.Next(1, (int)ton.SO_LUONG_TON_KHO);
+                                ton.SO_LUONG_TON_KHO -= hdct.SO_LUONG;
+                                var gia = context.GD_GIA
+                                    .Where(s => s.ID_HANG_HOA == idhh && s.NGAY_LUU_HANH < beginDay)
+                                    .OrderBy(s => s.NGAY_LUU_HANH)
+                                    .FirstOrDefault();
+                                if (gia == null)
+                                {
+                                    continue;
+                                }
+                                hdct.GIA_BAN = gia.GIA;
+                                context.GD_HOA_DON_CHI_TIET.Add(hdct);
+                                coHang = true;
+                            }
+                            if (!coHang)
+                            {
+                                context.GD_HOA_DON.Remove(hd);
+                            }
+                            context.SaveChanges();
+                            
+                        }
+                        catch (Exception e)
+                        {
+                            scope.Dispose();
+                            throw e;
+                        }
+                    }
+                }
+                scope.Complete();
             }
         }
         #endregion
@@ -1025,7 +1097,7 @@ namespace WebService3
 
                                 var gd_phieu_nhap_chi_tiet = new GD_PHIEU_NHAP_CHI_TIET();
                                 gd_phieu_nhap_chi_tiet.ID_PHIEU_NHAP_XUAT = id;
-                                gd_phieu_nhap_chi_tiet.ID_HANG_HOA = context.DM_HANG_HOA.Where(s=>s.MA_TRA_CUU==item2.ma_tra_cuu_hang_hoa).First().ID;
+                                gd_phieu_nhap_chi_tiet.ID_HANG_HOA = context.DM_HANG_HOA.Where(s => s.MA_TRA_CUU == item2.ma_tra_cuu_hang_hoa).First().ID;
                                 var giaNhap = item2.gia_nhap;
                                 gd_phieu_nhap_chi_tiet.GIA_NHAP = giaNhap;
                                 so_luong = item2.size_sl.Sum(s => s.so_luong);
@@ -1062,7 +1134,7 @@ namespace WebService3
                                     context.SaveChanges();
                                 }
                             }
-                        }                   
+                        }
                     }
                     scope.Complete();
                     return null;

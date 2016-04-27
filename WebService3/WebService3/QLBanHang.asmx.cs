@@ -29,7 +29,7 @@ namespace WebService3
         {
             try
             {
-                Function.Test();
+                Function.Test2();
                 var result = new KetQuaTraVe(true, "Thành công", null);
                 TraKetQua(result);
             }
