@@ -150,6 +150,7 @@
           <Property Name="THOI_GIAN_TAO" Type="datetime" Nullable="false" />
           <Property Name="ID_TAI_KHOAN" Type="decimal" Precision="18" Scale="0" />
           <Property Name="LOAI_THANH_TOAN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GIAM_TRU" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="GD_HOA_DON_CHI_TIET">
           <Key>
@@ -1082,6 +1083,7 @@
           <NavigationProperty Name="DM_CUA_HANG" Relationship="Self.FK_GD_HOA_DON_DM_CUA_HANG" FromRole="GD_HOA_DON" ToRole="DM_CUA_HANG" />
           <NavigationProperty Name="DM_TAI_KHOAN" Relationship="Self.FK_GD_HOA_DON_DM_TAI_KHOAN" FromRole="GD_HOA_DON" ToRole="DM_TAI_KHOAN" />
           <NavigationProperty Name="GD_HOA_DON_CHI_TIET" Relationship="Self.FK_GD_HOA_DON_CHI_TIET_GD_HOA_DON" FromRole="GD_HOA_DON" ToRole="GD_HOA_DON_CHI_TIET" />
+          <Property Name="GIAM_TRU" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="GD_HOA_DON_CHI_TIET">
           <Key>
@@ -2007,6 +2009,7 @@
           <EntitySetMapping Name="GD_HOA_DON">
             <EntityTypeMapping TypeName="TKHTQuanLyBanHangModel.GD_HOA_DON">
               <MappingFragment StoreEntitySet="GD_HOA_DON">
+                <ScalarProperty Name="GIAM_TRU" ColumnName="GIAM_TRU" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="MA_HOA_DON" ColumnName="MA_HOA_DON" />
                 <ScalarProperty Name="ID_CUA_HANG" ColumnName="ID_CUA_HANG" />

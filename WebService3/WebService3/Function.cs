@@ -134,7 +134,7 @@ namespace WebService3
             {
                 using (var context = new TKHTQuanLyBanHangEntities())
                 {
-                    for (int i = 0; i < 100; i++)
+                    for (int i = 0; i < 200; i++)
                     {
 
                         try
@@ -155,19 +155,34 @@ namespace WebService3
                             context.GD_HOA_DON.Add(hoaDon);
                             context.SaveChanges();
                             var hd = context.GD_HOA_DON.Where(s => s.MA_HOA_DON == maHD).First();
+                            var idHD = hd.ID;
                             bool coHang = false;
-                            for (int j = 0; j < ran.Next(1, 6); j++)
+                            decimal tongGiamTru = 0;
+                            var length = ran.Next(1, 6);
+                            var idKhach = tk.ID;
+                            var khach = context.DM_KHACH_HANG.Where(s => s.DM_TAI_KHOAN.ID == idKhach).First();
+                            var tongTienDaMua = khach.TONG_TIEN_DA_MUA;
+                            for (int j = 0; j < length; j++)
                             {
                                 var listTonKho = context.GD_TON_KHO.Where(s => s.SO_LUONG_TON_KHO > 0).ToList();
                                 var hdct = new GD_HOA_DON_CHI_TIET();
                                 hdct.DA_THANH_TOAN = "Y";
                                 hdct.ID_HOA_DON = hd.ID;
-                                var k = ran.Next(0, listTonKho.Count - 1);
+                                if (listTonKho.Count<1)
+                                {
+                                    context.GD_HOA_DON.Remove(hd);
+                                    break;
+                                }
+                                var k = listTonKho.Count == 1? 0 : ran.Next(0, listTonKho.Count - 1);
                                 var ton = listTonKho[k];
+                                if (context.GD_HOA_DON_CHI_TIET.Where(s=>s.ID_HOA_DON==idHD).Select(s=>s.ID_HANG_HOA).Contains(ton.ID_HANG_HOA))
+                                {
+                                    continue;
+                                }
                                 var idhh = ton.ID_HANG_HOA;
                                 hdct.ID_HANG_HOA = idhh;
                                 hdct.ID_SIZE = ton.ID_SIZE;
-                                hdct.SO_LUONG = ran.Next(1, (int)ton.SO_LUONG_TON_KHO);
+                                hdct.SO_LUONG = ton.SO_LUONG_TON_KHO==1?1:ran.Next(1, (int)ton.SO_LUONG_TON_KHO);
                                 ton.SO_LUONG_TON_KHO -= hdct.SO_LUONG;
                                 var gia = context.GD_GIA
                                     .Where(s => s.ID_HANG_HOA == idhh && s.NGAY_LUU_HANH < beginDay)
@@ -177,10 +192,30 @@ namespace WebService3
                                 {
                                     continue;
                                 }
-                                hdct.GIA_BAN = gia.GIA;
+                                decimal muckm = 0;
+                                var km = context.GD_KHUYEN_MAI.Where(s => s.THOI_GIAN_BAT_DAU <= beginDay && s.THOI_GIAN_KET_THUC >= beginDay).FirstOrDefault();
+                                if (km!=null)
+                                {
+                                    var hangKm = km.GD_KHUYEN_MAI_CHI_TIET.Where(s => s.ID_HANG_HOA == idhh).FirstOrDefault();
+                                    if (hangKm!=null)
+                                    {
+                                        muckm = hangKm.MUC_KHUYEN_MAI;
+                                    }
+                                }
+                                hdct.GIA_BAN = gia.GIA - gia.GIA * muckm;
+                                
+                                var diem = (int)((decimal)(beginDay - khach.NGAY_THAM_GIA).TotalDays / 365 + tongTienDaMua / 1000) * hdct.GIA_BAN;
+                                if (tk.TEN_TAI_KHOAN != "customer")
+                                {
+                                    khach.DIEM += diem;
+                                    tongGiamTru += diem;
+                                }
+                                khach.TONG_TIEN_DA_MUA += hdct.GIA_BAN;
                                 context.GD_HOA_DON_CHI_TIET.Add(hdct);
                                 coHang = true;
+                                //context.SaveChanges();
                             }
+                            hoaDon.GIAM_TRU = tongGiamTru;
                             if (!coHang)
                             {
                                 context.GD_HOA_DON.Remove(hd);
