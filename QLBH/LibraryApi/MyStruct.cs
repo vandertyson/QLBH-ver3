@@ -158,11 +158,15 @@ namespace LibraryApi
     }
     namespace QuanLyBanHang
     {
+        public class SizeSL
+        {
+            public string ten_size { get; set; }
+            public int so_luong { get; set; }
+        }
         public class HangHoa
         {
             public string ma_tra_cuu_hang_hoa { get; set; }
-            public string ten_size { get; set; }
-            public int so_luong { get; set; }
+            public List<SizeSL> size_sl { get; set; }
             public decimal gia_nhap { get; set; }
         }
         public class PhieuNhap

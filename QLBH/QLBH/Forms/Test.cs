@@ -93,15 +93,15 @@ namespace QLBH.Forms
                         {
                             if (String.IsNullOrEmpty(item.ma_tra_cuu))
                             {
-                                XtraMessageBox.Show("Vui lòng kiểm tra lại thông tin mã tra cứu hàng hóa ngày " 
-                                                    + Convert.ToDateTime(item.ngay_nhap).ToShortDateString() 
+                                XtraMessageBox.Show("Vui lòng kiểm tra lại thông tin mã tra cứu hàng hóa ngày "
+                                                    + Convert.ToDateTime(item.ngay_nhap).ToShortDateString()
                                                     + " trong file excel");
                                 return;
                             }
-                            if (String.IsNullOrEmpty(item.gia_nhap) | Convert.ToInt16(item.gia_nhap) < 0 )
+                            if (String.IsNullOrEmpty(item.gia_nhap) | Convert.ToInt16(item.gia_nhap) < 0)
                             {
                                 XtraMessageBox.Show("Vui lòng kiểm tra lại thông tin giá nhập mặt hàng "
-                                                     + item.ma_tra_cuu.ToString() 
+                                                     + item.ma_tra_cuu.ToString()
                                                      + " ngày " + Convert.ToDateTime(item.ngay_nhap).ToShortDateString()
                                                      + " trong file excel");
                                 return;
@@ -112,8 +112,8 @@ namespace QLBH.Forms
 
                         #region Tạo danh sách phiếu nhập
 
-                        var list_phieu_nhap = new List<PhieuNhap>();  
-                                             
+                        var list_phieu_nhap = new List<PhieuNhap>();
+
                         #region 1 ngày tương ứng 1 phiếu
 
                         var list_phieu_theo_ngay = data_from_excel.Select(s => Convert.ToDateTime(s.ngay_nhap)).Distinct();
@@ -133,53 +133,23 @@ namespace QLBH.Forms
                             var hang_nhap_trong_ngay = data_from_excel.Where(s => Convert.ToDateTime(s.ngay_nhap) == item).ToList();
                             foreach (var hang in hang_nhap_trong_ngay)
                             {
-                                #region mỗi size là 1 phiếu chi tiết
-                                if (!String.IsNullOrEmpty(hang.so_luong_size_l) & Convert.ToInt16(hang.so_luong_size_l) != 0)
+                                var hang_hoa = new LibraryApi.QuanLyBanHang.HangHoa();
+                                hang_hoa.gia_nhap = decimal.Parse(hang.gia_nhap);
+                                hang_hoa.ma_tra_cuu_hang_hoa = hang.ma_tra_cuu;
+                                hang_hoa.size_sl = new List<SizeSL>();
+                                foreach (var item2 in new List<string> { "S", "M", "L", "XL", "XXL" })
                                 {
-                                    LibraryApi.QuanLyBanHang.HangHoa hang_theo_size = new LibraryApi.QuanLyBanHang.HangHoa();
-                                    hang_theo_size.ma_tra_cuu_hang_hoa = hang.ma_tra_cuu;
-                                    hang_theo_size.gia_nhap = Convert.ToDecimal(hang.gia_nhap);
-                                    hang_theo_size.so_luong = Convert.ToInt16(hang.so_luong_size_l);
-                                    hang_theo_size.ten_size = "L";
-                                    phieu.list_hang_hoa.Add(hang_theo_size);
+                                    var sl = int.Parse(hang.GetType().GetProperty(item2).GetValue(hang).ToString());
+                                    if (sl == 0)
+                                    {
+                                        continue;
+                                    }
+                                    SizeSL s = new SizeSL();
+                                    s.ten_size = item2;
+                                    s.so_luong = sl;
+                                    hang_hoa.size_sl.Add(s);
                                 }
-                                if (!String.IsNullOrEmpty(hang.so_luong_size_s) & Convert.ToInt16(hang.so_luong_size_s) != 0)
-                                {
-                                    LibraryApi.QuanLyBanHang.HangHoa hang_theo_size = new LibraryApi.QuanLyBanHang.HangHoa();
-                                    hang_theo_size.ma_tra_cuu_hang_hoa = hang.ma_tra_cuu;
-                                    hang_theo_size.gia_nhap = Convert.ToDecimal(hang.gia_nhap);
-                                    hang_theo_size.so_luong = Convert.ToInt16(hang.so_luong_size_s);
-                                    hang_theo_size.ten_size = "S";
-                                    phieu.list_hang_hoa.Add(hang_theo_size);
-                                }
-                                if (!String.IsNullOrEmpty(hang.so_luong_size_m) & Convert.ToInt16(hang.so_luong_size_m) != 0)
-                                {
-                                    LibraryApi.QuanLyBanHang.HangHoa hang_theo_size = new LibraryApi.QuanLyBanHang.HangHoa();
-                                    hang_theo_size.ma_tra_cuu_hang_hoa = hang.ma_tra_cuu;
-                                    hang_theo_size.gia_nhap = Convert.ToDecimal(hang.gia_nhap);
-                                    hang_theo_size.so_luong = Convert.ToInt16(hang.so_luong_size_m);
-                                    hang_theo_size.ten_size = "M";
-                                    phieu.list_hang_hoa.Add(hang_theo_size);
-                                }
-                                if (!String.IsNullOrEmpty(hang.so_luong_size_xl) & Convert.ToInt16(hang.so_luong_size_xl) != 0)
-                                {
-                                    LibraryApi.QuanLyBanHang.HangHoa hang_theo_size = new LibraryApi.QuanLyBanHang.HangHoa();
-                                    hang_theo_size.ma_tra_cuu_hang_hoa = hang.ma_tra_cuu;
-                                    hang_theo_size.gia_nhap = Convert.ToDecimal(hang.gia_nhap);
-                                    hang_theo_size.so_luong = Convert.ToInt16(hang.so_luong_size_xl);
-                                    hang_theo_size.ten_size = "XL";
-                                    phieu.list_hang_hoa.Add(hang_theo_size);
-                                }
-                                if (!String.IsNullOrEmpty(hang.so_luong_size_xxl) & Convert.ToInt16(hang.so_luong_size_xxl) != 0)
-                                {
-                                    LibraryApi.QuanLyBanHang.HangHoa hang_theo_size = new LibraryApi.QuanLyBanHang.HangHoa();
-                                    hang_theo_size.ma_tra_cuu_hang_hoa = hang.ma_tra_cuu;
-                                    hang_theo_size.gia_nhap = Convert.ToDecimal(hang.gia_nhap);
-                                    hang_theo_size.so_luong = Convert.ToInt16(hang.so_luong_size_xxl);
-                                    hang_theo_size.ten_size = "XXL";
-                                    phieu.list_hang_hoa.Add(hang_theo_size);
-                                }
-                                #endregion
+                                phieu.list_hang_hoa.Add(hang_hoa);
                             }
                             #endregion 
 
@@ -193,8 +163,8 @@ namespace QLBH.Forms
                         MyNetwork.ThemPhieuNhapTuExcel(list_phieu_nhap, this, data =>
                         {
                             MessageBox.Show(data.Message);
-                        });                      
-                    }                   
+                        });
+                    }
                 }
 
                 #endregion

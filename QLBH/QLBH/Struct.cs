@@ -31,15 +31,15 @@ namespace QLBH
         [ExcelColumn("MA_TRA_CUU_HANG_HOA")]
         public string ma_tra_cuu { get; set; }
         [ExcelColumn("SIZE_S")]
-        public string so_luong_size_s { get; set; }
+        public string S { get; set; }
         [ExcelColumn("SIZE_M")]
-        public string so_luong_size_m { get; set; }
+        public string M { get; set; }
         [ExcelColumn("SIZE_L")]
-        public string so_luong_size_l { get; set; }
+        public string L { get; set; }
         [ExcelColumn("SIZE_XL")]
-        public string so_luong_size_xl { get; set; }
+        public string XL { get; set; }
         [ExcelColumn("SIZE_XXL")]
-        public string so_luong_size_xxl { get; set; }
+        public string XXL { get; set; }
         [ExcelColumn("GIA_NHAP")]
         public string gia_nhap { get; set; }
     }

@@ -37,11 +37,11 @@ namespace QLBH
         {
                 if (String.IsNullOrEmpty(mo_ta))
                 {
-                    return @"C:\Users\Son Pham\Desktop\New Text Document (3).txt";
+                    //return @"C:\Users\Son Pham\Desktop\New Text Document (3).txt";
                 }
                 if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
                 {
-                    return @"C:\Users\Son Pham\Desktop\New Text Document (3).txt";                
+                    //return @"C:\Users\Son Pham\Desktop\New Text Document (3).txt";                
                 }
                 using (System.Net.WebClient client = new System.Net.WebClient())
                 {
@@ -53,7 +53,8 @@ namespace QLBH
 
         public static void exception_handle(Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            MessageBox.Show(ex.Data.ToString());
+            
         }
 
         public static Color lay_mau_theo_ma_mau(string ma_mau_html)
