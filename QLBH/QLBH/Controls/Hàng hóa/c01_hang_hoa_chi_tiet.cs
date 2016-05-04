@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using LibraryApi;
 using System.IO;
 using DevExpress.XtraEditors;
+using QLBH.Common;
 namespace QLBH.Controls
 {
     public partial class c01_hang_hoa_chi_tiet : UserControl
@@ -141,7 +142,7 @@ namespace QLBH.Controls
             }
             catch (Exception v_E)
             {
-                Common.exception_handle(v_E);
+                CommonFunction.exception_handle(v_E);
             }           
         }
         #endregion

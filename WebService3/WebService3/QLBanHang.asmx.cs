@@ -15,6 +15,40 @@ namespace WebService3
     [System.Web.Script.Services.ScriptService]
     public class QLBanHang : System.Web.Services.WebService
     {
+        #region Dùng chung
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void SQLQueryRequest(string query)
+        {
+            try
+            {
+                var data = Function.SQLQuerry(query);
+                var result = new KetQuaTraVe(true, "Thành công", data);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, e.Message, null);
+                TraKetQua(result);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void UploadFile(string binary, string file_name)
+        {
+            try
+            {
+                var data = Function.upLoadFile(binary, file_name);
+                var result = new KetQuaTraVe(true, "Thành công", data);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, "Thất bại", e.Message);
+                TraKetQua(result);
+            }
+        }
 
         void TraKetQua(KetQuaTraVe result)
         {
@@ -39,8 +73,78 @@ namespace WebService3
                 TraKetQua(result);
             }
         }
-        [WebMethod]
+        #endregion
+
         #region Quản lý danh mục hàng hóa
+
+        #region Báo cáo chi tiết hàng hóa
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void TinhTrangKinhDoanhMatHang(decimal id_hang_hoa, DateTime thoi_gian_bat_dau, DateTime thoi_gian_ket_thuc)
+        {
+            try
+            {
+                var data = Function.tinh_trang_kinh_doanh(id_hang_hoa, thoi_gian_bat_dau, thoi_gian_ket_thuc);
+                var result = new KetQuaTraVe(true, "Thành công", data);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, "Thất bại", e.Message);
+                TraKetQua(result);
+            }
+        }
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void BaoCaoPhanHoiKhachHang(DateTime bat_dau, int so_thang, decimal id_hang_hoa)
+        {
+            try
+            {
+                var data = BaoCaoChiTietHangHoa.bao_cao_phan_hoi_khach_hang(bat_dau, so_thang, id_hang_hoa);
+                var result = new KetQuaTraVe(true, "Thành công", data);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, "Thất bại", e.Message);
+                TraKetQua(result);
+            }
+        }
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void TinhTrangKinhDoanhHangHoa(decimal id_hang_hoa, DateTime bat_dau, DateTime ket_thuc)
+        {
+            try
+            {
+                var data = Function.ThongTinKinhDoanhHangHoa(id_hang_hoa, bat_dau, ket_thuc);
+                var result = new KetQuaTraVe(true, "Thành công", data);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, "Thất bại", e.Message);
+                TraKetQua(result);
+            }
+        }
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void BaoCaoChiTietKhuyenMai(decimal id_san_pham, DateTime ngay_hien_tai)
+        {
+            try
+            {
+                var data = BaoCaoChiTietHangHoa.bao_cao_khuyen_mai_san_pham(id_san_pham, ngay_hien_tai);
+                var result = new KetQuaTraVe(true, "Thành công", data);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, "Thất bại", e.Message);
+                TraKetQua(result);
+            }
+        }
+        #endregion
+
+        [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void DanhSachLoaiHang()
         {
@@ -122,55 +226,7 @@ namespace WebService3
                 var result = new KetQuaTraVe(false, "Thất bại", e.Message);
                 TraKetQua(result);
             }
-        }
-        [WebMethod]
-        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void TinhTrangKinhDoanhMatHang(decimal id_hang_hoa, DateTime thoi_gian_bat_dau, DateTime thoi_gian_ket_thuc)
-        {
-            try
-            {
-                var data = Function.tinh_trang_kinh_doanh(id_hang_hoa, thoi_gian_bat_dau, thoi_gian_ket_thuc);
-                var result = new KetQuaTraVe(true, "Thành công", data);
-                TraKetQua(result);
-            }
-            catch (Exception e)
-            {
-                var result = new KetQuaTraVe(false, "Thất bại", e.Message);
-                TraKetQua(result);
-            }
-        }
-        [WebMethod]
-        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void BaoCaoPhanHoiKhachHang(DateTime bat_dau, int so_thang, decimal id_hang_hoa)
-        {
-            try
-            {
-                var data = Function.bao_cao_phan_hoi_khach_hang(bat_dau, so_thang, id_hang_hoa);
-                var result = new KetQuaTraVe(true, "Thành công", data);
-                TraKetQua(result);
-            }
-            catch (Exception e)
-            {
-                var result = new KetQuaTraVe(false, "Thất bại", e.Message);
-                TraKetQua(result);
-            }
-        }
-        [WebMethod]
-        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void TinhTrangKinhDoanhHangHoa(decimal id_hang_hoa,DateTime bat_dau,DateTime ket_thuc)
-        {
-            try
-            {
-                var data = Function.ThongTinKinhDoanhHangHoa(id_hang_hoa, bat_dau, ket_thuc);
-                var result = new KetQuaTraVe(true, "Thành công", data);
-                TraKetQua(result);
-            }
-            catch (Exception e)
-            {
-                var result = new KetQuaTraVe(false, "Thất bại", e.Message);
-                TraKetQua(result);
-            }
-        }
+        }      
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void ThemHangHoa(string list_hang_hoa)
@@ -189,23 +245,9 @@ namespace WebService3
                 TraKetQua(result);
             }
         }
-        [WebMethod]
-        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void BaoCaoChiTietKhuyenMai(decimal id_san_pham, DateTime ngay_hien_tai)
-        {
-            try
-            {
-                var data = Function.bao_cao_khuyen_mai_san_pham(id_san_pham, ngay_hien_tai);
-                var result = new KetQuaTraVe(true, "Thành công", data);
-                TraKetQua(result);
-            }
-            catch (Exception e)
-            {
-                var result = new KetQuaTraVe(false, "Thất bại", e.Message);
-                TraKetQua(result);
-            }
-        }
+       
         #endregion
+
         #region Quản lý khách hàng
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
@@ -224,24 +266,8 @@ namespace WebService3
             }
         }
         #endregion
-
-        [WebMethod]
-        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void UploadFile(string binary, string file_name)
-        {
-            try
-            {
-                var data = Function.upLoadFile(binary, file_name);
-                var result = new KetQuaTraVe(true, "Thành công", data);
-                TraKetQua(result);
-            }
-            catch (Exception e)
-            {
-                var result = new KetQuaTraVe(false, "Thất bại", e.Message);
-                TraKetQua(result);
-            }
-        }
-
+       
+        #region Quản lý phiếu nhập xuất
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void ThemPhieuNhapExcel(string list_phieu_nhap)
@@ -249,8 +275,8 @@ namespace WebService3
             try
             {
                 JavaScriptSerializer js = new JavaScriptSerializer();
-                var listPhieu = js.Deserialize<List<PhieuNhap.PhieuNhap>>(list_phieu_nhap);
-                Function.ThemPhieuNhapXuat(listPhieu);
+                var listPhieu = js.Deserialize<List<QuanLyPhieuNhapXuat.PhieuNhap>>(list_phieu_nhap);
+                QuanLyPhieuNhapXuat.ThemPhieuNhapXuat(listPhieu);
                 var result = new KetQuaTraVe(true, "Thành công", null);
                 TraKetQua(result);
             }
@@ -260,5 +286,9 @@ namespace WebService3
                 TraKetQua(result);
             }
         }
+        #endregion
+
+   
+
     }
 }

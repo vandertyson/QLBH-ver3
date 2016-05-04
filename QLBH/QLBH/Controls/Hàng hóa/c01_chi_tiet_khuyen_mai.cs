@@ -8,14 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LibraryApi;
-using LibraryApi.ChiTietHangHoa.BaoCaoKhuyenMai;
+using QLBH.Common;
 
 namespace QLBH.Controls
 {
     public partial class c01_chi_tiet_khuyen_mai : UserControl
     {
-        private BaoCaoKhuyenMai v_bao_cao_km;
-        private DotKhuyenMai m_current_lich_su;
+        private BaoCaoChiTietHangHoa.BaoCaoKhuyenMai v_bao_cao_km;
+        private BaoCaoChiTietHangHoa.DotKhuyenMai m_current_lich_su;
 
         public c01_chi_tiet_khuyen_mai()
         {
@@ -23,7 +23,7 @@ namespace QLBH.Controls
             set_define_event();
         }
 
-        public c01_chi_tiet_khuyen_mai(BaoCaoKhuyenMai ip)
+        public c01_chi_tiet_khuyen_mai(BaoCaoChiTietHangHoa.BaoCaoKhuyenMai ip)
         {
             InitializeComponent();
             this.v_bao_cao_km = ip;
@@ -54,7 +54,7 @@ namespace QLBH.Controls
             }
             catch (Exception ex)
             {
-                Common.exception_handle(ex);
+                CommonFunction.exception_handle(ex);
             }
         }
 

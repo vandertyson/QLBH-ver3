@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LibraryApi;
+using QLBH.Common;
 
 namespace QLBH.Controls
 {
@@ -32,17 +33,17 @@ namespace QLBH.Controls
         }
         public void data_to_control()
         {
-            //
-            //string file_name = SystemInfo.dia_chi_bai_viet_mo_ta_san_pham + v_hang_hoa.ten + ".docx";
-            //m_rich_txt_edit.LoadDocument(Common.download_docx_file_from_link(v_hang_hoa.mo_ta, file_name));
-            m_rich_txt_edit.LoadDocument(@"C:\Users\Son Pham\Desktop\New Text Document (3).txt");
-            m_rich_txt_edit.ActiveViewType = DevExpress.XtraRichEdit.RichEditViewType.Simple;
-            //
+            if (String.IsNullOrEmpty(v_hang_hoa.mo_ta))
+            {
+                m_rich_txt_edit.LoadDocument(@"Template/Giới thiệu sản phẩm.docx");
+                return;
+            }
+            m_rich_txt_edit.LoadDocument(@"Template/Giới thiệu sản phẩm.docx");
 
         }
         public void data_to_bai_viet(string file_name)
         {
-            m_rich_txt_edit.LoadDocument(Common.download_docx_file_from_link(v_hang_hoa.mo_ta, file_name));
+            m_rich_txt_edit.LoadDocument(CommonFunction.download_docx_file_from_link(v_hang_hoa.mo_ta, file_name));
             m_rich_txt_edit.ActiveViewType = DevExpress.XtraRichEdit.RichEditViewType.Simple;
         }
         #endregion
@@ -57,7 +58,7 @@ namespace QLBH.Controls
             }
             catch (Exception ex)
             {
-                Common.exception_handle(ex);
+                CommonFunction.exception_handle(ex);
             }
             
         }

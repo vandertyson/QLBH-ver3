@@ -15,6 +15,7 @@ using LibraryApi;
 using DevExpress.XtraTab;
 using DevExpress.XtraTab.ViewInfo;
 using DevExpress.XtraEditors;
+using QLBH.Common;
 
 namespace QLBH.Forms
 {
@@ -25,6 +26,7 @@ namespace QLBH.Forms
         public List<XtraTabPage> m_opening_control { get; set; } = new List<XtraTabPage>();
 
         #endregion
+
         #region public methods
         public f01_main_form()
         {
@@ -35,6 +37,7 @@ namespace QLBH.Forms
 
 
         #endregion
+
         #region private methods
         private void format_control()
         {
@@ -51,6 +54,7 @@ namespace QLBH.Forms
             m_pnl_menu_detail.Visible = v_menu_detail_is_opened;
         }
         #endregion
+
         #region event handlers
         private void m_btn_open_menu_MouseHover(object sender, EventArgs e)
         {
@@ -134,7 +138,7 @@ namespace QLBH.Forms
         private void m_btn_menu_tong_quan_MouseHover(object sender, EventArgs e)
         {
             var p = sender as SimpleButton;
-            p.BackColor = Common.lay_mau_theo_ma_mau(SystemInfo.ma_mau_da_cam_dep);
+            p.BackColor = CommonFunction.lay_mau_theo_ma_mau(SystemInfo.ma_mau_da_cam_dep);
         }
     }
 }

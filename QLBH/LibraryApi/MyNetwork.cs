@@ -7,9 +7,6 @@ using RestSharp;
 using System.Windows;
 using Newtonsoft.Json;
 using System.Windows.Forms;
-using LibraryApi.ChiTietHangHoa.BaoCaoKhuyenMai;
-using LibraryApi.ChiTietHangHoa.BaoCaoPhanHoi;
-using LibraryApi.QuanLyBanHang;
 namespace LibraryApi
 {
     public class MyNetwork
@@ -17,21 +14,16 @@ namespace LibraryApi
         #region CONST SERVICE URL
         //public const string URL_SERVICE = @"http://quanlybanhang.somee.com//QLBanHang.asmx/";
         public const string URL_SERVICE = @"http://localhost:32608/QLBanHang.asmx/";
+        
+        #endregion
         #region Danh mục hàng hóa
         public const string URL_GET_LOAI_HANG = URL_SERVICE + @"DanhSachLoaiHang";
         public const string URL_LAY_DANH_SACH_HANG_THEO_LOAI_HANG = URL_SERVICE + @"LayDanhSachHangHoaTheoLoaiHangHoa";
         public const string URL_GET_TAG = URL_SERVICE;
-        public const string URL_THEM_HANG_HOA = URL_SERVICE + "ThemHangHoa";
-        #endregion
-        #region Chi tiết hàng hóa
-        public const string URL_LAY_BAO_CAO_PHAN_HOI_KHACH_HANG = URL_SERVICE + @"BaoCaoPhanHoiKhachHang";
-        public const string URL_LAY_BAO_CAO_CHI_TIET_KHUYEN_MAI = URL_SERVICE + @"BaoCaoChiTietKhuyenMai";
+        public const string URL_THEM_HANG_HOA = @"ThemHangHoa";
         #endregion
         #region Quản lý bán hàng
-        public const string URL_THEM_PHIEU_NHAP_EXCEL = URL_SERVICE + @"ThemPhieuNhapExcel";
         #endregion
-        #endregion
-
 
         public delegate void CompleteHandle<T>(T data);
         public class TraVe<T>
@@ -40,7 +32,7 @@ namespace LibraryApi
             public string Message { get; set; }
             public T Data { get; set; }
         }
-        static void requestDataWithParam<T>(Dictionary<string, object> param
+        public static void requestDataWithParam<T>(Dictionary<string, object> param
             , string url
             , Form f
             , CompleteHandle<TraVe<T>> MyDelegate
@@ -83,6 +75,7 @@ namespace LibraryApi
                 throw e;
             }
         }
+
         #region Quản lý danh mục hàng hóa
 
         public static void GetDanhSachLoaiHang(
@@ -100,21 +93,7 @@ namespace LibraryApi
             requestDataWithParam(param, URL_LAY_DANH_SACH_HANG_THEO_LOAI_HANG, f, MyDelegate);
         }
         #region Chi tiết hàng hóa
-        public static void LayBaoCaoPhanHoiKhachHang(decimal id_hang_hoa, DateTime bat_dau, int so_thang, Form f, CompleteHandle<TraVe<BaoCaoPhanHoi>> MyDelegate)
-        {
-            Dictionary<string, object> param = new Dictionary<string, object>();
-            param["id_hang_hoa"] = id_hang_hoa;
-            param["bat_dau"] = bat_dau;
-            param["so_thang"] = so_thang;
-            requestDataWithParam(param, URL_LAY_BAO_CAO_PHAN_HOI_KHACH_HANG, f, MyDelegate);
-        }
-        public static void LayBaoCaoChiTietKhuyenMai(decimal id_hang_hoa, DateTime ngay_hien_tai, Form f, CompleteHandle<TraVe<BaoCaoKhuyenMai>> MyDelegate)
-        {
-            Dictionary<string, object> param = new Dictionary<string, object>();
-            param["id_san_pham"] = id_hang_hoa;
-            param["ngay_hien_tai"] = ngay_hien_tai;
-            requestDataWithParam(param, URL_LAY_BAO_CAO_CHI_TIET_KHUYEN_MAI, f, MyDelegate);
-        }
+       
         public static void ThemHangHoa(
            List<ThemHangHoaPost> list_hang_hoa,
            Form f,
@@ -126,17 +105,7 @@ namespace LibraryApi
         }
         #endregion
         #endregion
-        #region Quản lý bán hàng
-        public static void ThemPhieuNhapTuExcel(
-            List<PhieuNhap> list_phieu_nhap,
-            Form f,
-            CompleteHandle<TraVe<string>> MyDelegate)
-        {
-            Dictionary<string, object> param = new Dictionary<string, object>();
-            param["list_phieu_nhap"] = JsonConvert.SerializeObject(list_phieu_nhap);
-            requestDataWithParam(param, URL_THEM_PHIEU_NHAP_EXCEL, f, MyDelegate);
-        }
-        #endregion
+
 
 
     }

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LibraryApi;
-
+using QLBH.Common;
 namespace QLBH.Controls
 {
     public partial class c01_hinh_anh_minh_hoa : UserControl
@@ -36,7 +36,7 @@ namespace QLBH.Controls
             m_img_slider.Images.Clear();
             foreach (var item in v_hh.link_anh)
             {
-                m_img_slider.Images.Add(Common.get_image(item));
+                m_img_slider.Images.Add(CommonFunction.get_image(item));
             }
         }
         #endregion
@@ -50,7 +50,7 @@ namespace QLBH.Controls
             }
             catch (Exception ex)
             {
-                Common.exception_handle(ex);
+                CommonFunction.exception_handle(ex);
             }
 
         }
@@ -65,7 +65,7 @@ namespace QLBH.Controls
             }
             catch (Exception ex)
             {
-                Common.exception_handle(ex);
+                CommonFunction.exception_handle(ex);
             }
         }
     }

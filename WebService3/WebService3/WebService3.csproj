@@ -109,6 +109,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaoCaoChiTietHangHoa.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="DM_CUA_HANG.cs">
       <DependentUpon>ModelQLBH.tt</DependentUpon>
@@ -189,6 +190,7 @@
     <Compile Include="GD_TON_KHO.cs">
       <DependentUpon>ModelQLBH.tt</DependentUpon>
     </Compile>
+    <Compile Include="QuanLyHoaDon.cs" />
     <Compile Include="KetQuaTraVe.cs" />
     <Compile Include="ModelQLBH.Context.cs">
       <AutoGen>True</AutoGen>
@@ -210,10 +212,12 @@
       <DependentUpon>QLBanHang.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="QuanLyPhieuNhapXuat.cs" />
     <Compile Include="Struct.cs" />
     <Compile Include="sysdiagram.cs">
       <DependentUpon>ModelQLBH.tt</DependentUpon>
     </Compile>
+    <Compile Include="TemplateClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

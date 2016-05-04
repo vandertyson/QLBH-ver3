@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.IO;
-using WebService3.ChiTietHangHoa.BaoCaoPhanHoi;
-using WebService3.ChiTietHangHoa.BaoCaoKhuyenMai;
+using System.IO;    
 using System.Transactions;
 using System.Data;
 
@@ -231,6 +229,13 @@ namespace WebService3
                     }
                 }
                 scope.Complete();
+            }
+        }
+        public static object SQLQuerry(string query)
+        {
+            using (var context= new TKHTQuanLyBanHangEntities())
+            {
+                return context.Database.SqlQuery<string>(query).ToList();
             }
         }
         #endregion
@@ -537,6 +542,7 @@ namespace WebService3
         //    }
         //}
         #endregion
+
         #region Chi tiết hàng hóa - Tình trạng kinh doanh
         public static object tinh_trang_kinh_doanh(decimal id_hang_hoa, DateTime bd, DateTime kt)
         {
@@ -677,283 +683,7 @@ namespace WebService3
             }
         }
         #endregion
-        #region Chi tiết hàng hóa - Phản hồi khách hàng
-        public static BaoCaoPhanHoi bao_cao_phan_hoi_khach_hang(DateTime bat_dau, int so_thang, decimal id_hang_hoa)
-        {
-            BaoCaoPhanHoi result = new BaoCaoPhanHoi();
-            result.rating = tinh_rating(id_hang_hoa);
-            result.duoc_yeu_thich = so_khach_hang_yeu_thich(id_hang_hoa);
-            var p = lay_cac_thang_tiep_theo(bat_dau, so_thang);
-            foreach (var item in p)
-            {
-                result.thong_ke_theo_thang.Add(lay_thong_ke_theo_thang(item.nam, item.thang, id_hang_hoa));
-            }
-            result.comments = so_luot_comment_den_hien_tai(id_hang_hoa);
-            result.views = so_luot_xem_den_thoi_diem_hien_tai(id_hang_hoa);
-            return result;
-        }
-        public static ChiTietHangHoa.BaoCaoPhanHoi.ThongKeTheoThang lay_thong_ke_theo_thang(int thang, int nam, decimal id_hang_hoa)
-        {
-            ChiTietHangHoa.BaoCaoPhanHoi.ThongKeTheoThang result = new ChiTietHangHoa.BaoCaoPhanHoi.ThongKeTheoThang();
-            result.nam = nam;
-            result.thang = thang;
-            result.luot_xem = lay_luot_xem_trong_thang(thang, nam, id_hang_hoa);
-            result.comments = lay_comment_trong_thang(thang, nam, id_hang_hoa);
-            return result;
-        }
-        public static List<Comment> lay_comment_trong_thang(int thang, int nam, decimal id_hang_hoa)
-        {
-            List<Comment> result = new List<Comment>();
-            using (var context = new TKHTQuanLyBanHangEntities())
-            {
-                var p1 = context.GD_NHAN_XET.Where(s => s.ID_HANG_HOA == id_hang_hoa & s.THOI_GIAN.Year == nam & s.THOI_GIAN.Month == thang).ToList();
-                var p2 = context.DM_LOAI_TAI_KHOAN.Where(s => s.MA_LOAI == "CUSTOMER").Select(s => s.ID).ToList();
-                foreach (var item in p1)
-                {
-                    var p3 = item.DM_TAI_KHOAN.ID_LOAI_TAI_KHOAN;
-                    //Kiem tra nguoi comment la khach hang
-                    if (!p2.Contains(p3)) continue;
-                    //Lay comment
-                    Comment cm = new Comment();
-                    //Lay thong tin comment
-                    var p4 = new KhachHang();
-                    p4.id = item.DM_TAI_KHOAN.ID;
-                    p4.ten_khach_hang = item.DM_TAI_KHOAN.TEN_TAI_KHOAN;
-                    //
-                    cm.id = item.ID;
-                    cm.nguoi_commnet = p4;
-                    cm.noi_dung = item.NHAN_XET;
-                    cm.thoi_gian = item.THOI_GIAN;
-                    result.Add(cm);
-                }
-            }
-            return result;
-        }
-        public static List<LuotXem> lay_luot_xem_trong_thang(int thang, int nam, decimal id_hang_hoa)
-        {
-            List<LuotXem> result = new List<LuotXem>();
-            using (var context = new TKHTQuanLyBanHangEntities())
-            {
-                var p1 = context.GD_CLICK_HANG_HOA.Where(s => s.ID_HANG_HOA == id_hang_hoa & s.THOI_GIAN.Year == nam & s.THOI_GIAN.Month == thang).ToList();
-                var p2 = context.DM_LOAI_TAI_KHOAN.Where(s => s.MA_LOAI == "CUSTOMER").Select(s => s.ID).ToList();
-                foreach (var item in p1)
-                {
-                    var p3 = item.DM_TAI_KHOAN.ID_LOAI_TAI_KHOAN;
-                    //Kiem tra nguoi comment la khach hang
-                    if (!p2.Contains(p3)) continue;
-                    //Lay comment
-                    LuotXem lx = new LuotXem();
-                    //Lay thong tin comment
-                    var p4 = new KhachHang();
-                    p4.id = item.DM_TAI_KHOAN.ID;
-                    p4.ten_khach_hang = item.DM_TAI_KHOAN.TEN_TAI_KHOAN;
-                    //
-                    lx.id = item.ID;
-                    lx.thoi_gian = item.THOI_GIAN;
-                    //
-                    result.Add(lx);
-                }
-            }
-            return result;
-        }
-        public static double tinh_rating(decimal id_hang_hoa)
-        {
-            double result = 0;
-            using (var context = new TKHTQuanLyBanHangEntities())
-            {
-                var p1 = context.GD_DANH_GIA.Where(s => s.ID_HANG_HOA == id_hang_hoa).ToList();
-                double tong_diem = 0;
-                if (p1.Count == 0)
-                {
-                    return 5.0;
-                }
-                foreach (var item in p1)
-                {
-                    tong_diem += Convert.ToDouble(item.DIEM);
-                }
-                result = tong_diem / p1.Count;
-            }
-            return result;
-        }
-        public static int so_khach_hang_yeu_thich(decimal id_hang_hoa)
-        {
-            using (var context = new TKHTQuanLyBanHangEntities())
-            {
-                return context.GD_SAN_PHAM_UA_THICH.Where(s => s.ID_HANG_HOA == id_hang_hoa).ToList().Count;
-            }
-        }
-        public static int so_luot_comment_den_hien_tai(decimal id_hang_hoa)
-        {
-            using (var context = new TKHTQuanLyBanHangEntities())
-            {
-                var p1 = context.GD_NHAN_XET.Where(s => s.ID_HANG_HOA == id_hang_hoa).ToList();
-                var p2 = context.DM_LOAI_TAI_KHOAN.Where(s => s.MA_LOAI == "CUSTOMER").Select(s => s.ID).ToList();
-                return p1.Where(s => !p2.Contains(s.DM_TAI_KHOAN.ID_LOAI_TAI_KHOAN)).ToList().Count;
-            }
-        }
-        public static int so_luot_xem_den_thoi_diem_hien_tai(decimal id_hang_hoa)
-        {
-            using (var context = new TKHTQuanLyBanHangEntities())
-            {
-                var p1 = context.GD_CLICK_HANG_HOA.Where(s => s.ID_HANG_HOA == id_hang_hoa).ToList();
-                var p2 = context.DM_LOAI_TAI_KHOAN.Where(s => s.MA_LOAI == "CUSTOMER").Select(s => s.ID).ToList();
-                return p1.Where(s => !p2.Contains(s.DM_TAI_KHOAN.ID_LOAI_TAI_KHOAN)).ToList().Count;
-            }
-        }
-        #endregion
-        #region Chi tiết hàng hóa - Thông tin khuyến mãi
-        public static BaoCaoKhuyenMai bao_cao_khuyen_mai_san_pham(decimal id_san_pham, DateTime ngay_hien_tai)
-        {
-            BaoCaoKhuyenMai result = new BaoCaoKhuyenMai();
-            var list_dot_khuyen_mai = danh_sach_id_cac_dot_khuyen_mai_cua_san_pham(id_san_pham);
-            foreach (var item in list_dot_khuyen_mai)
-            {
-                var dot_km = thong_tin_dot_khuyen_mai(id_san_pham, item);
-                if (dot_km.thoi_gian_bat_dau <= ngay_hien_tai & dot_km.thoi_gian_ket_thuc >= ngay_hien_tai)
-                {
-                    result.dot_khuyen_mai_hien_tai = dot_km;
-                }
-                else
-                {
-                    result.lich_su.Add(dot_km);
-                }
-            }
-            return result;
-        }
-        public static DotKhuyenMai thong_tin_dot_khuyen_mai(decimal id_san_pham, decimal id_dot_km)
-        {
-            DotKhuyenMai result = new DotKhuyenMai();
-            using (var context = new TKHTQuanLyBanHangEntities())
-            {
-                var p2 = context.GD_KHUYEN_MAI.Where(s => s.ID == id_dot_km).First();
-                //
-                result.id = p2.ID;
-                result.ma_dot = p2.MA_DOT;
-                result.mo_ta = p2.MO_TA;
-                result.thoi_gian_bat_dau = p2.THOI_GIAN_BAT_DAU;
-                result.thoi_gian_ket_thuc = p2.THOI_GIAN_KET_THUC;
-                result.muc_khuyen_mai = context.GD_KHUYEN_MAI_CHI_TIET.Where(s => s.ID_KHUYEN_MAI == id_dot_km & s.ID_HANG_HOA == id_san_pham).Select(s => s.MUC_KHUYEN_MAI).First();
-                //
-                result.luot_mua = get_luot_mua_san_pham_trong_dot_km(id_san_pham, id_dot_km);
-                result.luot_xem = get_luot_xem_san_pham_trong_dot_km(id_san_pham, id_dot_km);
-                result.so_luong_ban_duoc = get_doanh_so_san_pham_trong_dot_km(id_san_pham, id_dot_km);
-                result.so_tien_ban_duoc = get_doanh_thu_san_pham_trong_dot_km(id_san_pham, id_dot_km);
-                result.tong_doanh_so = get_tong_doanh_so_dot_km(id_dot_km);
-                result.tong_doanh_thu = get_tong_doanh_thu_dot_km(id_dot_km);
-            }
-            return result;
-        }
-
-        public static decimal get_tong_doanh_thu_dot_km(decimal id_dot_km)
-        {
-            decimal result = 0;
-            using (var context = new TKHTQuanLyBanHangEntities())
-            {
-                var ngay_bat_dau = context.GD_KHUYEN_MAI.Where(s => s.ID == id_dot_km).Select(s => s.THOI_GIAN_BAT_DAU).First();
-                var ngay_ket_thuc = context.GD_KHUYEN_MAI.Where(s => s.ID == id_dot_km).Select(s => s.THOI_GIAN_KET_THUC).First();
-                var list_hoa_don = context.GD_HOA_DON.Where(s => s.THOI_GIAN_TAO <= ngay_ket_thuc & s.THOI_GIAN_TAO >= ngay_bat_dau).Select(s => s.ID).ToList();
-                foreach (var item in list_hoa_don)
-                {
-                    var chi_tiet = context.GD_HOA_DON_CHI_TIET.Where(s => s.ID_HOA_DON == item).ToList();
-                    foreach (var item2 in chi_tiet)
-                    {
-                        result += item2.SO_LUONG * item2.GIA_BAN;
-                    }
-                }
-            }
-            return result;
-        }
-
-        public static int get_tong_doanh_so_dot_km(decimal id_dot_km)
-        {
-            int result = 0;
-            using (var context = new TKHTQuanLyBanHangEntities())
-            {
-                var ngay_bat_dau = context.GD_KHUYEN_MAI.Where(s => s.ID == id_dot_km).Select(s => s.THOI_GIAN_BAT_DAU).First();
-                var ngay_ket_thuc = context.GD_KHUYEN_MAI.Where(s => s.ID == id_dot_km).Select(s => s.THOI_GIAN_KET_THUC).First();
-                var list_hoa_don = context.GD_HOA_DON.Where(s => s.THOI_GIAN_TAO <= ngay_ket_thuc & s.THOI_GIAN_TAO >= ngay_bat_dau).Select(s => s.ID).ToList();
-                foreach (var item in list_hoa_don)
-                {
-                    var chi_tiet = context.GD_HOA_DON_CHI_TIET.Where(s => s.ID_HOA_DON == item).ToList();
-                    foreach (var item2 in chi_tiet)
-                    {
-                        result += (int)item2.SO_LUONG;
-                    }
-                }
-            }
-            return result;
-        }
-
-        public static decimal get_doanh_thu_san_pham_trong_dot_km(decimal id_san_pham, decimal id_dot_km)
-        {
-            decimal result = 0;
-            using (var context = new TKHTQuanLyBanHangEntities())
-            {
-                var ngay_bat_dau = context.GD_KHUYEN_MAI.Where(s => s.ID == id_dot_km).Select(s => s.THOI_GIAN_BAT_DAU).First();
-                var ngay_ket_thuc = context.GD_KHUYEN_MAI.Where(s => s.ID == id_dot_km).Select(s => s.THOI_GIAN_KET_THUC).First();
-                var list_hoa_don = context.GD_HOA_DON.Where(s => s.THOI_GIAN_TAO <= ngay_ket_thuc & s.THOI_GIAN_TAO >= ngay_bat_dau).Select(s => s.ID).ToList();
-                foreach (var item in list_hoa_don)
-                {
-                    var chi_tiet = context.GD_HOA_DON_CHI_TIET.Where(s => s.ID_HOA_DON == item & s.ID_HANG_HOA == id_san_pham).First();
-                    result += chi_tiet.SO_LUONG * chi_tiet.GIA_BAN;
-                }
-            }
-            return result;
-        }
-
-        public static int get_doanh_so_san_pham_trong_dot_km(decimal id_san_pham, decimal id_dot_km)
-        {
-            int result = 0;
-            using (var context = new TKHTQuanLyBanHangEntities())
-            {
-                var ngay_bat_dau = context.GD_KHUYEN_MAI.Where(s => s.ID == id_dot_km).Select(s => s.THOI_GIAN_BAT_DAU).First();
-                var ngay_ket_thuc = context.GD_KHUYEN_MAI.Where(s => s.ID == id_dot_km).Select(s => s.THOI_GIAN_KET_THUC).First();
-                var list_hoa_don = context.GD_HOA_DON.Where(s => s.THOI_GIAN_TAO <= ngay_ket_thuc & s.THOI_GIAN_TAO >= ngay_bat_dau).Select(s => s.ID).ToList();
-                foreach (var item in list_hoa_don)
-                {
-                    var chi_tiet = context.GD_HOA_DON_CHI_TIET.Where(s => s.ID_HOA_DON == item & s.ID_HANG_HOA == id_san_pham).First();
-                    result += (int)chi_tiet.SO_LUONG;
-                }
-            }
-            return result;
-        }
-
-        public static int get_luot_xem_san_pham_trong_dot_km(decimal id_san_pham, decimal id_dot_km)
-        {
-            int result = 0;
-            using (var context = new TKHTQuanLyBanHangEntities())
-            {
-                var ngay_bat_dau = context.GD_KHUYEN_MAI.Where(s => s.ID == id_dot_km).Select(s => s.THOI_GIAN_BAT_DAU).First();
-                var ngay_ket_thuc = context.GD_KHUYEN_MAI.Where(s => s.ID == id_dot_km).Select(s => s.THOI_GIAN_KET_THUC).First();
-                result = context.GD_CLICK_HANG_HOA.Where(s => s.THOI_GIAN <= ngay_ket_thuc & s.THOI_GIAN >= ngay_bat_dau & s.ID_HANG_HOA == id_san_pham).ToList().Count;
-            }
-            return result;
-        }
-
-        public static int get_luot_mua_san_pham_trong_dot_km(decimal id_san_pham, decimal id_dot_km)
-        {
-            int result = 0;
-            using (var context = new TKHTQuanLyBanHangEntities())
-            {
-                var ngay_bat_dau = context.GD_KHUYEN_MAI.Where(s => s.ID == id_dot_km).Select(s => s.THOI_GIAN_BAT_DAU).First();
-                var ngay_ket_thuc = context.GD_KHUYEN_MAI.Where(s => s.ID == id_dot_km).Select(s => s.THOI_GIAN_KET_THUC).First();
-                result = context.GD_HOA_DON.Where(s => s.THOI_GIAN_TAO <= ngay_ket_thuc & s.THOI_GIAN_TAO >= ngay_bat_dau).Select(s => s.ID).ToList().ToList().Count;
-            }
-            return result;
-        }
-
-
-        public static List<decimal> danh_sach_id_cac_dot_khuyen_mai_cua_san_pham(decimal id_san_pham)
-        {
-            List<decimal> result = new List<decimal>();
-            using (var context = new TKHTQuanLyBanHangEntities())
-            {
-                result = context.GD_KHUYEN_MAI_CHI_TIET.Where(s => s.ID_HANG_HOA == id_san_pham).Select(s => s.ID_KHUYEN_MAI).ToList();
-            }
-            return result;
-        }
-
-        #endregion
+       
         #region Cập nhật danh mục hàng hóa
         public static string GenMa(string key, int num, string last)
         {
@@ -1098,116 +828,11 @@ namespace WebService3
         #endregion
         #region Quản lý bán hàng
         #region Quản lý nhập xuất kho
-        public static object ThemPhieuNhapXuat(
-           List<PhieuNhap.PhieuNhap> list_phieu_nhap)
-        {
-            using (var scope = new TransactionScope(TransactionScopeOption.Required,
-                                   new System.TimeSpan(0, 15, 0)))
-            {
-                try
-                {
-                    using (var context = new TKHTQuanLyBanHangEntities())
-                    {
-                        foreach (var item in list_phieu_nhap)
-                        {
-                            //Nhap phieu
-                            var gd_phieu_nhap_xuat = new GD_PHIEU_NHAP_XUAT();
-                            gd_phieu_nhap_xuat.LOAI_PHIEU = "N";
-                            var lastPhieu = context.GD_PHIEU_NHAP_XUAT.OrderByDescending(s => s.MA_PHIEU).FirstOrDefault();
-                            var maCu = lastPhieu == null ? null : lastPhieu.MA_PHIEU;
-                            var maMoi = GenMa("P", 7, maCu);
-                            gd_phieu_nhap_xuat.MA_PHIEU = maMoi;
-                            gd_phieu_nhap_xuat.ID_TAI_KHOAN = context.DM_TAI_KHOAN.Where(s => s.TEN_TAI_KHOAN == item.ten_tai_khoan).First().ID;
-                            gd_phieu_nhap_xuat.NGAY_NHAP = item.ngay_nhap;
-                            var id_cua_hang = item.id_cua_hang;
-                            gd_phieu_nhap_xuat.ID_CUA_HANG = id_cua_hang;
-                            context.GD_PHIEU_NHAP_XUAT.Add(gd_phieu_nhap_xuat);
-                            context.SaveChanges();
-                            var phieuNhapXuat = context.GD_PHIEU_NHAP_XUAT.Where(s => s.MA_PHIEU == maMoi).First();
-                            var id = phieuNhapXuat.ID;
-                            //Nhap chi tiet phieu
-                            int so_luong = 0;
-                            foreach (var item2 in item.list_hang_hoa)
-                            {
-
-                                var gd_phieu_nhap_chi_tiet = new GD_PHIEU_NHAP_CHI_TIET();
-                                gd_phieu_nhap_chi_tiet.ID_PHIEU_NHAP_XUAT = id;
-                                gd_phieu_nhap_chi_tiet.ID_HANG_HOA = context.DM_HANG_HOA.Where(s => s.MA_TRA_CUU == item2.ma_tra_cuu_hang_hoa).First().ID;
-                                var giaNhap = item2.gia_nhap;
-                                gd_phieu_nhap_chi_tiet.GIA_NHAP = giaNhap;
-                                so_luong = item2.size_sl.Sum(s => s.so_luong);
-                                gd_phieu_nhap_chi_tiet.GIA_NHAP_BINH_QUAN = tinh_gia_nhap_binh_quan(item.id_cua_hang, gd_phieu_nhap_chi_tiet.ID_HANG_HOA, giaNhap, so_luong);
-                                context.GD_PHIEU_NHAP_CHI_TIET.Add(gd_phieu_nhap_chi_tiet);
-                                foreach (var item3 in item2.size_sl)
-                                {
-                                    var gd_phieu_nhap_xuat_chi_tiet = new GD_PHIEU_NHAP_XUAT_CHI_TIET();
-                                    gd_phieu_nhap_xuat_chi_tiet.ID_PHIEU_NHAP_XUAT = id;
-                                    var id_hang_hoa = context.DM_HANG_HOA.Where(s => s.MA_TRA_CUU == item2.ma_tra_cuu_hang_hoa).First().ID;
-                                    gd_phieu_nhap_xuat_chi_tiet.ID_HANG_HOA = id_hang_hoa;
-                                    var id_size = context.GD_TAG.Where(s => s.TEN_TAG == item3.ten_size).First().ID;
-                                    gd_phieu_nhap_xuat_chi_tiet.ID_SIZE = id_size;
-                                    gd_phieu_nhap_xuat_chi_tiet.SO_LUONG = item3.so_luong;
-                                    context.GD_PHIEU_NHAP_XUAT_CHI_TIET.Add(gd_phieu_nhap_xuat_chi_tiet);
-
-                                    // Nhập tồn kho
-                                    var tonKho = context.GD_TON_KHO
-                                        .Where(s => s.ID_CUA_HANG == id_cua_hang && s.ID_HANG_HOA == id_hang_hoa && s.ID_SIZE == id_size)
-                                        .FirstOrDefault();
-                                    if (tonKho == null)
-                                    {
-                                        var gdTonKho = new GD_TON_KHO();
-                                        gdTonKho.ID_CUA_HANG = id_cua_hang;
-                                        gdTonKho.ID_HANG_HOA = id_hang_hoa;
-                                        gdTonKho.ID_SIZE = id_size;
-                                        gdTonKho.SO_LUONG_TON_KHO = item3.so_luong;
-                                        context.GD_TON_KHO.Add(gdTonKho);
-                                    }
-                                    else
-                                    {
-                                        tonKho.SO_LUONG_TON_KHO += item3.so_luong;
-                                    }
-                                    context.SaveChanges();
-                                }
-                            }
-                        }
-                    }
-                    scope.Complete();
-                    return null;
-                }
-                catch (Exception v_e)
-                {
-                    scope.Dispose();
-                    throw v_e;
-                }
-                finally
-                {
-
-                }
-            }
-        }
-
-        private static decimal tinh_gia_nhap_binh_quan(decimal id_cua_hang, decimal iD_HANG_HOA, decimal gia_nhap, int slNhap)
-        {
-            using (var context = new TKHTQuanLyBanHangEntities())
-            {
-                var temp = context.GD_PHIEU_NHAP_CHI_TIET
-                    .Where(s => s.ID_HANG_HOA == iD_HANG_HOA).FirstOrDefault();
-                if (temp == null)
-                {
-                    return gia_nhap;
-                }
-                var slDu = context.GD_TON_KHO
-                    .Where(s => s.ID_CUA_HANG == id_cua_hang && s.ID_HANG_HOA == iD_HANG_HOA)
-                    .Sum(s => s.SO_LUONG_TON_KHO);
-                var giaBinhQuanCu = context.GD_PHIEU_NHAP_CHI_TIET
-                    .Where(s => s.GD_PHIEU_NHAP_XUAT.ID_CUA_HANG == id_cua_hang && s.ID_HANG_HOA == iD_HANG_HOA)
-                    .OrderByDescending(s => s.GD_PHIEU_NHAP_XUAT.NGAY_NHAP)
-                    .FirstOrDefault()
-                    .GIA_NHAP_BINH_QUAN;
-                return (giaBinhQuanCu * slDu + gia_nhap * slNhap) / (slNhap + slDu);
-            }
-        }
+       
         #endregion
+        #endregion
+        #region Hóa đơn
+        
         #endregion
         #region Quản lý thành viên
         public static ThanhVien ChiTietThanhVien(decimal id_thanh_vien)

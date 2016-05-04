@@ -5,6 +5,8 @@ using System.Web;
 
 namespace WebService3
 {
+    #region Dùng chung
+    #endregion
     #region Quản lý hàng hóa
     #region Quản lý danh mục hàng hóa
     public class LoaiHang
@@ -124,91 +126,7 @@ namespace WebService3
         public List<string> tag { get; set; }
     }
     #endregion
-    namespace ChiTietHangHoa
-    {
-        namespace BaoCaoPhanHoi
-        {
-            public class KhachHang
-            {
-                public decimal id { get; set; }
-                public string ten_khach_hang { get; set; }
-                public string link_anh_dai_dien { get; set; }
-            }
-            public class LuotXem
-            {
-                public decimal id { get; set; }
-                public DateTime thoi_gian { get; set; }
-            }
-            public class Comment
-            {
-                public decimal id { get; set; }
-                public string noi_dung { get; set; }
-                public DateTime thoi_gian { get; set; }
-                public KhachHang nguoi_commnet { get; set; }
-            }
-            public class ThongKeTheoThang
-            {
-                public int thang { get; set; }
-                public int nam { get; set; }
-                public List<Comment> comments { get; set; }
-                public List<LuotXem> luot_xem { get; set; }
-            }
-            public class BaoCaoPhanHoi
-            {
-                public List<ThongKeTheoThang> thong_ke_theo_thang { get; set; }
-                public int views { get; set; }
-                public int comments { get; set; }
-                public int duoc_yeu_thich { get; set; }
-                public double rating { get; set; }
-            }
-        }
-        namespace BaoCaoKhuyenMai
-        {
-            public class BaoCaoKhuyenMai
-            {
-                public DotKhuyenMai dot_khuyen_mai_hien_tai { get; set; }
-                public List<DotKhuyenMai> lich_su { get; set; }
-            }
-            public class DotKhuyenMai
-            {
-                public decimal id { get; set; }
-                public string ma_dot { get; set; }
-                public string mo_ta { get; set; }
-                public DateTime thoi_gian_bat_dau { get; set; }
-                public DateTime thoi_gian_ket_thuc { get; set; }
-                public decimal muc_khuyen_mai { get; set; }
-                public int luot_xem { get; set; }
-                public int luot_mua { get; set; }
-                public decimal so_tien_ban_duoc { get; set; }
-                public int so_luong_ban_duoc { get; set; }
-                public decimal tong_doanh_thu { get; set; }
-                public int tong_doanh_so { get; set; }
-            }
-        }
-    }
-    #endregion
-    #region Quản lý bán hàng
-    namespace PhieuNhap
-    {
-        public class SizeSL
-        {
-            public string ten_size { get; set; }
-            public int so_luong { get; set; }
-        }
-        public class HangHoa
-        {
-            public string ma_tra_cuu_hang_hoa { get; set; }
-            public List<SizeSL> size_sl { get; set; }
-            public decimal gia_nhap { get; set; }
-        }
-        public class PhieuNhap
-        {
-            public DateTime ngay_nhap { get; set; }
-            public string ten_tai_khoan { get; set; }
-            public decimal id_cua_hang { get; set; }
-            public List<HangHoa> list_hang_hoa { get; set; }
-        }   
-    }
+    
     #endregion
     #region Quản lý thành viên
     public class ThanhVien

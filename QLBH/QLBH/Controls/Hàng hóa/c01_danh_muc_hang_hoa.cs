@@ -11,6 +11,7 @@ using LibraryApi;
 using DevExpress.XtraTab;
 using DevExpress.XtraEditors;
 using DevExpress.XtraBars.Docking;
+using QLBH.Common;
 
 
 namespace QLBH.Controls
@@ -60,9 +61,9 @@ namespace QLBH.Controls
                 //
                 v_xtra_page.Text = item.ten_tag;
                 v_xtra_page.Tag = item.id;
-                v_xtra_page.Image = Common.get_image(item.link_anh);
+                v_xtra_page.Image = CommonFunction.get_image(item.link_anh);
                 v_xtra_page.Appearance.Header.Font = new Font(SystemInfo.font_chu_1, SystemInfo.font_size_1, FontStyle.Regular);
-                v_xtra_page.Appearance.Header.ForeColor = Common.lay_mau_theo_ma_mau(SystemInfo.ma_mau_da_cam_dep);
+                v_xtra_page.Appearance.Header.ForeColor = CommonFunction.lay_mau_theo_ma_mau(SystemInfo.ma_mau_da_cam_dep);
                 v_xtra_page.AutoScroll = true;
                 //v_xtra_page.MouseLeave += V_xtra_page_MouseLeave;
                 xtraTabControl1.TabPages.Add(v_xtra_page);
@@ -93,7 +94,7 @@ namespace QLBH.Controls
             }
             catch (Exception v_e)
             {
-                Common.exception_handle(v_e);
+                CommonFunction.exception_handle(v_e);
             }
         }
         private bool match_filter(HangHoa v_hang, List<Tag> filter)
@@ -147,7 +148,7 @@ namespace QLBH.Controls
                 p.Height = 40;
                 p.BackColor = Color.Transparent;
                 p.Text = "";
-                //p.Image = Common.get_image(@"D:\Downloads\CocCoc\Double Left - 64.png");
+                //p.Image = CommonFunction.get_image(@"D:\Downloads\CocCoc\Double Left - 64.png");
                 //p.ImageLocation = ImageLocation.MiddleCenter;
                 p.Click += P_Click;
                 xtra_page.Controls.Add(p);
@@ -167,9 +168,9 @@ namespace QLBH.Controls
                 {
                     SimpleButton v_btn = new SimpleButton();
                     v_btn.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat;
-                    v_btn.BackColor = Common.lay_mau_theo_ma_mau(SystemInfo.ma_mau_den_dep);
+                    v_btn.BackColor = CommonFunction.lay_mau_theo_ma_mau(SystemInfo.ma_mau_den_dep);
                     v_btn.Height = 59;
-                    v_btn.ForeColor = Common.lay_mau_theo_ma_mau(SystemInfo.ma_mau_da_cam_dep);
+                    v_btn.ForeColor = CommonFunction.lay_mau_theo_ma_mau(SystemInfo.ma_mau_da_cam_dep);
                     v_btn.Font = new Font(SystemInfo.font_chu_1, SystemInfo.font_size_1, FontStyle.Regular);
                     
                     xtra_page.Controls.Add(v_btn);
@@ -219,7 +220,7 @@ namespace QLBH.Controls
             p1.Height = 40;
             p1.BackColor = Color.Black;
             p1.Text = "";
-            //p1.Image = Common.get_image(@"D:\Downloads\CocCoc\Double Left - 64.png");
+            //p1.Image = CommonFunction.get_image(@"D:\Downloads\CocCoc\Double Left - 64.png");
             //p1.ImageLocation = ImageLocation.MiddleCenter;
             p1.Click += P_Click;
             xtra_page.Controls.Add(p1);
@@ -260,7 +261,7 @@ namespace QLBH.Controls
             }
             catch (Exception ex)
             {
-                Common.exception_handle(ex);
+                CommonFunction.exception_handle(ex);
             }
         }
 
@@ -284,7 +285,7 @@ namespace QLBH.Controls
             }
             catch (Exception ex)
             {
-                Common.exception_handle(ex);
+                CommonFunction.exception_handle(ex);
             }
         }
       
@@ -334,7 +335,7 @@ namespace QLBH.Controls
             }
             catch (Exception v_E)
             {
-                Common.exception_handle(v_E);
+                CommonFunction.exception_handle(v_E);
             }
         }
 

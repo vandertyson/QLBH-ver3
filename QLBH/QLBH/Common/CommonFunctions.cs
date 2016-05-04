@@ -9,11 +9,12 @@ using System.Drawing.Imaging;
 using LibraryApi;
 using System.Drawing;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 
 
-namespace QLBH
+namespace QLBH.Common
 {
-    class Common
+    class CommonFunction
     {
         public static Image get_image(string link)
         {
@@ -37,24 +38,22 @@ namespace QLBH
         {
                 if (String.IsNullOrEmpty(mo_ta))
                 {
-                    //return @"C:\Users\Son Pham\Desktop\New Text Document (3).txt";
+                   
                 }
                 if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
                 {
-                    //return @"C:\Users\Son Pham\Desktop\New Text Document (3).txt";                
+                           
                 }
                 using (System.Net.WebClient client = new System.Net.WebClient())
                 {
-                    client.DownloadFileAsync(new Uri(mo_ta),
-                    file_name);
+                    client.DownloadFileAsync(new Uri(mo_ta),file_name);
                 }
                 return file_name;
         }
 
         public static void exception_handle(Exception ex)
         {
-            MessageBox.Show(ex.Data.ToString());
-            
+            XtraMessageBox.Show(ex.Data.ToString() + "INNER     :" + ex.InnerException);         
         }
 
         public static Color lay_mau_theo_ma_mau(string ma_mau_html)

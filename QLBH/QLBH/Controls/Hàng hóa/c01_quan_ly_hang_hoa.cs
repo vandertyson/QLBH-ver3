@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LibraryApi;
+using QLBH.Common;
 
 namespace QLBH.Controls
 {
@@ -62,7 +63,7 @@ namespace QLBH.Controls
             }
             catch (Exception v_e)
             {
-                Common.exception_handle(v_e); 
+                CommonFunction.exception_handle(v_e); 
             }
         }
 
@@ -74,7 +75,7 @@ namespace QLBH.Controls
             }
             catch (Exception v_e)
             {
-                Common.exception_handle(v_e);
+                CommonFunction.exception_handle(v_e);
             }
         }
     }

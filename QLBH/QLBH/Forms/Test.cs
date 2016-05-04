@@ -8,10 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LibraryApi;
-using LibraryApi.QuanLyBanHang;
 using LinqToExcel;
 using DevExpress.XtraEditors;
-
+using QLBH.Common;
 
 namespace QLBH.Forms
 {
@@ -29,7 +28,7 @@ namespace QLBH.Forms
                 string file = @"C:\Users\Son Pham\Desktop\QLBH ver3\DataExcel.xlsx";
                 string path = @"http://quanlybanhang.somee.com/docx/";
                 var excel = new ExcelQueryFactory(file);
-                var dt = from a in excel.Worksheet<ThemHangHoa>("HANG_HOA") select a;
+                var dt = from a in excel.Worksheet<ThemHangHoaExcel>("HANG_HOA") select a;
                 var listHH = new List<ThemHangHoaPost>();
 
                 foreach (var item in dt)
@@ -42,13 +41,13 @@ namespace QLBH.Forms
                     hh.ten_hang_hoa = item.Ten;
                     hh.ma_nha_cung_cap = item.MaNhaCungCap;
                     hh.ma_tra_cuu = item.MaTraCuu;
-                    var listLink = Common.TachID(item.Link);
+                    var listLink = CommonFunction.TachID(item.Link);
                     hh.link_anh = new List<string>();
                     foreach (var link in listLink)
                     {
                         hh.link_anh.Add(link);
                     }
-                    var listTag = Common.TachID(item.Tag);
+                    var listTag = CommonFunction.TachID(item.Tag);
                     hh.tag = new List<string>();
                     foreach (var t in listTag)
                     {
@@ -67,6 +66,7 @@ namespace QLBH.Forms
                 MessageBox.Show(ex.Message);
             }
         }
+
         private void m_btn_phieu_nhap_Click(object sender, EventArgs e)
         {
             try
@@ -112,7 +112,7 @@ namespace QLBH.Forms
 
                         #region Tạo danh sách phiếu nhập
 
-                        var list_phieu_nhap = new List<PhieuNhap>();
+                        var list_phieu_nhap = new List<QuanLyPhieuNhapXuat.PhieuNhap>();
 
                         #region 1 ngày tương ứng 1 phiếu
 
@@ -122,21 +122,21 @@ namespace QLBH.Forms
 
                         foreach (var item in list_phieu_theo_ngay)
                         {
-                            PhieuNhap phieu = new PhieuNhap();
+                            QuanLyPhieuNhapXuat.PhieuNhap phieu = new QuanLyPhieuNhapXuat.PhieuNhap();
                             phieu.ngay_nhap = Convert.ToDateTime(item);
                             phieu.ten_tai_khoan = SystemInfo.ten_tai_khoan;
                             phieu.id_cua_hang = SystemInfo.id_cua_hang;
-                            phieu.list_hang_hoa = new List<LibraryApi.QuanLyBanHang.HangHoa>();
+                            phieu.list_hang_hoa = new List<QuanLyPhieuNhapXuat.HangHoa>();
 
                             #region nhập thông tin cho từng phiếu
                             // lay het hang nhap trong ngay
                             var hang_nhap_trong_ngay = data_from_excel.Where(s => Convert.ToDateTime(s.ngay_nhap) == item).ToList();
                             foreach (var hang in hang_nhap_trong_ngay)
                             {
-                                var hang_hoa = new LibraryApi.QuanLyBanHang.HangHoa();
+                                var hang_hoa = new QuanLyPhieuNhapXuat.HangHoa();
                                 hang_hoa.gia_nhap = decimal.Parse(hang.gia_nhap);
                                 hang_hoa.ma_tra_cuu_hang_hoa = hang.ma_tra_cuu;
-                                hang_hoa.size_sl = new List<SizeSL>();
+                                hang_hoa.size_sl = new List<QuanLyPhieuNhapXuat.SizeSL>();
                                 foreach (var item2 in new List<string> { "S", "M", "L", "XL", "XXL" })
                                 {
                                     var sl = int.Parse(hang.GetType().GetProperty(item2).GetValue(hang).ToString());
@@ -144,7 +144,7 @@ namespace QLBH.Forms
                                     {
                                         continue;
                                     }
-                                    SizeSL s = new SizeSL();
+                                    QuanLyPhieuNhapXuat.SizeSL s = new QuanLyPhieuNhapXuat.SizeSL();
                                     s.ten_size = item2;
                                     s.so_luong = sl;
                                     hang_hoa.size_sl.Add(s);
@@ -160,7 +160,7 @@ namespace QLBH.Forms
 
                         #region Chạy request để nhập    
 
-                        MyNetwork.ThemPhieuNhapTuExcel(list_phieu_nhap, this, data =>
+                        QuanLyPhieuNhapXuat.ThemPhieuNhapTuExcel(list_phieu_nhap, this, data =>
                         {
                             MessageBox.Show(data.Message);
                         });
@@ -171,7 +171,7 @@ namespace QLBH.Forms
             }
             catch (Exception ex)
             {
-                Common.exception_handle(ex);
+                CommonFunction.exception_handle(ex);
             }
         }
     }
