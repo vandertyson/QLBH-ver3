@@ -119,6 +119,12 @@
     <Compile Include="Controls\Common Controls\c0_so_luong.Designer.cs">
       <DependentUpon>c0_so_luong.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Common Controls\c0_table.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Common Controls\c0_table.Designer.cs">
+      <DependentUpon>c0_table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Hàng hóa\c01_chi_tiet_khuyen_mai.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -287,6 +293,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Common Controls\c0_so_luong.resx">
       <DependentUpon>c0_so_luong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Common Controls\c0_table.resx">
+      <DependentUpon>c0_table.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Hàng hóa\c01_chi_tiet_khuyen_mai.resx">
       <DependentUpon>c01_chi_tiet_khuyen_mai.cs</DependentUpon>

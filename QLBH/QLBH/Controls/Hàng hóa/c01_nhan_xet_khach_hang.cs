@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using LibraryApi.ChiTietHangHoa.BaoCaoPhanHoi;
 using LibraryApi;
 using DevExpress.XtraCharts;
 
@@ -18,7 +17,7 @@ namespace QLBH.Controls
         public decimal id_hang_hoa { get; set; }
         public DateTime bat_dau { get; set; }
         public int so_thang { get; set; }
-        public BaoCaoPhanHoi v_bao_cao_phan_hoi { get; set; }
+        public BaoCaoChiTietHangHoa.BaoCaoPhanHoi v_bao_cao_phan_hoi { get; set; }
         public c01_nhan_xet_khach_hang()
         {
             InitializeComponent();
@@ -27,7 +26,7 @@ namespace QLBH.Controls
         public c01_nhan_xet_khach_hang(decimal id_hang_hoa, DateTime bat_dau, int so_thang)
         {
             InitializeComponent();
-            MyNetwork.LayBaoCaoPhanHoiKhachHang(id_hang_hoa, bat_dau, so_thang, this.TopLevelControl as Form, data =>
+            BaoCaoChiTietHangHoa.LayBaoCaoPhanHoiKhachHang(id_hang_hoa, bat_dau, so_thang, this.TopLevelControl as Form, data =>
                {
                    v_bao_cao_phan_hoi = data.Data;
                    data_to_chart();
@@ -35,7 +34,7 @@ namespace QLBH.Controls
                    data_to_thong_ke();
                });
         }
-        public c01_nhan_xet_khach_hang(BaoCaoPhanHoi p)
+        public c01_nhan_xet_khach_hang(BaoCaoChiTietHangHoa.BaoCaoPhanHoi p)
         {
             InitializeComponent();
             v_bao_cao_phan_hoi = p;

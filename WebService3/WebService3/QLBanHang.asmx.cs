@@ -150,7 +150,7 @@ namespace WebService3
         {
             try
             {
-                var data = Function.DanhMucLoaiHang();
+                var data = QuanLyDanhMucHangHoa.DanhMucLoaiHang();
                 var result = new KetQuaTraVe(true, "Thành công", data);
                 TraKetQua(result);
             }
