@@ -259,6 +259,7 @@ namespace WebService3
                 return listDs;
             }
         }
+
         //public static List<HangHoaMaster> TimKiemHangHoa(string ma_hang_hoa, string ten_hang_hoa, string list_id_loai_tag)
         //{
         //    using (var context = new TKHTQuanLyBanHangEntities())
