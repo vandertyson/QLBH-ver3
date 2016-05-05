@@ -57,6 +57,7 @@
     <Reference Include="DevExpress.XtraGrid.v14.1, Version=14.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v14.1, Version=14.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraMap.v14.1, Version=14.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraNavBar.v14.1, Version=14.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraPivotGrid.v14.1, Version=14.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraPrinting.v14.1, Version=14.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraRichEdit.v14.1, Version=14.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -101,6 +102,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\CommonFunctions.cs" />
+    <Compile Include="Controls\Common Controls\c0_cua_hang_simple.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Common Controls\c0_cua_hang_simple.Designer.cs">
+      <DependentUpon>c0_cua_hang_simple.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Common Controls\c0_gia_tien.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -118,6 +125,12 @@
     </Compile>
     <Compile Include="Controls\Common Controls\c0_so_luong.Designer.cs">
       <DependentUpon>c0_so_luong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Cửa hàng\c03_nghiep_vu_cua_hang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Cửa hàng\c03_nghiep_vu_cua_hang.Designer.cs">
+      <DependentUpon>c03_nghiep_vu_cua_hang.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Hàng hóa\c01_chi_tiet_khuyen_mai.cs">
       <SubType>UserControl</SubType>
@@ -257,6 +270,12 @@
     <Compile Include="Controls\Hóa đơn\c02_size_so_luong.Designer.cs">
       <DependentUpon>c02_size_so_luong.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Cửa hàng\c03_quan_ly_kho_va_cua_hang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Cửa hàng\c03_quan_ly_kho_va_cua_hang.Designer.cs">
+      <DependentUpon>c03_quan_ly_kho_va_cua_hang.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TemplateControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -269,6 +288,12 @@
     <Compile Include="Forms\f01_main_form.Designer.cs">
       <DependentUpon>f01_main_form.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\f02_them_hoa_don.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\f02_them_hoa_don.Designer.cs">
+      <DependentUpon>f02_them_hoa_don.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Test.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -279,6 +304,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExcelStruct.cs" />
     <Compile Include="SystemInfo.cs" />
+    <EmbeddedResource Include="Controls\Common Controls\c0_cua_hang_simple.resx">
+      <DependentUpon>c0_cua_hang_simple.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Common Controls\c0_gia_tien.resx">
       <DependentUpon>c0_gia_tien.cs</DependentUpon>
     </EmbeddedResource>
@@ -287,6 +315,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Common Controls\c0_so_luong.resx">
       <DependentUpon>c0_so_luong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Cửa hàng\c03_nghiep_vu_cua_hang.resx">
+      <DependentUpon>c03_nghiep_vu_cua_hang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Hàng hóa\c01_chi_tiet_khuyen_mai.resx">
       <DependentUpon>c01_chi_tiet_khuyen_mai.cs</DependentUpon>
@@ -357,11 +388,17 @@
     <EmbeddedResource Include="Controls\Hóa đơn\c02_size_so_luong.resx">
       <DependentUpon>c02_size_so_luong.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Cửa hàng\c03_quan_ly_kho_va_cua_hang.resx">
+      <DependentUpon>c03_quan_ly_kho_va_cua_hang.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\TemplateControl.resx">
       <DependentUpon>TemplateControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\f01_main_form.resx">
       <DependentUpon>f01_main_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\f02_them_hoa_don.resx">
+      <DependentUpon>f02_them_hoa_don.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Test.resx">
       <DependentUpon>Test.cs</DependentUpon>
@@ -459,7 +496,52 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Shop Filled-50.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Controls\Phiếu nhập\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shopping Cart-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sale-52.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bill Filled-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bill Filled-50 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shopping Cart-52.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shopping Cart-52 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shopping Cart-52 %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bill-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MS Excel Filled-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Box Filled-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bill Filled-50 %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sale-481.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Land Sales-50.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

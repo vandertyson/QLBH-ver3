@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using LibraryApi.ChiTietHangHoa.BaoCaoPhanHoi;
 using LibraryApi;
 using DevExpress.XtraCharts;
+using static LibraryApi.BaoCaoChiTietHangHoa;
 
 namespace QLBH.Controls
 {
@@ -27,7 +22,7 @@ namespace QLBH.Controls
         public c01_nhan_xet_khach_hang(decimal id_hang_hoa, DateTime bat_dau, int so_thang)
         {
             InitializeComponent();
-            MyNetwork.LayBaoCaoPhanHoiKhachHang(id_hang_hoa, bat_dau, so_thang, this.TopLevelControl as Form, data =>
+            BaoCaoChiTietHangHoa.LayBaoCaoPhanHoiKhachHang(id_hang_hoa, bat_dau, so_thang, this.TopLevelControl as Form, data =>
                {
                    v_bao_cao_phan_hoi = data.Data;
                    data_to_chart();

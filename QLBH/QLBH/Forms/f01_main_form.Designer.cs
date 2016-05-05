@@ -33,8 +33,7 @@
             this.m_btn_he_thong = new DevExpress.XtraEditors.SimpleButton();
             this.m_btn_kinh_doanh = new DevExpress.XtraEditors.SimpleButton();
             this.m_btn_khach_hang = new DevExpress.XtraEditors.SimpleButton();
-            this.m_btn_kho = new DevExpress.XtraEditors.SimpleButton();
-            this.m_btn_ban_hang = new DevExpress.XtraEditors.SimpleButton();
+            this.m_btn_cua_hang = new DevExpress.XtraEditors.SimpleButton();
             this.m_btn_hang_hoa = new DevExpress.XtraEditors.SimpleButton();
             this.m_bnt_hang_hoa = new DevExpress.XtraEditors.SimpleButton();
             this.m_btn_tong_quan = new DevExpress.XtraEditors.SimpleButton();
@@ -44,8 +43,7 @@
             this.m_btn_menu_he_thong = new DevExpress.XtraEditors.SimpleButton();
             this.m_btn_menu_kinh_doanh = new DevExpress.XtraEditors.SimpleButton();
             this.m_btn_menu_khach_hang = new DevExpress.XtraEditors.SimpleButton();
-            this.m_btn_menu_kho = new DevExpress.XtraEditors.SimpleButton();
-            this.m_btn_menu_ban_hang = new DevExpress.XtraEditors.SimpleButton();
+            this.m_btn_menu_cua_hang = new DevExpress.XtraEditors.SimpleButton();
             this.m_btn_menu_hang_hoa = new DevExpress.XtraEditors.SimpleButton();
             this.m_btn_menu_tong_quan = new DevExpress.XtraEditors.SimpleButton();
             this.m_btn_user_login = new DevExpress.XtraEditors.SimpleButton();
@@ -74,8 +72,7 @@
             this.m_pnl_menu.Controls.Add(this.m_btn_he_thong);
             this.m_pnl_menu.Controls.Add(this.m_btn_kinh_doanh);
             this.m_pnl_menu.Controls.Add(this.m_btn_khach_hang);
-            this.m_pnl_menu.Controls.Add(this.m_btn_kho);
-            this.m_pnl_menu.Controls.Add(this.m_btn_ban_hang);
+            this.m_pnl_menu.Controls.Add(this.m_btn_cua_hang);
             this.m_pnl_menu.Controls.Add(this.m_btn_hang_hoa);
             this.m_pnl_menu.Controls.Add(this.m_bnt_hang_hoa);
             this.m_pnl_menu.Controls.Add(this.m_btn_tong_quan);
@@ -106,7 +103,7 @@
             this.m_btn_exit.Dock = System.Windows.Forms.DockStyle.Top;
             this.m_btn_exit.Image = global::QLBH.Properties.Resources.Exit_521;
             this.m_btn_exit.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.m_btn_exit.Location = new System.Drawing.Point(0, 408);
+            this.m_btn_exit.Location = new System.Drawing.Point(0, 357);
             this.m_btn_exit.LookAndFeel.SkinMaskColor = System.Drawing.Color.Transparent;
             this.m_btn_exit.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Transparent;
             this.m_btn_exit.LookAndFeel.SkinName = "Visual Studio 2013 Dark";
@@ -135,7 +132,7 @@
             this.m_btn_he_thong.Dock = System.Windows.Forms.DockStyle.Top;
             this.m_btn_he_thong.Image = global::QLBH.Properties.Resources.System_Information_48;
             this.m_btn_he_thong.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.m_btn_he_thong.Location = new System.Drawing.Point(0, 357);
+            this.m_btn_he_thong.Location = new System.Drawing.Point(0, 306);
             this.m_btn_he_thong.LookAndFeel.SkinMaskColor = System.Drawing.Color.Transparent;
             this.m_btn_he_thong.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Transparent;
             this.m_btn_he_thong.LookAndFeel.SkinName = "Visual Studio 2013 Dark";
@@ -164,7 +161,7 @@
             this.m_btn_kinh_doanh.Dock = System.Windows.Forms.DockStyle.Top;
             this.m_btn_kinh_doanh.Image = global::QLBH.Properties.Resources.Combo_Chart_48;
             this.m_btn_kinh_doanh.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.m_btn_kinh_doanh.Location = new System.Drawing.Point(0, 306);
+            this.m_btn_kinh_doanh.Location = new System.Drawing.Point(0, 255);
             this.m_btn_kinh_doanh.LookAndFeel.SkinMaskColor = System.Drawing.Color.Transparent;
             this.m_btn_kinh_doanh.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Transparent;
             this.m_btn_kinh_doanh.LookAndFeel.SkinName = "Visual Studio 2013 Dark";
@@ -193,7 +190,7 @@
             this.m_btn_khach_hang.Dock = System.Windows.Forms.DockStyle.Top;
             this.m_btn_khach_hang.Image = global::QLBH.Properties.Resources.Contacts_Filled_50;
             this.m_btn_khach_hang.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.m_btn_khach_hang.Location = new System.Drawing.Point(0, 255);
+            this.m_btn_khach_hang.Location = new System.Drawing.Point(0, 204);
             this.m_btn_khach_hang.LookAndFeel.SkinMaskColor = System.Drawing.Color.Transparent;
             this.m_btn_khach_hang.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Transparent;
             this.m_btn_khach_hang.LookAndFeel.SkinName = "Visual Studio 2013 Dark";
@@ -204,63 +201,34 @@
             this.m_btn_khach_hang.ToolTip = "Menu";
             this.m_btn_khach_hang.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Hand;
             // 
-            // m_btn_kho
+            // m_btn_cua_hang
             // 
-            this.m_btn_kho.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.m_btn_kho.Appearance.BackColor2 = System.Drawing.Color.Transparent;
-            this.m_btn_kho.Appearance.BorderColor = System.Drawing.Color.Transparent;
-            this.m_btn_kho.Appearance.FontStyleDelta = System.Drawing.FontStyle.Bold;
-            this.m_btn_kho.Appearance.ForeColor = System.Drawing.Color.Transparent;
-            this.m_btn_kho.Appearance.Options.UseBackColor = true;
-            this.m_btn_kho.Appearance.Options.UseBorderColor = true;
-            this.m_btn_kho.Appearance.Options.UseFont = true;
-            this.m_btn_kho.Appearance.Options.UseForeColor = true;
-            this.m_btn_kho.AutoWidthInLayoutControl = true;
-            this.m_btn_kho.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.m_btn_kho.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat;
-            this.m_btn_kho.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.m_btn_kho.Dock = System.Windows.Forms.DockStyle.Top;
-            this.m_btn_kho.Image = global::QLBH.Properties.Resources.Shop_48;
-            this.m_btn_kho.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.m_btn_kho.Location = new System.Drawing.Point(0, 204);
-            this.m_btn_kho.LookAndFeel.SkinMaskColor = System.Drawing.Color.Transparent;
-            this.m_btn_kho.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Transparent;
-            this.m_btn_kho.LookAndFeel.SkinName = "Visual Studio 2013 Dark";
-            this.m_btn_kho.Name = "m_btn_kho";
-            this.m_btn_kho.ShowFocusRectangle = DevExpress.Utils.DefaultBoolean.False;
-            this.m_btn_kho.Size = new System.Drawing.Size(59, 51);
-            this.m_btn_kho.TabIndex = 6;
-            this.m_btn_kho.ToolTip = "Menu";
-            this.m_btn_kho.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Hand;
-            // 
-            // m_btn_ban_hang
-            // 
-            this.m_btn_ban_hang.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.m_btn_ban_hang.Appearance.BackColor2 = System.Drawing.Color.Transparent;
-            this.m_btn_ban_hang.Appearance.BorderColor = System.Drawing.Color.Transparent;
-            this.m_btn_ban_hang.Appearance.FontStyleDelta = System.Drawing.FontStyle.Bold;
-            this.m_btn_ban_hang.Appearance.ForeColor = System.Drawing.Color.Transparent;
-            this.m_btn_ban_hang.Appearance.Options.UseBackColor = true;
-            this.m_btn_ban_hang.Appearance.Options.UseBorderColor = true;
-            this.m_btn_ban_hang.Appearance.Options.UseFont = true;
-            this.m_btn_ban_hang.Appearance.Options.UseForeColor = true;
-            this.m_btn_ban_hang.AutoWidthInLayoutControl = true;
-            this.m_btn_ban_hang.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.m_btn_ban_hang.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat;
-            this.m_btn_ban_hang.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.m_btn_ban_hang.Dock = System.Windows.Forms.DockStyle.Top;
-            this.m_btn_ban_hang.Image = global::QLBH.Properties.Resources.Purchase_Order_52;
-            this.m_btn_ban_hang.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.m_btn_ban_hang.Location = new System.Drawing.Point(0, 153);
-            this.m_btn_ban_hang.LookAndFeel.SkinMaskColor = System.Drawing.Color.Transparent;
-            this.m_btn_ban_hang.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Transparent;
-            this.m_btn_ban_hang.LookAndFeel.SkinName = "Visual Studio 2013 Dark";
-            this.m_btn_ban_hang.Name = "m_btn_ban_hang";
-            this.m_btn_ban_hang.ShowFocusRectangle = DevExpress.Utils.DefaultBoolean.False;
-            this.m_btn_ban_hang.Size = new System.Drawing.Size(59, 51);
-            this.m_btn_ban_hang.TabIndex = 5;
-            this.m_btn_ban_hang.ToolTip = "Menu";
-            this.m_btn_ban_hang.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Hand;
+            this.m_btn_cua_hang.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.m_btn_cua_hang.Appearance.BackColor2 = System.Drawing.Color.Transparent;
+            this.m_btn_cua_hang.Appearance.BorderColor = System.Drawing.Color.Transparent;
+            this.m_btn_cua_hang.Appearance.FontStyleDelta = System.Drawing.FontStyle.Bold;
+            this.m_btn_cua_hang.Appearance.ForeColor = System.Drawing.Color.Transparent;
+            this.m_btn_cua_hang.Appearance.Options.UseBackColor = true;
+            this.m_btn_cua_hang.Appearance.Options.UseBorderColor = true;
+            this.m_btn_cua_hang.Appearance.Options.UseFont = true;
+            this.m_btn_cua_hang.Appearance.Options.UseForeColor = true;
+            this.m_btn_cua_hang.AutoWidthInLayoutControl = true;
+            this.m_btn_cua_hang.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.m_btn_cua_hang.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat;
+            this.m_btn_cua_hang.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.m_btn_cua_hang.Dock = System.Windows.Forms.DockStyle.Top;
+            this.m_btn_cua_hang.Image = global::QLBH.Properties.Resources.Shop_48;
+            this.m_btn_cua_hang.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.m_btn_cua_hang.Location = new System.Drawing.Point(0, 153);
+            this.m_btn_cua_hang.LookAndFeel.SkinMaskColor = System.Drawing.Color.Transparent;
+            this.m_btn_cua_hang.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Transparent;
+            this.m_btn_cua_hang.LookAndFeel.SkinName = "Visual Studio 2013 Dark";
+            this.m_btn_cua_hang.Name = "m_btn_cua_hang";
+            this.m_btn_cua_hang.ShowFocusRectangle = DevExpress.Utils.DefaultBoolean.False;
+            this.m_btn_cua_hang.Size = new System.Drawing.Size(59, 51);
+            this.m_btn_cua_hang.TabIndex = 6;
+            this.m_btn_cua_hang.ToolTip = "Menu";
+            this.m_btn_cua_hang.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Hand;
             // 
             // m_btn_hang_hoa
             // 
@@ -394,8 +362,7 @@
             this.m_pnl_menu_detail.Controls.Add(this.m_btn_menu_he_thong);
             this.m_pnl_menu_detail.Controls.Add(this.m_btn_menu_kinh_doanh);
             this.m_pnl_menu_detail.Controls.Add(this.m_btn_menu_khach_hang);
-            this.m_pnl_menu_detail.Controls.Add(this.m_btn_menu_kho);
-            this.m_pnl_menu_detail.Controls.Add(this.m_btn_menu_ban_hang);
+            this.m_pnl_menu_detail.Controls.Add(this.m_btn_menu_cua_hang);
             this.m_pnl_menu_detail.Controls.Add(this.m_btn_menu_hang_hoa);
             this.m_pnl_menu_detail.Controls.Add(this.m_btn_menu_tong_quan);
             this.m_pnl_menu_detail.Controls.Add(this.m_btn_user_login);
@@ -426,7 +393,7 @@
             this.m_btn_menu_exit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.m_btn_menu_exit.Dock = System.Windows.Forms.DockStyle.Top;
             this.m_btn_menu_exit.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.m_btn_menu_exit.Location = new System.Drawing.Point(0, 408);
+            this.m_btn_menu_exit.Location = new System.Drawing.Point(0, 357);
             this.m_btn_menu_exit.LookAndFeel.SkinMaskColor = System.Drawing.Color.Transparent;
             this.m_btn_menu_exit.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Transparent;
             this.m_btn_menu_exit.LookAndFeel.SkinName = "Visual Studio 2013 Dark";
@@ -457,7 +424,7 @@
             this.m_btn_menu_he_thong.Cursor = System.Windows.Forms.Cursors.Hand;
             this.m_btn_menu_he_thong.Dock = System.Windows.Forms.DockStyle.Top;
             this.m_btn_menu_he_thong.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.m_btn_menu_he_thong.Location = new System.Drawing.Point(0, 357);
+            this.m_btn_menu_he_thong.Location = new System.Drawing.Point(0, 306);
             this.m_btn_menu_he_thong.LookAndFeel.SkinMaskColor = System.Drawing.Color.Transparent;
             this.m_btn_menu_he_thong.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Transparent;
             this.m_btn_menu_he_thong.LookAndFeel.SkinName = "Visual Studio 2013 Dark";
@@ -488,7 +455,7 @@
             this.m_btn_menu_kinh_doanh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.m_btn_menu_kinh_doanh.Dock = System.Windows.Forms.DockStyle.Top;
             this.m_btn_menu_kinh_doanh.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.m_btn_menu_kinh_doanh.Location = new System.Drawing.Point(0, 306);
+            this.m_btn_menu_kinh_doanh.Location = new System.Drawing.Point(0, 255);
             this.m_btn_menu_kinh_doanh.LookAndFeel.SkinMaskColor = System.Drawing.Color.Transparent;
             this.m_btn_menu_kinh_doanh.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Transparent;
             this.m_btn_menu_kinh_doanh.LookAndFeel.SkinName = "Visual Studio 2013 Dark";
@@ -519,7 +486,7 @@
             this.m_btn_menu_khach_hang.Cursor = System.Windows.Forms.Cursors.Hand;
             this.m_btn_menu_khach_hang.Dock = System.Windows.Forms.DockStyle.Top;
             this.m_btn_menu_khach_hang.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.m_btn_menu_khach_hang.Location = new System.Drawing.Point(0, 255);
+            this.m_btn_menu_khach_hang.Location = new System.Drawing.Point(0, 204);
             this.m_btn_menu_khach_hang.LookAndFeel.SkinMaskColor = System.Drawing.Color.Transparent;
             this.m_btn_menu_khach_hang.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Transparent;
             this.m_btn_menu_khach_hang.LookAndFeel.SkinName = "Visual Studio 2013 Dark";
@@ -531,67 +498,36 @@
             this.m_btn_menu_khach_hang.ToolTip = "Menu";
             this.m_btn_menu_khach_hang.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Hand;
             // 
-            // m_btn_menu_kho
+            // m_btn_menu_cua_hang
             // 
-            this.m_btn_menu_kho.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.m_btn_menu_kho.Appearance.BackColor2 = System.Drawing.Color.Transparent;
-            this.m_btn_menu_kho.Appearance.BorderColor = System.Drawing.Color.Transparent;
-            this.m_btn_menu_kho.Appearance.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.m_btn_menu_kho.Appearance.ForeColor = System.Drawing.Color.Snow;
-            this.m_btn_menu_kho.Appearance.Options.UseBackColor = true;
-            this.m_btn_menu_kho.Appearance.Options.UseBorderColor = true;
-            this.m_btn_menu_kho.Appearance.Options.UseFont = true;
-            this.m_btn_menu_kho.Appearance.Options.UseForeColor = true;
-            this.m_btn_menu_kho.Appearance.Options.UseTextOptions = true;
-            this.m_btn_menu_kho.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.m_btn_menu_kho.AutoWidthInLayoutControl = true;
-            this.m_btn_menu_kho.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.m_btn_menu_kho.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat;
-            this.m_btn_menu_kho.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.m_btn_menu_kho.Dock = System.Windows.Forms.DockStyle.Top;
-            this.m_btn_menu_kho.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.m_btn_menu_kho.Location = new System.Drawing.Point(0, 204);
-            this.m_btn_menu_kho.LookAndFeel.SkinMaskColor = System.Drawing.Color.Transparent;
-            this.m_btn_menu_kho.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Transparent;
-            this.m_btn_menu_kho.LookAndFeel.SkinName = "Visual Studio 2013 Dark";
-            this.m_btn_menu_kho.Name = "m_btn_menu_kho";
-            this.m_btn_menu_kho.ShowFocusRectangle = DevExpress.Utils.DefaultBoolean.False;
-            this.m_btn_menu_kho.Size = new System.Drawing.Size(215, 51);
-            this.m_btn_menu_kho.TabIndex = 6;
-            this.m_btn_menu_kho.Text = "Kho và cửa hàng";
-            this.m_btn_menu_kho.ToolTip = "Menu";
-            this.m_btn_menu_kho.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Hand;
-            // 
-            // m_btn_menu_ban_hang
-            // 
-            this.m_btn_menu_ban_hang.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.m_btn_menu_ban_hang.Appearance.BackColor2 = System.Drawing.Color.Transparent;
-            this.m_btn_menu_ban_hang.Appearance.BorderColor = System.Drawing.Color.Transparent;
-            this.m_btn_menu_ban_hang.Appearance.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.m_btn_menu_ban_hang.Appearance.ForeColor = System.Drawing.Color.Snow;
-            this.m_btn_menu_ban_hang.Appearance.Options.UseBackColor = true;
-            this.m_btn_menu_ban_hang.Appearance.Options.UseBorderColor = true;
-            this.m_btn_menu_ban_hang.Appearance.Options.UseFont = true;
-            this.m_btn_menu_ban_hang.Appearance.Options.UseForeColor = true;
-            this.m_btn_menu_ban_hang.Appearance.Options.UseTextOptions = true;
-            this.m_btn_menu_ban_hang.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.m_btn_menu_ban_hang.AutoWidthInLayoutControl = true;
-            this.m_btn_menu_ban_hang.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.m_btn_menu_ban_hang.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat;
-            this.m_btn_menu_ban_hang.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.m_btn_menu_ban_hang.Dock = System.Windows.Forms.DockStyle.Top;
-            this.m_btn_menu_ban_hang.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.m_btn_menu_ban_hang.Location = new System.Drawing.Point(0, 153);
-            this.m_btn_menu_ban_hang.LookAndFeel.SkinMaskColor = System.Drawing.Color.Transparent;
-            this.m_btn_menu_ban_hang.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Transparent;
-            this.m_btn_menu_ban_hang.LookAndFeel.SkinName = "Visual Studio 2013 Dark";
-            this.m_btn_menu_ban_hang.Name = "m_btn_menu_ban_hang";
-            this.m_btn_menu_ban_hang.ShowFocusRectangle = DevExpress.Utils.DefaultBoolean.False;
-            this.m_btn_menu_ban_hang.Size = new System.Drawing.Size(215, 51);
-            this.m_btn_menu_ban_hang.TabIndex = 5;
-            this.m_btn_menu_ban_hang.Text = "Bán hàng";
-            this.m_btn_menu_ban_hang.ToolTip = "Menu";
-            this.m_btn_menu_ban_hang.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Hand;
+            this.m_btn_menu_cua_hang.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.m_btn_menu_cua_hang.Appearance.BackColor2 = System.Drawing.Color.Transparent;
+            this.m_btn_menu_cua_hang.Appearance.BorderColor = System.Drawing.Color.Transparent;
+            this.m_btn_menu_cua_hang.Appearance.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.m_btn_menu_cua_hang.Appearance.ForeColor = System.Drawing.Color.Snow;
+            this.m_btn_menu_cua_hang.Appearance.Options.UseBackColor = true;
+            this.m_btn_menu_cua_hang.Appearance.Options.UseBorderColor = true;
+            this.m_btn_menu_cua_hang.Appearance.Options.UseFont = true;
+            this.m_btn_menu_cua_hang.Appearance.Options.UseForeColor = true;
+            this.m_btn_menu_cua_hang.Appearance.Options.UseTextOptions = true;
+            this.m_btn_menu_cua_hang.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.m_btn_menu_cua_hang.AutoWidthInLayoutControl = true;
+            this.m_btn_menu_cua_hang.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.m_btn_menu_cua_hang.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat;
+            this.m_btn_menu_cua_hang.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.m_btn_menu_cua_hang.Dock = System.Windows.Forms.DockStyle.Top;
+            this.m_btn_menu_cua_hang.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.m_btn_menu_cua_hang.Location = new System.Drawing.Point(0, 153);
+            this.m_btn_menu_cua_hang.LookAndFeel.SkinMaskColor = System.Drawing.Color.Transparent;
+            this.m_btn_menu_cua_hang.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Transparent;
+            this.m_btn_menu_cua_hang.LookAndFeel.SkinName = "Visual Studio 2013 Dark";
+            this.m_btn_menu_cua_hang.Name = "m_btn_menu_cua_hang";
+            this.m_btn_menu_cua_hang.ShowFocusRectangle = DevExpress.Utils.DefaultBoolean.False;
+            this.m_btn_menu_cua_hang.Size = new System.Drawing.Size(215, 51);
+            this.m_btn_menu_cua_hang.TabIndex = 6;
+            this.m_btn_menu_cua_hang.Text = "Cửa hàng";
+            this.m_btn_menu_cua_hang.ToolTip = "Menu";
+            this.m_btn_menu_cua_hang.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Hand;
             // 
             // m_btn_menu_hang_hoa
             // 
@@ -640,7 +576,7 @@
             this.m_btn_menu_tong_quan.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.m_btn_menu_tong_quan.AutoWidthInLayoutControl = true;
             this.m_btn_menu_tong_quan.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.m_btn_menu_tong_quan.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.m_btn_menu_tong_quan.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat;
             this.m_btn_menu_tong_quan.Cursor = System.Windows.Forms.Cursors.Hand;
             this.m_btn_menu_tong_quan.Dock = System.Windows.Forms.DockStyle.Top;
             this.m_btn_menu_tong_quan.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
@@ -662,7 +598,7 @@
             this.m_btn_user_login.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.m_btn_user_login.Appearance.BackColor2 = System.Drawing.Color.Transparent;
             this.m_btn_user_login.Appearance.BorderColor = System.Drawing.Color.Transparent;
-            this.m_btn_user_login.Appearance.Font = new System.Drawing.Font("Tahoma", 27.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.m_btn_user_login.Appearance.Font = new System.Drawing.Font("Tahoma", 29.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.m_btn_user_login.Appearance.FontSizeDelta = 1;
             this.m_btn_user_login.Appearance.FontStyleDelta = System.Drawing.FontStyle.Bold;
             this.m_btn_user_login.Appearance.ForeColor = System.Drawing.Color.Snow;
@@ -670,6 +606,8 @@
             this.m_btn_user_login.Appearance.Options.UseBorderColor = true;
             this.m_btn_user_login.Appearance.Options.UseFont = true;
             this.m_btn_user_login.Appearance.Options.UseForeColor = true;
+            this.m_btn_user_login.Appearance.Options.UseTextOptions = true;
+            this.m_btn_user_login.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.m_btn_user_login.AutoWidthInLayoutControl = true;
             this.m_btn_user_login.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.m_btn_user_login.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat;
@@ -756,8 +694,7 @@
         private DevExpress.XtraEditors.SimpleButton m_btn_he_thong;
         private DevExpress.XtraEditors.SimpleButton m_btn_kinh_doanh;
         private DevExpress.XtraEditors.SimpleButton m_btn_khach_hang;
-        private DevExpress.XtraEditors.SimpleButton m_btn_kho;
-        private DevExpress.XtraEditors.SimpleButton m_btn_ban_hang;
+        private DevExpress.XtraEditors.SimpleButton m_btn_cua_hang;
         private DevExpress.XtraEditors.SimpleButton m_btn_hang_hoa;
         private DevExpress.XtraEditors.PanelControl m_pnl_menu_detail;
         private DevExpress.XtraEditors.SimpleButton m_btn_user_login;
@@ -765,8 +702,7 @@
         private DevExpress.XtraEditors.SimpleButton m_btn_menu_he_thong;
         private DevExpress.XtraEditors.SimpleButton m_btn_menu_kinh_doanh;
         private DevExpress.XtraEditors.SimpleButton m_btn_menu_khach_hang;
-        private DevExpress.XtraEditors.SimpleButton m_btn_menu_kho;
-        private DevExpress.XtraEditors.SimpleButton m_btn_menu_ban_hang;
+        private DevExpress.XtraEditors.SimpleButton m_btn_menu_cua_hang;
         private DevExpress.XtraEditors.SimpleButton m_btn_menu_hang_hoa;
         private DevExpress.XtraEditors.SimpleButton m_btn_menu_tong_quan;
         private DevExpress.XtraEditors.PanelControl m_pnl_status;

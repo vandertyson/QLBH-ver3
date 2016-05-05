@@ -109,10 +109,6 @@ namespace QLBH.Forms
                     throw;
                 }
             }
-
-
-
-
         }
 
         private XtraTabPage check_exist(Type type)
@@ -140,5 +136,7 @@ namespace QLBH.Forms
             var p = sender as SimpleButton;
             p.BackColor = CommonFunction.lay_mau_theo_ma_mau(SystemInfo.ma_mau_da_cam_dep);
         }
+
+       
     }
 }

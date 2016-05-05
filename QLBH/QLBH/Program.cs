@@ -18,7 +18,8 @@ namespace QLBH
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new f01_main_form());
-            Application.Run(new Test());
+            //Application.Run(new Test());
+            Application.Run(new f02_them_hoa_don());
         }
     }
 }
