@@ -190,6 +190,7 @@
     <Compile Include="GD_TON_KHO.cs">
       <DependentUpon>ModelQLBH.tt</DependentUpon>
     </Compile>
+    <Compile Include="QuanLyDanhMucHangHoa.cs" />
     <Compile Include="QuanLyHoaDon.cs" />
     <Compile Include="KetQuaTraVe.cs" />
     <Compile Include="ModelQLBH.Context.cs">
