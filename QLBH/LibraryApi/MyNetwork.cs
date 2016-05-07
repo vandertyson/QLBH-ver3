@@ -34,7 +34,7 @@ namespace LibraryApi
         }
         public static void requestDataWithParam<T>(Dictionary<string, object> param
             , string url
-            , Form f
+            , ContainerControl f
             , CompleteHandle<TraVe<T>> MyDelegate
             )
         {
@@ -78,13 +78,7 @@ namespace LibraryApi
 
         #region Quản lý danh mục hàng hóa
 
-        public static void GetDanhSachLoaiHang(
-            Form f,
-            CompleteHandle<TraVe<List<LoaiHang>>> MyDelegate)
-        {
-            Dictionary<string, object> param = new Dictionary<string, object>();
-            requestDataWithParam(param, URL_GET_LOAI_HANG, f, MyDelegate);
-        }
+        
 
         public static void LayDanhSachHangHoaTheoLoaiHangHoa(decimal id_loai_hang, Form f, CompleteHandle<TraVe<List<HangHoa>>> MyDelegate)
         {

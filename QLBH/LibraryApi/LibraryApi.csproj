@@ -63,6 +63,7 @@
     <Compile Include="MyNetwork.cs" />
     <Compile Include="MyStruct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuanLyDanhMucHangHoa.cs" />
     <Compile Include="QuanLyHoaDon.cs" />
     <Compile Include="QuanLyPhieuNhapXuat.cs" />
     <Compile Include="TemplateClass.cs" />

@@ -52,7 +52,7 @@ namespace WebService3
                             gd_phieu_nhap_xuat.LOAI_PHIEU = "N";
                             var lastPhieu = context.GD_PHIEU_NHAP_XUAT.OrderByDescending(s => s.MA_PHIEU).FirstOrDefault();
                             var maCu = lastPhieu == null ? null : lastPhieu.MA_PHIEU;
-                            var maMoi = Function.GenMa("P", 7, maCu);
+                            var maMoi = Common.GenMa("P", 7, maCu);
                             gd_phieu_nhap_xuat.MA_PHIEU = maMoi;
                             gd_phieu_nhap_xuat.ID_TAI_KHOAN = context.DM_TAI_KHOAN.Where(s => s.TEN_TAI_KHOAN == item.ten_tai_khoan).First().ID;
                             gd_phieu_nhap_xuat.NGAY_NHAP = item.ngay_nhap;

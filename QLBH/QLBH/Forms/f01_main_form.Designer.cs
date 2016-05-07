@@ -116,6 +116,7 @@
             this.m_btn_exit.TabIndex = 10;
             this.m_btn_exit.ToolTip = "Menu";
             this.m_btn_exit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Hand;
+            this.m_btn_exit.Click += new System.EventHandler(this.m_btn_exit_Click);
             // 
             // m_btn_he_thong
             // 
@@ -662,7 +663,7 @@
             this.m_btn_user_login.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.m_btn_user_login.Appearance.BackColor2 = System.Drawing.Color.Transparent;
             this.m_btn_user_login.Appearance.BorderColor = System.Drawing.Color.Transparent;
-            this.m_btn_user_login.Appearance.Font = new System.Drawing.Font("Tahoma", 27.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.m_btn_user_login.Appearance.Font = new System.Drawing.Font("Tahoma", 28.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.m_btn_user_login.Appearance.FontSizeDelta = 1;
             this.m_btn_user_login.Appearance.FontStyleDelta = System.Drawing.FontStyle.Bold;
             this.m_btn_user_login.Appearance.ForeColor = System.Drawing.Color.Snow;

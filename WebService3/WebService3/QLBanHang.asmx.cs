@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Services;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
+using WebService3.Old;
 
 namespace WebService3
 {
@@ -59,11 +60,11 @@ namespace WebService3
         }
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void Test()
+        public void Test(string key,decimal id)
         {
             try
             {
-                Function.Test2();
+                QuanLyDanhMucHangHoa.Test3(key, id);
                 var result = new KetQuaTraVe(true, "Thành công", null);
                 TraKetQua(result);
             }
@@ -162,16 +163,18 @@ namespace WebService3
         }
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void TimKiemHangHoa()
+        public void TimKiemHangHoa(string keyword)
         {
             try
             {
-                var ma_hang_hoa = Context.Request["ma_hang_hoa"];
-                var ten_hang_hoa = Context.Request["ten_hang_hoa"];
-                var list_id_loai_tag = Context.Request["list_id_loai_tag"];
-                //var data = Function.TimKiemHangHoa(ma_hang_hoa, ten_hang_hoa, list_id_loai_tag);
-                //var result = new KetQuaTraVe(true, "Thành công", data);
-                //TraKetQua(result);
+                var page = Context.Request["page"];
+                var length = Context.Request["length"];
+
+                var data = QuanLyDanhMucHangHoa.TimKiemHangHoa(keyword,
+                    length == null ? 20 : int.Parse(length),
+                    page == null ? 0 : int.Parse(page));
+                var result = new KetQuaTraVe(true, "Thành công", data);
+                TraKetQua(result);
             }
             catch (Exception e)
             {

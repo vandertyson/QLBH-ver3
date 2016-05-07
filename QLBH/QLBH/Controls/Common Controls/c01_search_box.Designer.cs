@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.m_btn_search = new DevExpress.XtraEditors.SimpleButton();
-            this.m_txt_search = new System.Windows.Forms.RichTextBox();
+            this.txtKeyWord = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // m_btn_search
@@ -44,39 +44,39 @@
             this.m_btn_search.Name = "m_btn_search";
             this.m_btn_search.Size = new System.Drawing.Size(57, 40);
             this.m_btn_search.TabIndex = 2;
+            this.m_btn_search.Click += new System.EventHandler(this.m_btn_search_Click);
             // 
-            // m_txt_search
+            // txtKeyWord
             // 
-            this.m_txt_search.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(67)))));
-            this.m_txt_search.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.m_txt_search.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.m_txt_search.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.m_txt_search.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.m_txt_search.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.m_txt_search.Location = new System.Drawing.Point(0, 0);
-            this.m_txt_search.Multiline = false;
-            this.m_txt_search.Name = "m_txt_search";
-            this.m_txt_search.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedHorizontal;
-            this.m_txt_search.Size = new System.Drawing.Size(189, 40);
-            this.m_txt_search.TabIndex = 4;
-            this.m_txt_search.Text = "";
+            this.txtKeyWord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(67)))));
+            this.txtKeyWord.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtKeyWord.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtKeyWord.Font = new System.Drawing.Font("Segoe UI Semilight", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtKeyWord.ForeColor = System.Drawing.Color.White;
+            this.txtKeyWord.Location = new System.Drawing.Point(0, 0);
+            this.txtKeyWord.Name = "txtKeyWord";
+            this.txtKeyWord.Size = new System.Drawing.Size(189, 32);
+            this.txtKeyWord.TabIndex = 3;
+            this.txtKeyWord.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtKeyWord.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKeyWord_KeyDown);
             // 
             // c01_search_box
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(67)))));
-            this.Controls.Add(this.m_txt_search);
+            this.Controls.Add(this.txtKeyWord);
             this.Controls.Add(this.m_btn_search);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
             this.Name = "c01_search_box";
             this.Size = new System.Drawing.Size(246, 40);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
         private DevExpress.XtraEditors.SimpleButton m_btn_search;
-        private System.Windows.Forms.RichTextBox m_txt_search;
+        private System.Windows.Forms.TextBox txtKeyWord;
     }
 }

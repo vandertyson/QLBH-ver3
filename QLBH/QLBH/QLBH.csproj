@@ -191,6 +191,18 @@
     <Compile Include="Controls\Hàng hóa\c01_hinh_anh_minh_hoa.Designer.cs">
       <DependentUpon>c01_hinh_anh_minh_hoa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Hàng hóa\c01_item_danh_muc_loai_hang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Hàng hóa\c01_item_danh_muc_loai_hang.Designer.cs">
+      <DependentUpon>c01_item_danh_muc_loai_hang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Hàng hóa\c01_item_hang_hoa.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Hàng hóa\c01_item_hang_hoa.Designer.cs">
+      <DependentUpon>c01_item_hang_hoa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Hàng hóa\c01_mo_ta_hang_hoa.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -281,6 +293,12 @@
     <Compile Include="Forms\Test.Designer.cs">
       <DependentUpon>Test.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Test2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Test2.Designer.cs">
+      <DependentUpon>Test2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExcelStruct.cs" />
@@ -330,6 +348,12 @@
     <EmbeddedResource Include="Controls\Hàng hóa\c01_hinh_anh_minh_hoa.resx">
       <DependentUpon>c01_hinh_anh_minh_hoa.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Hàng hóa\c01_item_danh_muc_loai_hang.resx">
+      <DependentUpon>c01_item_danh_muc_loai_hang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Hàng hóa\c01_item_hang_hoa.resx">
+      <DependentUpon>c01_item_hang_hoa.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Hàng hóa\c01_mo_ta_hang_hoa.resx">
       <DependentUpon>c01_mo_ta_hang_hoa.cs</DependentUpon>
     </EmbeddedResource>
@@ -374,6 +398,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Test.resx">
       <DependentUpon>Test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Test2.resx">
+      <DependentUpon>Test2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -469,6 +496,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\Phiếu nhập\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ao-so-mi.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
