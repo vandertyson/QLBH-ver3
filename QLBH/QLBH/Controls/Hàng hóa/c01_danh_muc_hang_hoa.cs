@@ -49,7 +49,7 @@ namespace QLBH.Controls
             InitializeComponent();
         }
 
-        public c01_danh_muc_hang_hoa(List<LoaiHang> v_list)
+        public c01_danh_muc_hang_hoa(List<QuanLyDanhMucHangHoa.LoaiHang> v_list)
         {
             InitializeComponent();
             a = true;

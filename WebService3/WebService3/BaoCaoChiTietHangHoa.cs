@@ -79,7 +79,7 @@ namespace WebService3
             BaoCaoPhanHoi result = new BaoCaoPhanHoi();
             result.rating = tinh_rating(id_hang_hoa);
             result.duoc_yeu_thich = so_khach_hang_yeu_thich(id_hang_hoa);
-            var p = Function.lay_cac_thang_tiep_theo(bat_dau, so_thang);
+            var p = Common.lay_cac_thang_tiep_theo(bat_dau, so_thang);
             foreach (var item in p)
             {
                 result.thong_ke_theo_thang.Add(lay_thong_ke_theo_thang(item.nam, item.thang, id_hang_hoa));

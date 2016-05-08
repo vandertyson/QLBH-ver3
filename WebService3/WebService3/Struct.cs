@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace WebService3
+namespace WebService3.Old
 {
     #region Dùng chung
     #endregion

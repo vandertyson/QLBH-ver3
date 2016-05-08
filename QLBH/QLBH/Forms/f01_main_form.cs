@@ -96,13 +96,9 @@ namespace QLBH.Forms
                     m_tabcontrol_main_view.TabPages.Add(vtp);
                     vtp.Text = "Quản lý hàng hóa";
                     m_opening_control.Add(vtp);
-                    MyNetwork.GetDanhSachLoaiHang(this, data =>
-                    {
-                        var loai_hang = data.Data;
-                        c01_quan_ly_hang_hoa v_ql = new c01_quan_ly_hang_hoa(loai_hang);
-                        vtp.Controls.Add(v_ql);
-                        v_ql.Dock = DockStyle.Fill;                   
-                    });
+                    c01_quan_ly_hang_hoa v_ql = new c01_quan_ly_hang_hoa();
+                    vtp.Controls.Add(v_ql);
+                    v_ql.Dock = DockStyle.Fill;
                 }
                 catch (Exception)
                 {
@@ -137,6 +133,9 @@ namespace QLBH.Forms
             p.BackColor = CommonFunction.lay_mau_theo_ma_mau(SystemInfo.ma_mau_da_cam_dep);
         }
 
-       
+        private void m_btn_exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

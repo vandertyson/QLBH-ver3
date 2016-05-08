@@ -113,6 +113,16 @@ namespace QLBH.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ao_so_mi {
+            get {
+                object obj = ResourceManager.GetObject("ao-so-mi", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Appointment_Reminders_Filled_50 {
             get {
                 object obj = ResourceManager.GetObject("Appointment Reminders Filled-50", resourceCulture);

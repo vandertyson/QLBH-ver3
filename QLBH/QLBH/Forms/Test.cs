@@ -179,28 +179,32 @@ namespace QLBH.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //table.Style = c0_table.ScrollStyle.Horizontal;
-            table.BackColor = Color.White;
-            var list = new List<string>();
-            for (int i = 0; i < 6; i++)
-            {
-                list.Add(i.ToString());
-            }
-            table.Length = () => { return list.Count; };
-            table.NumberOfCellPerLine = () => { return 1; };
-            table.LengthForCellAtIndex = index =>
-            {
-                return 100;
-            };
-            table.CellAtIndex = index => 
-            {
-                var cell = new c02_hoa_don_chi_tiet();
-                cell.Dock = DockStyle.Fill;
-                //cell.Text = list[index];
-                return cell;
-            };
+            ////table.Style = c0_table.ScrollStyle.Horizontal;
+            //table.BackColor = Color.White;
+            //var list = new List<string>();
+            //for (int i = 0; i < 6; i++)
+            //{
+            //    list.Add(i.ToString());
+            //}
+            //table.Length = () => { return list.Count; };
+            //table.NumberOfCellPerLine = () => { return 2; };
+            //table.LengthForCellAtIndex = index =>
+            //{
+            //    return 100;
+            //};
+            //table.CellAtIndex = index => 
+            //{
+            //    var cell = new Button();
+            //    cell.Dock = DockStyle.Fill;
+            //    cell.Text = list[index];
+            //    return cell;
+            //};
+            //var btn = new Button();
+            //btn.Text = "special";
+            //btn.Dock = DockStyle.Fill;
             
             table.InitTable();
+            table.Add(btn, 0);
         }
     }
 }

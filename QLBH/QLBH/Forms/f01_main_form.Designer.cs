@@ -113,6 +113,7 @@
             this.m_btn_exit.TabIndex = 10;
             this.m_btn_exit.ToolTip = "Menu";
             this.m_btn_exit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Hand;
+            this.m_btn_exit.Click += new System.EventHandler(this.m_btn_exit_Click);
             // 
             // m_btn_he_thong
             // 

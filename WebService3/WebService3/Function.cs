@@ -6,7 +6,7 @@ using System.IO;
 using System.Transactions;
 using System.Data;
 
-namespace WebService3
+namespace WebService3.Old
 {
     public class Function
     {
@@ -231,6 +231,7 @@ namespace WebService3
                 scope.Complete();
             }
         }
+        
         public static object SQLQuerry(string query)
         {
             using (var context= new TKHTQuanLyBanHangEntities())
