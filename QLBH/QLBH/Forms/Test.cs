@@ -11,7 +11,7 @@ using LibraryApi;
 using LinqToExcel;
 using DevExpress.XtraEditors;
 using QLBH.Common;
-using QLBH.Controls.Common_Controls;
+using QLBH.Controls.Hóa_đơn;
 
 namespace QLBH.Forms
 {
@@ -187,24 +187,20 @@ namespace QLBH.Forms
                 list.Add(i.ToString());
             }
             table.Length = () => { return list.Count; };
-            table.NumberOfCellPerLine = () => { return 2; };
+            table.NumberOfCellPerLine = () => { return 1; };
             table.LengthForCellAtIndex = index =>
             {
                 return 100;
             };
             table.CellAtIndex = index => 
             {
-                var cell = new Button();
+                var cell = new c02_hoa_don_chi_tiet();
                 cell.Dock = DockStyle.Fill;
-                cell.Text = list[index];
+                //cell.Text = list[index];
                 return cell;
             };
-            var btn = new Button();
-            btn.Text = "special";
-            btn.Dock = DockStyle.Fill;
             
             table.InitTable();
-            table.Add(btn, 0);
         }
     }
 }

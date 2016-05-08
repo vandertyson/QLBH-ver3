@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace QLBH.Controls.Hóa_đơn
+namespace QLBH.Forms
 {
-    public partial class c02_hoa_don_full : UserControl
+    public partial class form_tag_hàng_hóa : Form
     {
-        public c02_hoa_don_full()
+        public form_tag_hàng_hóa()
         {
             InitializeComponent();
         }
-
-       
     }
 }

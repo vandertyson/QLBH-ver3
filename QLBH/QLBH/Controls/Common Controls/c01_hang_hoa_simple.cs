@@ -10,11 +10,12 @@ using System.Windows.Forms;
 
 namespace QLBH.Controls
 {
-    public partial class c01_hang_hoa_master : UserControl
+    public partial class c01_hang_hoa_simple : UserControl
     {
-        public c01_hang_hoa_master()
+        public c01_hang_hoa_simple()
         {
             InitializeComponent();
         }
+
     }
 }

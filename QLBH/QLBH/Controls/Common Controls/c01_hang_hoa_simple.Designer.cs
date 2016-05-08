@@ -1,6 +1,6 @@
 ﻿namespace QLBH.Controls
 {
-    partial class c01_hang_hoa_master
+    partial class c01_hang_hoa_simple
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(c01_hang_hoa_master));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(c01_hang_hoa_simple));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.m_lbl_gia = new DevExpress.XtraEditors.LabelControl();
             this.m_lbl_ma_hang_hoa = new DevExpress.XtraEditors.LabelControl();

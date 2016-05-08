@@ -8,15 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace QLBH.Controls.Hóa_đơn
+namespace QLBH.Controls.Hàng_hóa
 {
-    public partial class c02_hoa_don_full : UserControl
+    public partial class c01_tag_hang_hoa : UserControl
     {
-        public c02_hoa_don_full()
+        public c01_tag_hang_hoa()
         {
             InitializeComponent();
         }
-
-       
     }
 }

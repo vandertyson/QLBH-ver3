@@ -83,7 +83,7 @@ namespace LibraryApi
 
         #region FUNCTION - Chứa các hàm lấy dữ liệu bằng request ( public static )
 
-        public static void GetSomething(object input, Form f, MyNetwork.CompleteHandle<MyNetwork.TraVe<string>> MyDelegate)
+        public static void LayDanhSachKhachHang(object input, Form f, MyNetwork.CompleteHandle<MyNetwork.TraVe<string>> MyDelegate)
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param["tên tham số truyền vào bên service"] = input;

@@ -10,6 +10,7 @@ using LibraryApi;
 using System.Drawing;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using System.Data;
 
 
 namespace QLBH.Common
@@ -36,24 +37,24 @@ namespace QLBH.Common
 
         internal static string download_docx_file_from_link(string mo_ta, string file_name)
         {
-                if (String.IsNullOrEmpty(mo_ta))
-                {
-                   
-                }
-                if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
-                {
-                           
-                }
-                using (System.Net.WebClient client = new System.Net.WebClient())
-                {
-                    client.DownloadFileAsync(new Uri(mo_ta),file_name);
-                }
-                return file_name;
+            if (String.IsNullOrEmpty(mo_ta))
+            {
+
+            }
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+            {
+
+            }
+            using (System.Net.WebClient client = new System.Net.WebClient())
+            {
+                client.DownloadFileAsync(new Uri(mo_ta), file_name);
+            }
+            return file_name;
         }
 
         public static void exception_handle(Exception ex)
         {
-            XtraMessageBox.Show(ex.Data.ToString() + "INNER     :" + ex.InnerException);         
+            XtraMessageBox.Show(ex.Data.ToString() + "INNER     :" + ex.InnerException);
         }
 
         public static Color lay_mau_theo_ma_mau(string ma_mau_html)
@@ -75,5 +76,74 @@ namespace QLBH.Common
             return listID;
         }
 
+        //DataColumn col3 = new DataColumn();
+        //    col3.ColumnName = "LuotXem";
+        //    col3.DataType = typeof(int);
+        //    col3.Caption = "Số lượt xem";
+        //    result.Columns.Add(col1);
+        //    result.Columns.Add(col2);
+        //    result.Columns.Add(col3);
+        //    //
+        //    foreach (var item in v_bao_cao_phan_hoi.thong_ke_theo_thang)
+        //    {
+        //        string thang = item.thang + "/" + item.nam;
+        //        int so_luot_comment = item.comments.Count;
+        //        int so_luot_xem = item.luot_xem.Count;
+        //        result.Rows.Add(new object[] { thang, so_luot_comment, so_luot_xem });
+        //    }
+
+        //    //
+        //    return result;
+        //}
+        public static DataTable list_to_data_table<T>(List<T> ip_list)
+        {
+            DataTable result = new DataTable();
+            var type = typeof(T);
+            var coltype = type.GetProperties();
+            foreach (var item in coltype)
+            {
+                DataColumn col = new DataColumn();
+                col.ColumnName = item.Name;
+                col.DataType = item.PropertyType;
+                result.Columns.Add(col);
+            }
+            foreach (var data in ip_list)
+            {
+                var values = new object[coltype.Length];
+                for (int i = 0; i < coltype.Length; i++)
+                {
+                    values[i] = coltype[i].GetValue(data, null);
+                }
+                result.Rows.Add(values);
+            }
+            return result;
+        }
+
+        public static DataTable convert_list_to_data_table<T>(List<string> PropertyNames, List<T> input_list)
+        {
+            DataTable result = new DataTable();
+            foreach (var item in typeof(T).GetProperties())
+            {
+                if (PropertyNames.Contains(item.Name))
+                {
+                    DataColumn col = new DataColumn();
+                    col.ColumnName = item.Name;
+                    col.DataType = item.PropertyType;
+                    result.Columns.Add(col);
+                }
+            }
+            foreach (var obj in input_list)
+            {
+                List<object> data_row_value = new List<object>();
+                var prop = obj.GetType().GetProperties();
+                foreach (var prop_name in PropertyNames)
+                {
+                    var value = obj.GetType().GetProperty(prop_name).GetValue(obj, null);
+                    data_row_value.Add(value);
+                }
+                result.Rows.Add(data_row_value.ToArray());
+            }
+            return result;
+        }
     }
 }
