@@ -62,7 +62,6 @@ namespace LibraryApi
                         {
                             MyDelegate(jsonObject);
                         }
-                        
                     }
                     else
                     {

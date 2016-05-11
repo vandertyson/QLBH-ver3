@@ -10,7 +10,9 @@ namespace WebService3
         #region Constant
         public const string DANH_MUC_SP = @"DANH_MUC_SAN_PHAM";
         public const string SIZE = @"SIZE_QUAN_AO";
+    
         #endregion
+
         #region Struct
         public class LoaiHang
         {
@@ -132,6 +134,12 @@ namespace WebService3
             public List<string> link_anh { get; set; }
             public List<string> tag { get; set; }
         }
+        public class NhaCungCapV2
+        {
+            public string ma_nha_cung_cap { get; set; }
+            public string ten_nha_cung_cap { get; set; }
+            public string dia_chi { get; set; }
+        }
         #endregion
 
         #region Functions
@@ -252,6 +260,25 @@ namespace WebService3
                 return hhMaster;
             }
         }
+
+        internal static List<NhaCungCapV2> LayDanhSachNhaCungCap()
+        {
+            using (var context = new TKHTQuanLyBanHangEntities())
+            {
+                List<NhaCungCapV2> rsul = new List<NhaCungCapV2>();
+                var ncc = context.DM_NHA_CUNG_CAP.ToList();
+                foreach (var item in ncc)
+                {
+                    NhaCungCapV2 cc = new NhaCungCapV2();
+                    cc.dia_chi = item.DIA_CHI;
+                    cc.ma_nha_cung_cap = item.MA_NHA_CUNG_CAP;
+                    cc.ten_nha_cung_cap = item.TEN_NHA_CUNG_CAP;
+                    rsul.Add(cc);
+                }
+                return rsul;
+            }
+        }
+
         public static List<decimal> layGia(TKHTQuanLyBanHangEntities context, decimal idHh)
         {
             var gia = context.GD_GIA.Where(s => s.ID_HANG_HOA == idHh)

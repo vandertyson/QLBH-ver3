@@ -60,9 +60,9 @@ namespace QLBH.Forms
             {
                 LayDanhSachNhaCungCap(this, data =>
                 {
-                    m_sle_ma_tra_cuu.DataSource = CommonFunction.list_to_data_table<NhaCungCapV2>(data.Data);
-                    m_sle_ma_tra_cuu.ValueMember = "ma_nha_cung_cap";
-                    m_sle_ma_tra_cuu.DisplayMember = "ma_nha_cung_cap";
+                    m_sle_nha_cung_cap.DataSource = CommonFunction.list_to_data_table<NhaCungCapV2>(data.Data);
+                    m_sle_nha_cung_cap.ValueMember = "ma_nha_cung_cap";
+                    m_sle_nha_cung_cap.DisplayMember = "ma_nha_cung_cap";
                 });
             }
             catch (Exception)

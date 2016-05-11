@@ -42,19 +42,21 @@ namespace WebService3
             public string so_dien_thoai { get; set; }
             public string email { get; set; }
             public decimal diem_giam_tru { get; set; }
+            public DateTime ngay_gia_nhap { get; set; }
         }
         public class HoaDonChiTiet
         {
-            public HangHoa hang { get; set; }
+            public string ma_hang { get; set; }
             public string ten_size { get; set; }
             public int so_luong { get; set; }
+            public string muc_khuyen_mai { get; set; }
             public decimal gia_ban { get; set; }
         }
         public class HoaDon
         {
             public string ma_hoa_don { get; set; }
             public DateTime thoi_gian_tao { get; set; }
-            public CuaHang cua_hang { get; set; }
+            public decimal id_cua_hang { get; set; }
             public KhachHang khach { get; set; }
             public string loai_thanh_toan { get; set; }
             public decimal giam_tru { get; set; }
@@ -79,6 +81,8 @@ namespace WebService3
                     cus.so_dien_thoai = khach.SO_DIEN_THOAI;
                     cus.email = acc.EMAIL;
                     cus.tai_khoan = acc.TEN_TAI_KHOAN;
+                    cus.ngay_gia_nhap = khach.NGAY_THAM_GIA;
+                    cus.diem_giam_tru = khach.DIEM;
                     result.Add(cus);
                 }
             }
@@ -89,13 +93,15 @@ namespace WebService3
             List<HangHoa> result = new List<HangHoa>();
             using (var context = new TKHTQuanLyBanHangEntities())
             {
-                var ds_hang = context.DM_HANG_HOA.Where(s => s.DA_XOA == "N").ToList();
+                var ds_hang_1= context.DM_HANG_HOA.Where(s => s.DA_XOA == "N").ToList();
+                var kho = context.GD_TON_KHO.Where(s => s.SO_LUONG_TON_KHO > 0).Select(s=>s.ID_HANG_HOA).Distinct().ToList();
+                var ds_hang = context.DM_HANG_HOA.Where(s => s.DA_XOA == "N" & kho.Contains(s.ID)).ToList();
                 foreach (var hang in ds_hang)
                 {
                     HangHoa sp = new HangHoa();
                     sp.ten_hang_hoa = hang.TEN_HANG_HOA;
                     sp.ma_hang_hoa = hang.MA_TRA_CUU;
-                    sp.gia_hien_tai = context.GD_GIA.Where(s => s.ID_HANG_HOA == hang.ID).OrderByDescending(s => s.NGAY_LUU_HANH).First().GIA;
+                    sp.gia_hien_tai = context.GD_GIA.Where(s => s.ID_HANG_HOA == hang.ID & s.NGAY_LUU_HANH <= ngay_hien_tai).OrderByDescending(s => s.NGAY_LUU_HANH).First().GIA;
 
                     //
                     sp.link_anh = new List<string>();
@@ -108,12 +114,10 @@ namespace WebService3
                     sp.san_co = new List<SizeSoLuongHienTai>();
                     foreach (var ton_kho in context.GD_TON_KHO.Where(s => s.ID_HANG_HOA == hang.ID & s.ID_CUA_HANG == id_cua_hang))
                     {
-                        if (ton_kho.SO_LUONG_TON_KHO != 0)
-                        {
-                            SizeSoLuongHienTai ssl = new SizeSoLuongHienTai();
-                            ssl.ten_size = context.GD_TAG.Where(s => s.ID == ton_kho.ID_SIZE).First().TEN_TAG;
-                            ssl.so_luong = int.Parse(ton_kho.SO_LUONG_TON_KHO.ToString());
-                        }
+                        SizeSoLuongHienTai ssl = new SizeSoLuongHienTai();
+                        ssl.ten_size = context.GD_TAG.Where(s => s.ID == ton_kho.ID_SIZE).First().TEN_TAG;
+                        ssl.so_luong = int.Parse(ton_kho.SO_LUONG_TON_KHO.ToString());
+                        sp.san_co.Add(ssl);
                     }
                     //
                     sp.km_dang_ap_ung = new List<KhuyenMaiDangApDung>();
@@ -144,7 +148,6 @@ namespace WebService3
         }
         public static void them_hoa_don(HoaDon hoa_don)
         {
-
             using (var scope = new TransactionScope())
             {
                 try
@@ -153,7 +156,7 @@ namespace WebService3
                     {
                         //them hoa don
                         GD_HOA_DON hd = new GD_HOA_DON();
-                        hd.ID_CUA_HANG = context.DM_CUA_HANG.Where(s => s.TEN_CUA_HANG == hoa_don.cua_hang.ten_cua_hang).First().ID;
+                        hd.ID_CUA_HANG = hoa_don.id_cua_hang;
                         hd.ID_TAI_KHOAN = context.DM_TAI_KHOAN.Where(s => s.TEN_TAI_KHOAN == hoa_don.khach.tai_khoan).First().ID;
                         hd.THOI_GIAN_TAO = hoa_don.thoi_gian_tao;
                         hd.MA_HOA_DON = hoa_don.ma_hoa_don;
@@ -169,14 +172,14 @@ namespace WebService3
                             GD_HOA_DON_CHI_TIET ct = new GD_HOA_DON_CHI_TIET();
                             ct.ID_HOA_DON = id_hd;
 
-                            var id_hang_hoa = context.DM_HANG_HOA.Where(s => s.MA_TRA_CUU == chi_tiet.hang.ma_hang_hoa).First().ID;
+                            var id_hang_hoa = context.DM_HANG_HOA.Where(s => s.MA_TRA_CUU == chi_tiet.ma_hang).First().ID;
                             var id_size = context.GD_TAG.Where(s => s.TEN_TAG == chi_tiet.ten_size).First().ID;
 
                             ct.ID_HANG_HOA = id_hang_hoa;
                             ct.ID_SIZE = id_size;
                             ct.SO_LUONG = chi_tiet.so_luong;
                             ct.GIA_BAN = chi_tiet.gia_ban;
-
+                            ct.DA_THANH_TOAN = "Y";
                             context.GD_HOA_DON_CHI_TIET.Add(ct);
 
                             //update ton kho
@@ -184,12 +187,8 @@ namespace WebService3
                                                                     & s.ID_HANG_HOA == id_hang_hoa
                                                                     & s.ID_SIZE == id_size).First();
                             ton_kho.SO_LUONG_TON_KHO -= chi_tiet.so_luong;
-
-                            //tinh diem cho khach hang
-
                             context.SaveChanges();
                         }
-
                         scope.Complete();
                     }
                 }
@@ -213,10 +212,11 @@ namespace WebService3
                     hd.loai_thanh_toan = gdhd.LOAI_THANH_TOAN;
                     hd.ma_hoa_don = gdhd.MA_HOA_DON;
 
-                    hd.cua_hang = new CuaHang();
-                    hd.cua_hang.ten_cua_hang = context.DM_CUA_HANG.Where(s => s.ID == gdhd.ID_CUA_HANG).First().TEN_CUA_HANG;
-                    hd.cua_hang.dia_chi = context.DM_CUA_HANG.Where(s => s.ID == gdhd.ID_CUA_HANG).First().DIA_CHI;
-                    hd.cua_hang.so_dien_thoai = context.DM_CUA_HANG.Where(s => s.ID == gdhd.ID_CUA_HANG).First().ToString();
+                    //hd.cua_hang = new CuaHang();
+                    //hd.cua_hang.ten_cua_hang = context.DM_CUA_HANG.Where(s => s.ID == gdhd.ID_CUA_HANG).First().TEN_CUA_HANG;
+                    //hd.cua_hang.dia_chi = context.DM_CUA_HANG.Where(s => s.ID == gdhd.ID_CUA_HANG).First().DIA_CHI;
+                    //hd.cua_hang.so_dien_thoai = context.DM_CUA_HANG.Where(s => s.ID == gdhd.ID_CUA_HANG).First().ToString();
+                    //hd.id_cua_hang = 
 
                     hd.khach = new KhachHang();
                     hd.khach.so_dien_thoai = context.DM_KHACH_HANG.Where(s => s.ID_TAI_KHOAN == gdhd.ID_TAI_KHOAN).First().SO_DIEN_THOAI;
@@ -228,10 +228,7 @@ namespace WebService3
                     foreach (var gdct in context.GD_HOA_DON_CHI_TIET.Where(s => s.ID_HOA_DON == gdhd.ID))
                     {
                         HoaDonChiTiet hdct = new HoaDonChiTiet();
-                        hdct.hang = new HangHoa();
-                        hdct.hang.ten_hang_hoa = context.DM_HANG_HOA.Where(s => s.ID == gdct.ID_HANG_HOA).First().TEN_HANG_HOA;
-                        hdct.hang.ma_hang_hoa = context.DM_HANG_HOA.Where(s => s.ID == gdct.ID_HANG_HOA).First().MA_TRA_CUU;
-                        hdct.hang.link_anh = context.DM_LINK_ANH.Where(s => s.ID_HANG_HOA == gdct.ID_HANG_HOA).Select(s => s.LINK_ANH).ToList();
+                        hdct.ma_hang= context.DM_HANG_HOA.Where(s => s.ID == gdct.ID_HANG_HOA).First().TEN_HANG_HOA;
                         hdct.ten_size = context.GD_TAG.Where(s => s.ID == gdct.ID_SIZE).First().TEN_TAG;
                         hdct.gia_ban = gdct.GIA_BAN;
                         hdct.so_luong = int.Parse(gdct.SO_LUONG.ToString());
@@ -244,7 +241,6 @@ namespace WebService3
             }
             return result;
         }
-
         private static decimal get_so_tien_giam_tru_km_cua_hoa_don(decimal iD_hoa_don)
         {
             decimal result = 0;
@@ -273,6 +269,18 @@ namespace WebService3
                 }
             }
             return result;
+        }
+        public static string get_ma_hoa_don()
+        {
+            using (var context = new TKHTQuanLyBanHangEntities())
+            {
+                var last_hd = context.GD_HOA_DON.OrderByDescending(s => s.ID).First();
+                if (last_hd == null)
+                {
+                    return "HD000001";
+                }
+                return Common.GenMa("HD", 6, last_hd.MA_HOA_DON);
+            }
         }
         #endregion
     }

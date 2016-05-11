@@ -248,7 +248,14 @@ namespace WebService3
                 TraKetQua(result);
             }
         }
-
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void LayDanhSachNhaCungCap()
+        {
+            var data = QuanLyDanhMucHangHoa.LayDanhSachNhaCungCap();
+            var result = new KetQuaTraVe(true, "Thành công", data);
+            TraKetQua(result);
+        }
         #endregion
 
         #region Quản lý tag hàng hóa
@@ -432,7 +439,94 @@ namespace WebService3
         }
         #endregion
 
-   
+        #region Quản lý hóa đơn
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void LayDanhSachKhachHang(DateTime ip_ngay_hien_tai)
+        {
+            try
+            {
+                var data = QuanLyHoaDon.get_danh_sach_khach_hang(ip_ngay_hien_tai);
+                var result = new KetQuaTraVe(true, "Thành công", data);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, e.Message, null);
+                TraKetQua(result);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void LayDanhSachHangHoaByCuaHangAndNgay(decimal ip_id_cua_hang, DateTime ip_ngay_hien_tai)
+        {
+            try
+            {
+                var data = QuanLyHoaDon.get_danh_sach_hang_hien_tai(ip_id_cua_hang, ip_ngay_hien_tai);
+                var result = new KetQuaTraVe(true, "Thành công", data);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, e.Message, null);
+                TraKetQua(result);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void ThemHoaDon(string ip_hoa_don)
+        {
+            try
+            {
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                var hd = js.Deserialize<QuanLyHoaDon.HoaDon>(ip_hoa_don);
+                QuanLyHoaDon.them_hoa_don(hd);
+                var result = new KetQuaTraVe(true, "Thành công", null);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, e.Message, null);
+                TraKetQua(result);
+            }
+        }
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void LayDanhSachHoaDon()
+        {
+            try
+            {
+                var data = QuanLyHoaDon.danh_sach_hoa_don();
+                var result = new KetQuaTraVe(true, "Thành công", data);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, e.Message, null);
+                TraKetQua(result);
+            }
+        }
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void LayMaHoaDon()
+        {
+            try
+            {
+                var data = QuanLyHoaDon.get_ma_hoa_don();
+                var result = new KetQuaTraVe(true, "Thành công", data);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, e.Message, null);
+                TraKetQua(result);
+            }
+        }
+        #endregion
+
+
 
     }
 }

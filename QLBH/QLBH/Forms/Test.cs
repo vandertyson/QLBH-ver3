@@ -20,7 +20,6 @@ namespace QLBH.Forms
         public Test()
         {
             InitializeComponent();
-            
         }
 
         private void btnThem_Click(object sender, EventArgs e)

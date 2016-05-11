@@ -264,24 +264,6 @@
     <Compile Include="Controls\Hàng hóa\c01_tinh_trang_kinh_doanh.Designer.cs">
       <DependentUpon>c01_tinh_trang_kinh_doanh.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Hóa đơn\c02_hoa_don.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Hóa đơn\c02_hoa_don.Designer.cs">
-      <DependentUpon>c02_hoa_don.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Hóa đơn\c02_hoa_don_chi_tiet.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Hóa đơn\c02_hoa_don_chi_tiet.Designer.cs">
-      <DependentUpon>c02_hoa_don_chi_tiet.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Hóa đơn\c02_hoa_don_full.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Hóa đơn\c02_hoa_don_full.Designer.cs">
-      <DependentUpon>c02_hoa_don_full.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Hóa đơn\c02_khuyen_mai_simple.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -336,12 +318,6 @@
     <Compile Include="Forms\f03_QuanLyKhuyenMAi.Designer.cs">
       <DependentUpon>f03_QuanLyKhuyenMAi.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Test.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\f02_them_hoa_don.Designer.cs">
-      <DependentUpon>f02_them_hoa_don.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\f03_them_phieu_nhap_excel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -377,12 +353,6 @@
     </Compile>
     <Compile Include="Forms\f10_them_hang_hoa_excal.Designer.cs">
       <DependentUpon>f10_them_hang_hoa_excal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Test.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Test.Designer.cs">
-      <DependentUpon>Test.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -469,15 +439,6 @@
     <EmbeddedResource Include="Controls\Hàng hóa\c01_tinh_trang_kinh_doanh.resx">
       <DependentUpon>c01_tinh_trang_kinh_doanh.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Hóa đơn\c02_hoa_don.resx">
-      <DependentUpon>c02_hoa_don.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Hóa đơn\c02_hoa_don_chi_tiet.resx">
-      <DependentUpon>c02_hoa_don_chi_tiet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Hóa đơn\c02_hoa_don_full.resx">
-      <DependentUpon>c02_hoa_don_full.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Hóa đơn\c02_khuyen_mai_simple.resx">
       <DependentUpon>c02_khuyen_mai_simple.cs</DependentUpon>
     </EmbeddedResource>
@@ -502,9 +463,6 @@
     <EmbeddedResource Include="Forms\f01_main_form.resx">
       <DependentUpon>f01_main_form.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\f02_them_hoa_don.resx">
-      <DependentUpon>f02_them_hoa_don.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\f03_them_phieu_nhap_excel.resx">
       <DependentUpon>f03_them_phieu_nhap_excel.cs</DependentUpon>
     </EmbeddedResource>
@@ -522,9 +480,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\f10_them_hang_hoa_excal.resx">
       <DependentUpon>f10_them_hang_hoa_excal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Test.resx">
-      <DependentUpon>Test.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
