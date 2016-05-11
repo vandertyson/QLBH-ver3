@@ -227,6 +227,12 @@
     <Compile Include="Controls\Common Controls\c01_search_box.Designer.cs">
       <DependentUpon>c01_search_box.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Hàng hóa\c01_quan_ly_tag.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Hàng hóa\c01_quan_ly_tag.Designer.cs">
+      <DependentUpon>c01_quan_ly_tag.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Hàng hóa\c01_tag_control.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -275,6 +281,12 @@
     <Compile Include="Controls\Hóa đơn\c02_size_so_luong.Designer.cs">
       <DependentUpon>c02_size_so_luong.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\KuyenMAi\c03_KhuyenMaiChiTiet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\KuyenMAi\c03_KhuyenMaiChiTiet.Designer.cs">
+      <DependentUpon>c03_KhuyenMaiChiTiet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TemplateControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -287,17 +299,17 @@
     <Compile Include="Forms\f01_main_form.Designer.cs">
       <DependentUpon>f01_main_form.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\f03_QuanLyKhuyenMAi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\f03_QuanLyKhuyenMAi.Designer.cs">
+      <DependentUpon>f03_QuanLyKhuyenMAi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Test.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Test.Designer.cs">
       <DependentUpon>Test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Test2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Test2.Designer.cs">
-      <DependentUpon>Test2.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -366,6 +378,9 @@
     <EmbeddedResource Include="Controls\Common Controls\c01_search_box.resx">
       <DependentUpon>c01_search_box.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Hàng hóa\c01_quan_ly_tag.resx">
+      <DependentUpon>c01_quan_ly_tag.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Hàng hóa\c01_tag_control.resx">
       <DependentUpon>c01_tag_control.cs</DependentUpon>
     </EmbeddedResource>
@@ -390,17 +405,20 @@
     <EmbeddedResource Include="Controls\Hóa đơn\c02_size_so_luong.resx">
       <DependentUpon>c02_size_so_luong.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\KuyenMAi\c03_KhuyenMaiChiTiet.resx">
+      <DependentUpon>c03_KhuyenMaiChiTiet.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\TemplateControl.resx">
       <DependentUpon>TemplateControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\f01_main_form.resx">
       <DependentUpon>f01_main_form.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\f03_QuanLyKhuyenMAi.resx">
+      <DependentUpon>f03_QuanLyKhuyenMAi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Test.resx">
       <DependentUpon>Test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Test2.resx">
-      <DependentUpon>Test2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

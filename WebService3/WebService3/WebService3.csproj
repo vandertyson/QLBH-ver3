@@ -213,7 +213,9 @@
       <DependentUpon>QLBanHang.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="QuanLyKhuyenMai.cs" />
     <Compile Include="QuanLyPhieuNhapXuat.cs" />
+    <Compile Include="QuanLyTagHangHoa.cs" />
     <Compile Include="Struct.cs" />
     <Compile Include="sysdiagram.cs">
       <DependentUpon>ModelQLBH.tt</DependentUpon>
@@ -234,7 +236,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>32608</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

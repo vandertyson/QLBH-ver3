@@ -22,19 +22,23 @@ namespace QLBH.Controls
         string key;
         int page=0;
         #endregion
+
         #region data binding type
         public List<HangHoa> list_hang_hoa { get; set; }
         public List<HangHoaMaster> list_hang_hoa_master { get; set; }
         //public List<LoaiHang> list_loai_hang { get; set; }
         #endregion
+
         #region public event handler
 
         #endregion
+
         #region public method
         public c01_quan_ly_hang_hoa()
         {
             InitializeComponent();
         }
+
         public c01_quan_ly_hang_hoa(List<QuanLyDanhMucHangHoa.LoaiHang> hang)
         {
             InitializeComponent();
