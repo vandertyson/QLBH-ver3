@@ -81,24 +81,24 @@
             // 
             // m_lbl_hang_hoa_master
             // 
-            this.m_lbl_hang_hoa_master.Appearance.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.m_lbl_hang_hoa_master.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.m_lbl_hang_hoa_master.Appearance.ForeColor = System.Drawing.Color.OldLace;
             this.m_lbl_hang_hoa_master.Dock = System.Windows.Forms.DockStyle.Top;
-            this.m_lbl_hang_hoa_master.Location = new System.Drawing.Point(5, 47);
+            this.m_lbl_hang_hoa_master.Location = new System.Drawing.Point(5, 38);
             this.m_lbl_hang_hoa_master.Name = "m_lbl_hang_hoa_master";
-            this.m_lbl_hang_hoa_master.Size = new System.Drawing.Size(360, 20);
+            this.m_lbl_hang_hoa_master.Size = new System.Drawing.Size(344, 18);
             this.m_lbl_hang_hoa_master.TabIndex = 11;
             this.m_lbl_hang_hoa_master.Text = "Mã sản phẩm:  MH0006 - Xuất sứ: Đài Loan - Vải lụa";
             // 
             // m_lbl_ten_san_pham
             // 
             this.m_lbl_ten_san_pham.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.m_lbl_ten_san_pham.Appearance.Font = new System.Drawing.Font("Sitka Text", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.m_lbl_ten_san_pham.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.m_lbl_ten_san_pham.Appearance.ForeColor = System.Drawing.Color.White;
             this.m_lbl_ten_san_pham.Dock = System.Windows.Forms.DockStyle.Top;
             this.m_lbl_ten_san_pham.Location = new System.Drawing.Point(5, 5);
             this.m_lbl_ten_san_pham.Name = "m_lbl_ten_san_pham";
-            this.m_lbl_ten_san_pham.Size = new System.Drawing.Size(348, 42);
+            this.m_lbl_ten_san_pham.Size = new System.Drawing.Size(353, 33);
             this.m_lbl_ten_san_pham.TabIndex = 9;
             this.m_lbl_ten_san_pham.Text = "ÁO CHOÀNG NỮ CHANEL";
             // 

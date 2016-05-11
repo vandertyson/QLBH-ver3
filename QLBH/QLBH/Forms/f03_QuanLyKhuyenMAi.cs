@@ -19,8 +19,8 @@ namespace QLBH.Forms
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            c03_khuyen_mai_chi_tei = new ();
-            xtraScrollableControl1.Controls.Add(c03)
+            //c03_khuyen_mai_chi_tei = new ();
+            //xtraScrollableControl1.Controls.Add(c03);
         }
 
         private void simpleButton2_Click(object sender, EventArgs e)

@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaoCaoChiTietHangHoa.cs" />
+    <Compile Include="BaoCaoDoanhThu.cs" />
     <Compile Include="MyNetwork.cs" />
     <Compile Include="MyStruct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

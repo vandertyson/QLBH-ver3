@@ -31,9 +31,9 @@ namespace QLBH.Controls.Hàng_hóa
         private void data_2_sle(MyNetwork.TraVe<List<string>> data)
         {
 
-            Common.CommonFunction.convert_list_2_data_table(data);
-            m_sle_Tag.Properties.DataSource = Common.CommonFunction.convert_list_2_data_table(data);
-            m_sle_Tag.Properties.DisplayMember = "TEN_HANG_HOA;
+            Common.CommonFunction.list_to_data_table(data.Data);
+            m_sle_Tag.Properties.DataSource = Common.CommonFunction.list_to_data_table(data.Data);
+            m_sle_Tag.Properties.DisplayMember = "TEN_HANG_HOA";
 
         }
 
