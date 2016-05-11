@@ -173,6 +173,56 @@ namespace QLBH.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Bill_50 {
+            get {
+                object obj = ResourceManager.GetObject("Bill-50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Bill_Filled_50 {
+            get {
+                object obj = ResourceManager.GetObject("Bill Filled-50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Bill_Filled_50__1_ {
+            get {
+                object obj = ResourceManager.GetObject("Bill Filled-50 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Bill_Filled_50__2_ {
+            get {
+                object obj = ResourceManager.GetObject("Bill Filled-50 (2)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Box_Filled_50 {
+            get {
+                object obj = ResourceManager.GetObject("Box Filled-50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Cloakroom_Filled_50 {
             get {
                 object obj = ResourceManager.GetObject("Cloakroom Filled-50", resourceCulture);
@@ -266,6 +316,16 @@ namespace QLBH.Properties {
         internal static System.Drawing.Bitmap Dog_Tag_Filled_50 {
             get {
                 object obj = ResourceManager.GetObject("Dog Tag Filled-50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap download {
+            get {
+                object obj = ResourceManager.GetObject("download", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -373,6 +433,16 @@ namespace QLBH.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Land_Sales_50 {
+            get {
+                object obj = ResourceManager.GetObject("Land Sales-50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Like_Filled_48 {
             get {
                 object obj = ResourceManager.GetObject("Like Filled-48", resourceCulture);
@@ -456,6 +526,16 @@ namespace QLBH.Properties {
         internal static System.Drawing.Bitmap Menu_50 {
             get {
                 object obj = ResourceManager.GetObject("Menu-50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MS_Excel_Filled_50 {
+            get {
+                object obj = ResourceManager.GetObject("MS Excel Filled-50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -573,6 +653,26 @@ namespace QLBH.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Sale_481 {
+            get {
+                object obj = ResourceManager.GetObject("Sale-481", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Sale_52 {
+            get {
+                object obj = ResourceManager.GetObject("Sale-52", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Search_52 {
             get {
                 object obj = ResourceManager.GetObject("Search-52", resourceCulture);
@@ -586,6 +686,56 @@ namespace QLBH.Properties {
         internal static System.Drawing.Bitmap Shop_48 {
             get {
                 object obj = ResourceManager.GetObject("Shop-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Shop_Filled_50 {
+            get {
+                object obj = ResourceManager.GetObject("Shop Filled-50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Shopping_Cart_48 {
+            get {
+                object obj = ResourceManager.GetObject("Shopping Cart-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Shopping_Cart_52 {
+            get {
+                object obj = ResourceManager.GetObject("Shopping Cart-52", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Shopping_Cart_52__1_ {
+            get {
+                object obj = ResourceManager.GetObject("Shopping Cart-52 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Shopping_Cart_52__2_ {
+            get {
+                object obj = ResourceManager.GetObject("Shopping Cart-52 (2)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

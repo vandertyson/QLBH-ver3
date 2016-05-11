@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,11 @@ namespace LibraryApi
         //public const string URL_SERVICE = @"http://quanlybanhang.somee.com//QLBanHang.asmx/";
         public const string URL_SERVICE = @"http://localhost:32608/QLBanHang.asmx/";
         public const string URL_DO_SOMETHING = URL_SERVICE + @"tên request";
+        private static string URL_LAY_DANH_SACH_KHACH_HANG = URL_SERVICE + @"LayDanhSachKhachHang";
+        private static string URL_LAY_DANH_SACH_HANG_HOA = URL_SERVICE + @"LayDanhSachHangHoaByCuaHangAndNgay";
+        private static string URL_THEM_HOA_DON = URL_SERVICE + @"ThemHoaDon";
+        private static string URL_LAY_DANH_SACH_HOA_DON = URL_SERVICE + @"LayDanhSachHoaDon";
+        private static string URL_LAY_MA_HOA_DON = URL_SERVICE + @"LayMaHoaDon";
 
         #endregion
 
@@ -56,6 +62,7 @@ namespace LibraryApi
             public string so_dien_thoai { get; set; }
             public string email { get; set; }
             public decimal diem_giam_tru { get; set; }
+            public DateTime ngay_gia_nhap { get; set; }
         }
 
         public class HoaDonChiTiet
@@ -83,13 +90,35 @@ namespace LibraryApi
 
         #region FUNCTION - Chứa các hàm lấy dữ liệu bằng request ( public static )
 
-        public static void GetSomething(object input, Form f, MyNetwork.CompleteHandle<MyNetwork.TraVe<string>> MyDelegate)
+        public static void LayDanhSachKhachHang(DateTime ngay_hien_tai, Form f, MyNetwork.CompleteHandle<MyNetwork.TraVe<List<KhachHang>>> MyDelegate)
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
-            param["tên tham số truyền vào bên service"] = input;
-            MyNetwork.requestDataWithParam(param, URL_DO_SOMETHING, f, MyDelegate);
+            param["ip_ngay_hien_tai"] = ngay_hien_tai;
+            MyNetwork.requestDataWithParam(param, URL_LAY_DANH_SACH_KHACH_HANG, f, MyDelegate);
         }
-
+        public static void LayDanhSachHangHoa(decimal id_cua_hang, DateTime ngay_hien_tai, Form f, MyNetwork.CompleteHandle<MyNetwork.TraVe<List<HangHoa>>> MyDelegate)
+        {
+            Dictionary<string, object> param = new Dictionary<string, object>();
+            param["ip_id_cua_hang"] = id_cua_hang;
+            param["ip_ngay_hien_tai"] = ngay_hien_tai;
+            MyNetwork.requestDataWithParam(param, URL_LAY_DANH_SACH_HANG_HOA, f, MyDelegate);
+        }
+        public static void ThemHoaDon(HoaDon hoa_don, Form f, MyNetwork.CompleteHandle<MyNetwork.TraVe<string>> MyDelegate)
+        {
+            Dictionary<string, object> param = new Dictionary<string, object>();
+            param["ip_hoa_don"] = JsonConvert.SerializeObject(hoa_don);
+            MyNetwork.requestDataWithParam(param, URL_THEM_HOA_DON, f, MyDelegate);
+        }
+        public static void LayDanhSachHoaDon(Form f, MyNetwork.CompleteHandle<MyNetwork.TraVe<List<HoaDon>>> MyDelegate)
+        {
+            Dictionary<string, object> param = new Dictionary<string, object>();
+            MyNetwork.requestDataWithParam(param, URL_LAY_DANH_SACH_HOA_DON, f, MyDelegate);
+        }
+        public static void LayMaHoaDon(Form f, MyNetwork.CompleteHandle<MyNetwork.TraVe<string>> MyDelegate)
+        {
+            Dictionary<string, object> param = new Dictionary<string, object>();
+            MyNetwork.requestDataWithParam(param, URL_LAY_MA_HOA_DON, f, MyDelegate);
+        }
         #endregion
     }
 }

@@ -16,6 +16,8 @@ using DevExpress.XtraTab;
 using DevExpress.XtraTab.ViewInfo;
 using DevExpress.XtraEditors;
 using QLBH.Common;
+using QLBH.Controls.Cửa_hàng;
+
 
 namespace QLBH.Forms
 {
@@ -35,7 +37,6 @@ namespace QLBH.Forms
             format_control();
         }
 
-
         #endregion
 
         #region private methods
@@ -44,71 +45,17 @@ namespace QLBH.Forms
             m_pnl_status.BackColor = Color.FromArgb(50, Color.White);
             m_tabcontrol_main_view.TabPages.Clear();
         }
+
         private void set_init_form_load()
         {
             v_menu_detail_is_opened = false;
             set_menu_detail_status();
+            set_define_event();
         }
+
         private void set_menu_detail_status()
         {
             m_pnl_menu_detail.Visible = v_menu_detail_is_opened;
-        }
-        #endregion
-
-        #region event handlers
-        private void m_btn_open_menu_MouseHover(object sender, EventArgs e)
-        {
-            m_btn_open_menu.BackColor = Color.Transparent;
-        }
-
-        private void m_btn_khach_hang_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void m_btn_menu_tong_quan_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-        #endregion
-
-        private void m_btn_open_menu_Click(object sender, EventArgs e)
-        {
-            v_menu_detail_is_opened = !v_menu_detail_is_opened;
-            set_menu_detail_status();
-        }
-
-        private void m_btn_menu_hang_hoa_Click(object sender, EventArgs e)
-        {
-            var p = check_exist(typeof(c01_quan_ly_hang_hoa));
-            if (p != null)
-            {
-                m_tabcontrol_main_view.SelectedTabPage = p;
-            }
-            else
-            {
-                try
-                {
-                    XtraTabPage vtp = new XtraTabPage();
-                    vtp.Name = typeof(c01_quan_ly_hang_hoa).ToString();
-                    m_tabcontrol_main_view.TabPages.Add(vtp);
-                    vtp.Text = "Quản lý hàng hóa";
-                    m_opening_control.Add(vtp);
-                    c01_quan_ly_hang_hoa v_ql = new c01_quan_ly_hang_hoa();
-                    vtp.Controls.Add(v_ql);
-                    v_ql.Dock = DockStyle.Fill;
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-            }
-
-
-
-
         }
 
         private XtraTabPage check_exist(Type type)
@@ -123,6 +70,176 @@ namespace QLBH.Forms
             }
             return null;
         }
+        #endregion
+
+        #region event handlers
+        private void set_define_event()
+        {
+            //menu
+            m_btn_open_menu.Click += m_btn_open_menu_Click;
+            //tong quan
+            m_btn_tong_quan.Click += M_btn_tong_quan_Click;
+            m_btn_menu_tong_quan.Click += M_btn_tong_quan_Click;
+            //hang hoa
+            m_btn_hang_hoa.Click += M_btn_hang_hoa_Click;
+            m_btn_menu_hang_hoa.Click += M_btn_hang_hoa_Click;
+            //cua hang
+            m_btn_cua_hang.Click += M_btn_cua_hang_Click;
+            m_btn_menu_cua_hang.Click += M_btn_cua_hang_Click;
+            //khach hang
+            m_btn_khach_hang.Click += M_btn_khach_hang_Click;
+            m_btn_menu_khach_hang.Click += M_btn_khach_hang_Click;
+            //kinh doanh
+            m_btn_kinh_doanh.Click += M_btn_kinh_doanh_Click;
+            m_btn_menu_kinh_doanh.Click += M_btn_kinh_doanh_Click;
+            //he thong
+            m_btn_he_thong.Click += M_btn_he_thong_Click;
+            m_btn_menu_he_thong.Click += M_btn_he_thong_Click;
+            //thoat
+            m_btn_exit.Click += M_btn_exit_Click;
+            m_btn_menu_exit.Click += M_btn_exit_Click;
+            //tab control
+            m_tabcontrol_main_view.CloseButtonClick += m_tabcontrol_main_view_CloseButtonClick;
+        }
+
+        private void M_btn_exit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void M_btn_he_thong_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void M_btn_kinh_doanh_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void M_btn_khach_hang_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void M_btn_hang_hoa_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var p = check_exist(typeof(c01_quan_ly_hang_hoa));
+                if (p != null)
+                {
+                    m_tabcontrol_main_view.SelectedTabPage = p;
+                }
+                else
+                {
+                    try
+                    {
+                        XtraTabPage vtp = new XtraTabPage();
+                        vtp.Name = typeof(c01_quan_ly_hang_hoa).ToString();
+                        m_tabcontrol_main_view.TabPages.Add(vtp);
+                        vtp.Text = "Quản lý hàng hóa";
+                        m_opening_control.Add(vtp);
+                        c01_quan_ly_hang_hoa v_ql = new c01_quan_ly_hang_hoa();
+                        vtp.Controls.Add(v_ql);
+                        v_ql.Dock = DockStyle.Fill;
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonFunction.exception_handle(ex);
+            }
+        }
+
+        private void M_btn_tong_quan_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void M_btn_cua_hang_Click(object sender, EventArgs e)
+        {
+            var p = check_exist(typeof(c03_nghiep_vu_cua_hang));
+            if (p != null)
+            {
+                m_tabcontrol_main_view.SelectedTabPage = p;
+            }
+            else
+            {
+                try
+                {
+                    XtraTabPage vtp = new XtraTabPage();
+                    vtp.Name = typeof(c03_nghiep_vu_cua_hang).ToString();
+                    m_tabcontrol_main_view.TabPages.Add(vtp);
+                    vtp.Text = "Nghiệp vụ cửa hàng";
+                    m_opening_control.Add(vtp);
+                    c03_nghiep_vu_cua_hang v_ql = new c03_nghiep_vu_cua_hang();
+                    vtp.Controls.Add(v_ql);
+                    v_ql.Dock = DockStyle.Fill;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
+
+        private void m_btn_open_menu_Click(object sender, EventArgs e)
+        {
+            if (v_menu_detail_is_opened)
+            {
+                m_pnl_menu_detail.Visible = true;
+            }
+            else
+            {
+                m_pnl_menu_detail.Visible = false;
+            }
+            v_menu_detail_is_opened = !v_menu_detail_is_opened;
+        }
 
         private void m_tabcontrol_main_view_CloseButtonClick(object sender, EventArgs e)
         {
@@ -131,15 +248,7 @@ namespace QLBH.Forms
             m_tabcontrol_main_view.TabPages.Remove(arg.Page as XtraTabPage);
         }
 
-        private void m_btn_menu_tong_quan_MouseHover(object sender, EventArgs e)
-        {
-            var p = sender as SimpleButton;
-            p.BackColor = CommonFunction.lay_mau_theo_ma_mau(SystemInfo.ma_mau_da_cam_dep);
-        }
+        #endregion
 
-        private void m_btn_exit_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
     }
 }

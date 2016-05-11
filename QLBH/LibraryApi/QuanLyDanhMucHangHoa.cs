@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,8 @@ namespace LibraryApi
         public const string SIZE = @"SIZE_QUAN_AO";
         public const string URL_GET_LOAI_HANG = MyNetwork.URL_SERVICE + @"DanhSachLoaiHang";
         public const string URL_TIM_KIEM_HANG_HOA = MyNetwork.URL_SERVICE + @"TimKiemHangHoa";
+        public const string URL_LAY_DANH_SACH_NHA_CUNG_CAP = MyNetwork.URL_SERVICE + @"LayDanhSachNhaCungCap";
+        private static string URL_THEM_HANG_HOA_EXCEL = MyNetwork.URL_SERVICE + @"ThemHangHoa";
         #endregion
         #region Struct
         public class LoaiHang
@@ -73,6 +76,12 @@ namespace LibraryApi
             public string ten_nguoi_dai_dien { get; set; }
             public string so_dien_thoai { get; set; }
             public string email { get; set; }
+        }
+        public class NhaCungCapV2
+        {
+            public string ma_nha_cung_cap { get; set; }
+            public string ten_nha_cung_cap { get; set; }
+            public string dia_chi { get; set; }
         }
         public class CuaHang
         {
@@ -136,6 +145,15 @@ namespace LibraryApi
             public List<string> link_anh { get; set; }
             public List<string> tag { get; set; }
         }
+        public class HangHoaExcel
+        {
+            public string ten_hang_hoa { get; set; }
+            public string ma_tra_cuu { get; set; }
+            public string ma_nha_cung_cap { get; set; }
+            public string mo_ta { get; set; }
+            public List<string> link_anh { get; set; }
+            public List<string> tag { get; set; }
+        }
         #endregion
 
         public static void GetDanhSachLoaiHang(
@@ -157,6 +175,20 @@ namespace LibraryApi
             param["length"] = length;
             param["page"] = page;
             MyNetwork.requestDataWithParam(param, URL_TIM_KIEM_HANG_HOA, f, MyDelegate);
+        }
+        public static void LayDanhSachNhaCungCap(Form f, MyNetwork.CompleteHandle<MyNetwork.TraVe<List<NhaCungCapV2>>> MyDelegate)
+        {
+            Dictionary<string, object> param = new Dictionary<string, object>();
+            MyNetwork.requestDataWithParam(param, URL_LAY_DANH_SACH_NHA_CUNG_CAP, f, MyDelegate);
+        }
+        public static void ThemHangHoaExcel(
+          List<HangHoaExcel> list_hang_hoa,
+          Form f,
+          MyNetwork.CompleteHandle<MyNetwork.TraVe<string>> MyDelegate)
+        {
+            Dictionary<string, object> param = new Dictionary<string, object>();
+            param["list_hang_hoa"] = JsonConvert.SerializeObject(list_hang_hoa);
+            MyNetwork.requestDataWithParam(param, URL_THEM_HANG_HOA_EXCEL, f, MyDelegate);
         }
     }
 }

@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using LibraryApi;
 using DevExpress.XtraCharts;
+using static LibraryApi.BaoCaoChiTietHangHoa;
 
 namespace QLBH.Controls
 {
@@ -17,7 +13,7 @@ namespace QLBH.Controls
         public decimal id_hang_hoa { get; set; }
         public DateTime bat_dau { get; set; }
         public int so_thang { get; set; }
-        public BaoCaoChiTietHangHoa.BaoCaoPhanHoi v_bao_cao_phan_hoi { get; set; }
+        public BaoCaoPhanHoi v_bao_cao_phan_hoi { get; set; }
         public c01_nhan_xet_khach_hang()
         {
             InitializeComponent();
@@ -26,7 +22,7 @@ namespace QLBH.Controls
         public c01_nhan_xet_khach_hang(decimal id_hang_hoa, DateTime bat_dau, int so_thang)
         {
             InitializeComponent();
-            BaoCaoChiTietHangHoa.LayBaoCaoPhanHoiKhachHang(id_hang_hoa, bat_dau, so_thang, this.TopLevelControl as Form, data =>
+            LayBaoCaoPhanHoiKhachHang(id_hang_hoa, bat_dau, so_thang, this.TopLevelControl as Form, data =>
                {
                    v_bao_cao_phan_hoi = data.Data;
                    data_to_chart();
@@ -34,18 +30,12 @@ namespace QLBH.Controls
                    data_to_thong_ke();
                });
         }
-        public c01_nhan_xet_khach_hang(BaoCaoChiTietHangHoa.BaoCaoPhanHoi p)
-        {
-            InitializeComponent();
-            v_bao_cao_phan_hoi = p;
-            data_to_chart();
-            data_to_nhan_xet_khach_hang();
-            data_to_thong_ke();
-        }
+
         public void refresh_data()
         {
             
         }
+
         public void data_to_nhan_xet_khach_hang()
         {
             m_xtra_scroll_comment.Controls.Clear();
@@ -91,41 +81,6 @@ namespace QLBH.Controls
                 m_chart_view.Series[0].Points.Add(new SeriesPoint(thang_nam,item.luot_xem.Count));
             }
         }
-
-        //private DataTable get_comments_and_view_dattable()
-        //{
-        //    DataTable result = new DataTable();
-        //    //
-        //    DataColumn col1 = new DataColumn();
-        //    col1.ColumnName = "ThangNam";
-        //    col1.DataType = typeof(string);
-        //    col1.Caption = "Tháng";
-
-        //    DataColumn col2 = new DataColumn();
-        //    col2.ColumnName = "LuotComment";
-        //    col2.DataType = typeof(Int32);
-        //    col2.Caption = "Số lượt comment";
-
-        //    DataColumn col3 = new DataColumn();
-        //    col3.ColumnName = "LuotXem";
-        //    col3.DataType = typeof(int);
-        //    col3.Caption = "Số lượt xem";
-
-        //    result.Columns.Add(col1);
-        //    result.Columns.Add(col2);
-        //    result.Columns.Add(col3);
-        //    //
-        //    foreach (var item in v_bao_cao_phan_hoi.thong_ke_theo_thang)
-        //    {
-        //        string thang = item.thang + "/" + item.nam;
-        //        int so_luot_comment = item.comments.Count;
-        //        int so_luot_xem = item.luot_xem.Count;
-        //        result.Rows.Add(new object[] { thang, so_luot_comment, so_luot_xem });
-        //    }
-
-        //    //
-        //    return result;
-        //}
 
         public void data_to_thong_ke()
         {

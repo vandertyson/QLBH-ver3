@@ -94,6 +94,8 @@
             this.m_txt_so_luong.Properties.Appearance.Options.UseFont = true;
             this.m_txt_so_luong.Properties.Appearance.Options.UseTextOptions = true;
             this.m_txt_so_luong.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.m_txt_so_luong.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.m_txt_so_luong.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.m_txt_so_luong.Size = new System.Drawing.Size(86, 22);
             this.m_txt_so_luong.StyleController = this.layoutControl1;
             this.m_txt_so_luong.TabIndex = 3;

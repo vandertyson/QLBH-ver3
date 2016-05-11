@@ -36,7 +36,7 @@
             // 
             // btnThem
             // 
-            this.btnThem.Location = new System.Drawing.Point(416, 301);
+            this.btnThem.Location = new System.Drawing.Point(417, 518);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(75, 23);
             this.btnThem.TabIndex = 9;
@@ -46,7 +46,7 @@
             // 
             // m_btn_phieu_nhap
             // 
-            this.m_btn_phieu_nhap.Location = new System.Drawing.Point(618, 309);
+            this.m_btn_phieu_nhap.Location = new System.Drawing.Point(631, 518);
             this.m_btn_phieu_nhap.Name = "m_btn_phieu_nhap";
             this.m_btn_phieu_nhap.Size = new System.Drawing.Size(75, 23);
             this.m_btn_phieu_nhap.TabIndex = 10;
@@ -56,7 +56,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(138, 301);
+            this.button1.Location = new System.Drawing.Point(148, 518);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 12;
@@ -67,16 +67,18 @@
             // table
             // 
             this.table.AutoScroll = true;
-            this.table.Location = new System.Drawing.Point(102, 38);
+            this.table.Dock = System.Windows.Forms.DockStyle.Top;
+            this.table.Location = new System.Drawing.Point(0, 0);
             this.table.Name = "table";
-            this.table.Size = new System.Drawing.Size(591, 163);
+            this.table.Size = new System.Drawing.Size(997, 503);
+            this.table.Style = QLBH.Controls.Common_Controls.c0_table.ScrollStyle.Vertical;
             this.table.TabIndex = 13;
             // 
             // Test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(867, 350);
+            this.ClientSize = new System.Drawing.Size(997, 553);
             this.Controls.Add(this.table);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.m_btn_phieu_nhap);
