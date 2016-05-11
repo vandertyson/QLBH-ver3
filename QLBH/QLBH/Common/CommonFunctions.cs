@@ -11,7 +11,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using System.Data;
-
+using System.Reflection;
+using DevExpress.Utils.Drawing.Helpers;
 
 namespace QLBH.Common
 {
@@ -21,7 +22,7 @@ namespace QLBH.Common
         {
             if (String.IsNullOrEmpty(link))
             {
-                return Image.FromFile(@"C: \Users\Son Pham\Desktop\quan.jpeg");
+                return Image.FromFile(@"");
             }
             using (WebClient webClient = new WebClient())
             {
@@ -31,7 +32,6 @@ namespace QLBH.Common
                 {
                     return Image.FromStream(mem);
                 }
-
             }
         }
 
@@ -61,6 +61,7 @@ namespace QLBH.Common
         {
             return ColorTranslator.FromHtml(ma_mau_html);
         }
+
         public static List<string> TachID(string input)
         {
             var dsID = input.Split(';').ToList();
@@ -76,41 +77,23 @@ namespace QLBH.Common
             return listID;
         }
 
-        //DataColumn col3 = new DataColumn();
-        //    col3.ColumnName = "LuotXem";
-        //    col3.DataType = typeof(int);
-        //    col3.Caption = "Số lượt xem";
-        //    result.Columns.Add(col1);
-        //    result.Columns.Add(col2);
-        //    result.Columns.Add(col3);
-        //    //
-        //    foreach (var item in v_bao_cao_phan_hoi.thong_ke_theo_thang)
-        //    {
-        //        string thang = item.thang + "/" + item.nam;
-        //        int so_luot_comment = item.comments.Count;
-        //        int so_luot_xem = item.luot_xem.Count;
-        //        result.Rows.Add(new object[] { thang, so_luot_comment, so_luot_xem });
-        //    }
-
-        //    //
-        //    return result;
-        //}
         public static DataTable list_to_data_table<T>(List<T> ip_list)
         {
             DataTable result = new DataTable();
             var type = typeof(T);
-            var coltype = type.GetProperties();
+            var coltype = type.GetProperties().ToList();
             foreach (var item in coltype)
             {
                 DataColumn col = new DataColumn();
                 col.ColumnName = item.Name;
                 col.DataType = item.PropertyType;
                 result.Columns.Add(col);
+                col.SetOrdinal(coltype.IndexOf(item));
             }
             foreach (var data in ip_list)
             {
-                var values = new object[coltype.Length];
-                for (int i = 0; i < coltype.Length; i++)
+                var values = new object[coltype.Count];
+                for (int i = 0; i < coltype.Count; i++)
                 {
                     values[i] = coltype[i].GetValue(data, null);
                 }
@@ -122,15 +105,23 @@ namespace QLBH.Common
         public static DataTable convert_list_to_data_table<T>(List<string> PropertyNames, List<T> input_list)
         {
             DataTable result = new DataTable();
-            foreach (var item in typeof(T).GetProperties())
+            var types = typeof(T).GetProperties().ToList();
+            foreach (var item in PropertyNames)
             {
-                if (PropertyNames.Contains(item.Name))
-                {
-                    DataColumn col = new DataColumn();
-                    col.ColumnName = item.Name;
-                    col.DataType = item.PropertyType;
-                    result.Columns.Add(col);
-                }
+                //if (PropertyNames.Contains(item.Name))
+                //{
+                //    DataColumn col = new DataColumn();
+                //    col.ColumnName = item.Name;
+                //    col.DataType = item.PropertyType;
+                //    result.Columns.Add(col);
+                //    col.SetOrdinal(types.IndexOf(item));
+                //}
+                var type = typeof(T).GetProperty(item);
+                DataColumn col = new DataColumn();
+                col.ColumnName = type.Name;
+                col.DataType = type.PropertyType;
+                result.Columns.Add(col);
+                col.SetOrdinal(types.IndexOf(type));
             }
             foreach (var obj in input_list)
             {
@@ -144,6 +135,23 @@ namespace QLBH.Common
                 result.Rows.Add(data_row_value.ToArray());
             }
             return result;
+        }
+
+        public static List<T> convert_data_table_to_list<T>(DataTable ip)
+        {
+            List<T> result = new List<T>();
+            foreach (var data in ip.Rows)
+            {
+               
+            }
+            return result;
+        }
+
+        public static DialogResult MsgBox_Yes_No_Cancel(string message, string title)
+        {
+            DialogResult v_Result = default(DialogResult);
+            v_Result = XtraMessageBox.Show(message, title, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Error);
+            return v_Result;
         }
     }
 }

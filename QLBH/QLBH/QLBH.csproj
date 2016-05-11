@@ -204,6 +204,18 @@
     <Compile Include="Controls\Hàng hóa\c01_hinh_anh_minh_hoa.Designer.cs">
       <DependentUpon>c01_hinh_anh_minh_hoa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Hàng hóa\c01_item_danh_muc_loai_hang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Hàng hóa\c01_item_danh_muc_loai_hang.Designer.cs">
+      <DependentUpon>c01_item_danh_muc_loai_hang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Hàng hóa\c01_item_hang_hoa.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Hàng hóa\c01_item_hang_hoa.Designer.cs">
+      <DependentUpon>c01_item_hang_hoa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Hàng hóa\c01_mo_ta_hang_hoa.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -282,6 +294,24 @@
     <Compile Include="Controls\Cửa hàng\c03_quan_ly_kho_va_cua_hang.Designer.cs">
       <DependentUpon>c03_quan_ly_kho_va_cua_hang.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Khách hàng\c04_quan_ly_khach_hang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Khách hàng\c04_quan_ly_khach_hang.Designer.cs">
+      <DependentUpon>c04_quan_ly_khach_hang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\f02_them_hoa_don_v2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\f02_them_hoa_don_v2.Designer.cs">
+      <DependentUpon>f02_them_hoa_don_v2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\f04_quan_ly_hoa_don.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\f04_quan_ly_hoa_don.Designer.cs">
+      <DependentUpon>f04_quan_ly_hoa_don.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TemplateControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -299,6 +329,42 @@
     </Compile>
     <Compile Include="Forms\f02_them_hoa_don.Designer.cs">
       <DependentUpon>f02_them_hoa_don.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\f03_them_phieu_nhap_excel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\f03_them_phieu_nhap_excel.Designer.cs">
+      <DependentUpon>f03_them_phieu_nhap_excel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\f05_chi_tiet_hang_hoa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\f05_chi_tiet_hang_hoa.Designer.cs">
+      <DependentUpon>f05_chi_tiet_hang_hoa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\f06_khuyen_mai.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\f06_khuyen_mai.Designer.cs">
+      <DependentUpon>f06_khuyen_mai.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\f07_them_moi_khach_hang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\f07_them_moi_khach_hang.Designer.cs">
+      <DependentUpon>f07_them_moi_khach_hang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\f08_thong_ke_khach_hang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\f08_thong_ke_khach_hang.Designer.cs">
+      <DependentUpon>f08_thong_ke_khach_hang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\f10_them_hang_hoa_excal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\f10_them_hang_hoa_excal.Designer.cs">
+      <DependentUpon>f10_them_hang_hoa_excal.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Test.cs">
       <SubType>Form</SubType>
@@ -361,6 +427,12 @@
     <EmbeddedResource Include="Controls\Hàng hóa\c01_hinh_anh_minh_hoa.resx">
       <DependentUpon>c01_hinh_anh_minh_hoa.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Hàng hóa\c01_item_danh_muc_loai_hang.resx">
+      <DependentUpon>c01_item_danh_muc_loai_hang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Hàng hóa\c01_item_hang_hoa.resx">
+      <DependentUpon>c01_item_hang_hoa.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Hàng hóa\c01_mo_ta_hang_hoa.resx">
       <DependentUpon>c01_mo_ta_hang_hoa.cs</DependentUpon>
     </EmbeddedResource>
@@ -400,6 +472,15 @@
     <EmbeddedResource Include="Controls\Cửa hàng\c03_quan_ly_kho_va_cua_hang.resx">
       <DependentUpon>c03_quan_ly_kho_va_cua_hang.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Khách hàng\c04_quan_ly_khach_hang.resx">
+      <DependentUpon>c04_quan_ly_khach_hang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\f02_them_hoa_don_v2.resx">
+      <DependentUpon>f02_them_hoa_don_v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\f04_quan_ly_hoa_don.resx">
+      <DependentUpon>f04_quan_ly_hoa_don.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\TemplateControl.resx">
       <DependentUpon>TemplateControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -408,6 +489,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\f02_them_hoa_don.resx">
       <DependentUpon>f02_them_hoa_don.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\f03_them_phieu_nhap_excel.resx">
+      <DependentUpon>f03_them_phieu_nhap_excel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\f05_chi_tiet_hang_hoa.resx">
+      <DependentUpon>f05_chi_tiet_hang_hoa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\f06_khuyen_mai.resx">
+      <DependentUpon>f06_khuyen_mai.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\f07_them_moi_khach_hang.resx">
+      <DependentUpon>f07_them_moi_khach_hang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\f08_thong_ke_khach_hang.resx">
+      <DependentUpon>f08_thong_ke_khach_hang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\f10_them_hang_hoa_excal.resx">
+      <DependentUpon>f10_them_hang_hoa_excal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Test.resx">
       <DependentUpon>Test.cs</DependentUpon>

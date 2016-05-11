@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f02_them_hoa_don));
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.m_lbl_date_time = new DevExpress.XtraEditors.LabelControl();
+            this.m_btn_them_hoa_don = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.m_tab_control_hoa_don = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
@@ -50,35 +50,35 @@
             this.panelControl1.Appearance.BackColor = System.Drawing.Color.White;
             this.panelControl1.Appearance.Options.UseBackColor = true;
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl1.Controls.Add(this.labelControl1);
-            this.panelControl1.Controls.Add(this.simpleButton1);
+            this.panelControl1.Controls.Add(this.m_lbl_date_time);
+            this.panelControl1.Controls.Add(this.m_btn_them_hoa_don);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(1253, 56);
             this.panelControl1.TabIndex = 2;
             // 
-            // labelControl1
+            // m_lbl_date_time
             // 
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl1.Location = new System.Drawing.Point(868, 12);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(385, 32);
-            this.labelControl1.TabIndex = 1;
-            this.labelControl1.Text = "Thứ 6 ngày 13 năm 2016 - 09:00:01 ";
+            this.m_lbl_date_time.Appearance.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.m_lbl_date_time.Location = new System.Drawing.Point(868, 12);
+            this.m_lbl_date_time.Name = "m_lbl_date_time";
+            this.m_lbl_date_time.Size = new System.Drawing.Size(385, 32);
+            this.m_lbl_date_time.TabIndex = 1;
+            this.m_lbl_date_time.Text = "Thứ 6 ngày 13 năm 2016 - 09:00:01 ";
             // 
-            // simpleButton1
+            // m_btn_them_hoa_don
             // 
-            this.simpleButton1.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.simpleButton1.Appearance.Options.UseBackColor = true;
-            this.simpleButton1.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat;
-            this.simpleButton1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
-            this.simpleButton1.Location = new System.Drawing.Point(0, 0);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(118, 56);
-            this.simpleButton1.TabIndex = 0;
-            this.simpleButton1.Text = "Hóa đơn mới";
+            this.m_btn_them_hoa_don.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.m_btn_them_hoa_don.Appearance.Options.UseBackColor = true;
+            this.m_btn_them_hoa_don.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.UltraFlat;
+            this.m_btn_them_hoa_don.Dock = System.Windows.Forms.DockStyle.Left;
+            this.m_btn_them_hoa_don.Image = ((System.Drawing.Image)(resources.GetObject("m_btn_them_hoa_don.Image")));
+            this.m_btn_them_hoa_don.Location = new System.Drawing.Point(0, 0);
+            this.m_btn_them_hoa_don.Name = "m_btn_them_hoa_don";
+            this.m_btn_them_hoa_don.Size = new System.Drawing.Size(118, 56);
+            this.m_btn_them_hoa_don.TabIndex = 0;
+            this.m_btn_them_hoa_don.Text = "Hóa đơn mới";
             // 
             // panelControl2
             // 
@@ -146,7 +146,7 @@
         private DevExpress.XtraTab.XtraTabControl m_tab_control_hoa_don;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
         private Controls.Hóa_đơn.c02_hoa_don_full c02_hoa_don_full1;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.LabelControl m_lbl_date_time;
+        private DevExpress.XtraEditors.SimpleButton m_btn_them_hoa_don;
     }
 }

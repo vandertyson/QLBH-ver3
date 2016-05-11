@@ -8,7 +8,7 @@ using LinqToExcel.Attributes;
 
 namespace QLBH
 {
-    class ThemHangHoaExcel
+    public class ThemHangHoaExcel
     {
         [ExcelColumn("TEN")]
         public string Ten { get; set; }
@@ -24,7 +24,6 @@ namespace QLBH
         public string Tag { get; set; }
     }
 
-    #region Quản lý bán hàng
     public class PhieuNhapExcel
     {
         [ExcelColumn("NGAY_NHAP")]
@@ -44,5 +43,5 @@ namespace QLBH
         [ExcelColumn("GIA_NHAP")]
         public string gia_nhap { get; set; }
     }
-    #endregion
+
 }

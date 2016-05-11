@@ -176,6 +176,7 @@ namespace WebService3
                             ct.ID_SIZE = id_size;
                             ct.SO_LUONG = chi_tiet.so_luong;
                             ct.GIA_BAN = chi_tiet.gia_ban;
+
                             context.GD_HOA_DON_CHI_TIET.Add(ct);
 
                             //update ton kho

@@ -30,10 +30,12 @@ namespace QLBH.Controls
                    data_to_thong_ke();
                });
         }
+
         public void refresh_data()
         {
             
         }
+
         public void data_to_nhan_xet_khach_hang()
         {
             m_xtra_scroll_comment.Controls.Clear();

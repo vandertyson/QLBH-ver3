@@ -88,15 +88,7 @@ namespace LibraryApi
         }
         #region Chi tiết hàng hóa
        
-        public static void ThemHangHoa(
-           List<ThemHangHoaPost> list_hang_hoa,
-           Form f,
-           CompleteHandle<TraVe<string>> MyDelegate)
-        {
-            Dictionary<string, object> param = new Dictionary<string, object>();
-            param["list_hang_hoa"] = JsonConvert.SerializeObject(list_hang_hoa);
-            requestDataWithParam(param, URL_THEM_HANG_HOA, f, MyDelegate);
-        }
+       
         #endregion
         #endregion
 

@@ -26,7 +26,8 @@ namespace QLBH.Controls.Hóa_đơn
         #endregion
 
         #region Public Event Handler
-
+        public event EventHandler ChonSize;
+        public event EventHandler ChonSoLuong;
         #endregion
 
         #region Public Methods
@@ -40,8 +41,7 @@ namespace QLBH.Controls.Hóa_đơn
         {
             InitializeComponent();
             set_define_events();
-            m_list_ssl = input_list_ssl;
-
+            m_list_ssl = input_list_ssl.Where(s => s.so_luong > 0).ToList();
             data_to_sle(m_list_ssl);
         }
        
@@ -86,15 +86,27 @@ namespace QLBH.Controls.Hóa_đơn
                 {
                     m_txt_so_luong.EditValue = "1";
                     m_so_luong_hien_tai = (int)m_txt_so_luong.EditValue;
+                    if (ChonSoLuong == null)
+                    {
+                        this.ChonSoLuong(m_so_luong_hien_tai, e);
+                    }
                     return;
                 }
                 var sl = (int)m_txt_so_luong.EditValue;
                 if (sl > m_so_luong_max)
                 {
                     m_txt_so_luong.EditValue = m_so_luong_max;
+                    if (ChonSoLuong == null)
+                    {
+                        this.ChonSoLuong(m_so_luong_hien_tai, e);
+                    }
                     return;
                 }
                 m_so_luong_hien_tai = (int)m_txt_so_luong.EditValue;
+                if (ChonSoLuong == null)
+                {
+                    this.ChonSoLuong(m_so_luong_hien_tai, e);
+                }
             }
             catch (Exception ex)
             {
@@ -110,6 +122,10 @@ namespace QLBH.Controls.Hóa_đơn
                 m_size_hien_tai = ssl.ten_size;
                 m_so_luong_max = ssl.so_luong;
                 m_txt_so_luong.Text = ssl.so_luong.ToString();
+                if (ChonSize == null)
+                {
+                    ChonSize(m_size_hien_tai, e);
+                }
             }
             catch (Exception ex)
             {

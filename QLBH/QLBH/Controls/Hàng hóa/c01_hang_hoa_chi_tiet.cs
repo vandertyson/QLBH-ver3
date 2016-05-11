@@ -19,7 +19,7 @@ namespace QLBH.Controls
         public c01_hinh_anh_minh_hoa v_c01_hinh_anh = new c01_hinh_anh_minh_hoa();
         public c01_mo_ta_hang_hoa v_c01_mo_ta = new c01_mo_ta_hang_hoa();
         public c01_nhan_xet_khach_hang v_c01_nhan_xet_khach_hang = new c01_nhan_xet_khach_hang();
-        public c01_chi_tiet_khuyen_mai v_c01_chi_tiet_khuyen_mai = new c01_chi_tiet_khuyen_mai();
+        public c01_chi_tiet_khuyen_mai v_c01_chi_tiet_khuyen_mai;
         public c01_tinh_trang_kinh_doanh v_c01_tinh_tinh_trang_kinh_doanh = new c01_tinh_trang_kinh_doanh();
         
         #endregion
@@ -73,7 +73,7 @@ namespace QLBH.Controls
 
         private void get_khuyen_mai_data()
         {
-            //v_c01_chi_tiet_khuyen_mai = new c01_chi_tiet_khuyen_mai(v_hang_hoa);
+            v_c01_chi_tiet_khuyen_mai = new c01_chi_tiet_khuyen_mai(v_hang_hoa);
         }
         private void get_hinh_anh_data()
         {
@@ -89,7 +89,6 @@ namespace QLBH.Controls
         }
         private void get_nhan_xet_data()
         {
-            //v_c01_nhan_xet_khach_hang = new c01_nhan_xet_khach_hang(v_hang_hoa);
             v_c01_nhan_xet_khach_hang = new c01_nhan_xet_khach_hang(v_hang_hoa.id, DateTime.Now.AddMonths(-6), 6);
         }
 
