@@ -188,14 +188,38 @@ namespace QLBH.Common
             return result;
         }
 
-        public static List<T> convert_data_table_to_list<T>(DataTable ip)
+        public static List<T> DataTableToList<T>(DataTable table) where T : class, new()
         {
-            List<T> result = new List<T>();
-            foreach (var data in ip.Rows)
+            try
             {
-               
+                List<T> list = new List<T>();
+
+                foreach (var row in table.AsEnumerable())
+                {
+                    T obj = new T();
+
+                    foreach (var prop in obj.GetType().GetProperties())
+                    {
+                        try
+                        {
+                            PropertyInfo propertyInfo = obj.GetType().GetProperty(prop.Name);
+                            propertyInfo.SetValue(obj, Convert.ChangeType(row[prop.Name], propertyInfo.PropertyType), null);
+                        }
+                        catch
+                        {
+                            continue;
+                        }
+                    }
+
+                    list.Add(obj);
+                }
+
+                return list;
             }
-            return result;
+            catch
+            {
+                return null;
+            }
         }
 
         public static DialogResult MsgBox_Yes_No_Cancel(string message, string title)

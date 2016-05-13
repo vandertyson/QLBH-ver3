@@ -16,6 +16,11 @@ namespace WebService3
             public string ten_tag { get; set; }
             public string link_anh { get; set; }
         }
+        public class HangHoa
+        {
+            public string ma_hang_hoa { get; set; }
+            public string ten_hang_hoa { get; set; }
+        }
         public class Tag
         {
             public decimal id { get; set; }
@@ -103,17 +108,20 @@ namespace WebService3
            
         }
 
-        public static List<string> LayDanhSachHangHoa()
+        public static List<HangHoa> LayDanhSachHangHoa()
         {
             using (var context = new TKHTQuanLyBanHangEntities())
             {
-                var gd_tag = context.DM_HANG_HOA.ToList();
-                var listTag = new List<string>();
-                foreach (var item in gd_tag)
+                var hanghoa = context.DM_HANG_HOA.ToList();
+                var list = new List<HangHoa>();
+                foreach (var item in hanghoa)
                 {
-                    listTag.Add(item.TEN_HANG_HOA);
+                    var temp = new HangHoa();
+                    temp.ma_hang_hoa = item.MA_HANG_HOA;
+                    temp.ten_hang_hoa = item.TEN_HANG_HOA;
+                    list.Add(temp);
                 }
-                return listTag;
+                return list;
             }
 
         }

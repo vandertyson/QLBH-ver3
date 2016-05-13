@@ -17,6 +17,11 @@ namespace LibraryApi
             public string ten_tag { get; set; }
             public string link_anh { get; set; }
         }
+        public class HangHoa
+        {
+            public string ma_hang_hoa { get; set; }
+            public string ten_hang_hoa { get; set; }
+        }
         public class Tag
         {
             public decimal id { get; set; }
@@ -62,7 +67,7 @@ namespace LibraryApi
             param["ten_tag"] = ten_tag;
             param["ten_loai_tag"] = ten_loai_tag;
             param["link_anh"] = link_anh;
-            MyNetwork.requestDataWithParam(param, URL_GAN_TAG_HANG_HOA, f, MyDelegate);
+            MyNetwork.requestDataWithParam(param, URL_THEM_TAG, f, MyDelegate);
         }
 
         public static void LayDanhSachTag(
@@ -75,10 +80,10 @@ namespace LibraryApi
 
         public static void LayDanhSachHangHoa(
           ContainerControl f,
-          MyNetwork.CompleteHandle<MyNetwork.TraVe<List<String>>> MyDelegate)
+          MyNetwork.CompleteHandle<MyNetwork.TraVe<List<HangHoa>>> MyDelegate)
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
-            MyNetwork.requestDataWithParam(param, URL_LAY_DANH_SACH_TAG, f, MyDelegate);
+            MyNetwork.requestDataWithParam(param, URL_LAY_DANH_SACH_HANG_HOA, f, MyDelegate);
         }
     }
 }

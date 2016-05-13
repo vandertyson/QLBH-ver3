@@ -332,10 +332,11 @@ namespace WebService3
         #region Quản lý khuyến mại
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void ThemDotKhuyeMai(string ma_dot,string mo_ta,DateTime tg_bd,DateTime tg_kt)
+        public void ThemDotKhuyenMai(string ma_dot,string mo_ta,DateTime tg_bd,DateTime tg_kt)
         {
             try
             {
+
                 QuanLyKhuyenMai.ThemDotKhuyenMai(ma_dot, mo_ta, tg_bd, tg_kt);
                 var result = new KetQuaTraVe(true, "Thành công", null);
                 TraKetQua(result);
@@ -349,11 +350,13 @@ namespace WebService3
 
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void ThemHangHoaKhuyenMai(string ten_hang_hoa, string ma_dot, decimal muc_km)
+        public void ThemHangHoaKhuyenMai(string list_hang_hoa)
         {
             try
             {
-                QuanLyKhuyenMai.ThemHangHoaKhuyenMai(ten_hang_hoa, ma_dot, muc_km);
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                var listhanghoa = js.Deserialize<List<QuanLyKhuyenMai.KhuyenMai_HangHoa>>(list_hang_hoa);
+                QuanLyKhuyenMai.ThemHangHoaKhuyenMai(listhanghoa);
                 var result = new KetQuaTraVe(true, "Thành công", null);
                 TraKetQua(result);
             }
@@ -366,11 +369,11 @@ namespace WebService3
 
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void SuaMucKhuyenMai(string ten_hang_hoa, string ma_dot, decimal muc_km)
+        public void SuaMucKhuyenMai(string ma_hang_hoa, string ma_dot, decimal muc_km)
         {
             try
             {
-                QuanLyKhuyenMai.SuaMucKhuyenMai(ten_hang_hoa, ma_dot, muc_km);
+                QuanLyKhuyenMai.SuaMucKhuyenMai(ma_hang_hoa, ma_dot, muc_km);
                 var result = new KetQuaTraVe(true, "Thành công", null);
                 TraKetQua(result);
             }
@@ -388,6 +391,23 @@ namespace WebService3
             try
             {
                 var data=QuanLyKhuyenMai.LayThongTinKhuyenMai();
+                var result = new KetQuaTraVe(true, "Thành công", data);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, "Thất bại", e.Message);
+                TraKetQua(result);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void GenMaKhuyenMai()
+        {
+            try
+            {
+                var data = QuanLyKhuyenMai.GenMaKhuyenMai();
                 var result = new KetQuaTraVe(true, "Thành công", data);
                 TraKetQua(result);
             }
@@ -526,7 +546,24 @@ namespace WebService3
         }
         #endregion
 
-
+        #region Báo cáo kinh doanh
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void LayDoanhThuDoanhSoTheoThang(DateTime thang_bd, DateTime thang_kt)
+        {
+            try
+            {
+                var data = BaoCaoKinhDoanh.get_doanh_thu_doanh_so_theo_thang(thang_bd, thang_kt);
+                var result = new KetQuaTraVe(true, "Thành công", data);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, e.Message, null);
+                TraKetQua(result);
+            }
+        }
+        #endregion
 
     }
 }

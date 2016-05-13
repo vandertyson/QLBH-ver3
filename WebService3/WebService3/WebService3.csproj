@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaoCaoChiTietHangHoa.cs" />
+    <Compile Include="BaoCaoKinhDoanh.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="DM_CUA_HANG.cs">
       <DependentUpon>ModelQLBH.tt</DependentUpon>
