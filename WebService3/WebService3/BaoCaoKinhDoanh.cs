@@ -18,14 +18,14 @@ namespace WebService3
         }
         #endregion
         #region function
-        public static List<BaoCaoDoanhThuDoanhSo> get_doanh_thu_doanh_so_theo_thang(DateTime thang_bd,DateTime thang_kt)
+        public static List<BaoCaoDoanhThuDoanhSo> get_doanh_thu_doanh_so_theo_thang(string thang_bd,string thang_kt)
         {
             var danh_sach_bao_cao = new List<BaoCaoDoanhThuDoanhSo>();
             using (var context = new TKHTQuanLyBanHangEntities())
             {
  
-                int thang_tinh = thang_bd.Month;
-                int nam_tinh = thang_bd.Year;
+                int thang_tinh = Convert.ToDateTime(thang_bd).Month;
+                int nam_tinh = Convert.ToDateTime(thang_bd).Year;
                 do
                 {
                     decimal tien = 0;
@@ -63,7 +63,7 @@ namespace WebService3
                     }
                     else thang_tinh++;
 
-                } while (((thang_tinh<=thang_kt.Month)&(nam_tinh==thang_kt.Year))|(nam_tinh<thang_kt.Year));
+                } while (((thang_tinh<= Convert.ToDateTime(thang_kt).Month)&(nam_tinh== Convert.ToDateTime(thang_kt).Year))|(nam_tinh< Convert.ToDateTime(thang_kt).Year));
             }
             return danh_sach_bao_cao;
         }

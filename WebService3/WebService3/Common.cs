@@ -22,11 +22,11 @@ namespace WebService3
             }
             return listID;
         }
-        public static List<ThangNam> lay_cac_thang_tiep_theo(DateTime bat_dau, int so_thang)
+        public static List<ThangNam> lay_cac_thang_tiep_theo(string bat_dau, int so_thang)
         {
             List<ThangNam> result = new List<ThangNam>();
-            int thang = bat_dau.Month;
-            int nam = bat_dau.Year;
+            int thang = Convert.ToDateTime(bat_dau).Month;
+            int nam = Convert.ToDateTime(bat_dau).Year;
             for (int i = 0; i < so_thang; i++)
             {
                 thang += 1;

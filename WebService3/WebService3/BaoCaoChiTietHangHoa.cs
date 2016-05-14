@@ -19,14 +19,14 @@ namespace WebService3
         public class LuotXem
         {
             public decimal id { get; set; }
-            public DateTime thoi_gian { get; set; }
+            public string thoi_gian { get; set; }
         }
 
         public class Comment
         {
             public decimal id { get; set; }
             public string noi_dung { get; set; }
-            public DateTime thoi_gian { get; set; }
+            public string thoi_gian { get; set; }
             public KhachHang nguoi_commnet { get; set; }
         }
 
@@ -58,8 +58,8 @@ namespace WebService3
             public decimal id { get; set; }
             public string ma_dot { get; set; }
             public string mo_ta { get; set; }
-            public DateTime thoi_gian_bat_dau { get; set; }
-            public DateTime thoi_gian_ket_thuc { get; set; }
+            public string thoi_gian_bat_dau { get; set; }
+            public string thoi_gian_ket_thuc { get; set; }
             public decimal muc_khuyen_mai { get; set; }
             public int luot_xem { get; set; }
             public int luot_mua { get; set; }
@@ -74,7 +74,7 @@ namespace WebService3
 
         #region Chi tiết hàng hóa - Phản hồi khách hàng
 
-        public static BaoCaoPhanHoi bao_cao_phan_hoi_khach_hang(DateTime bat_dau, int so_thang, decimal id_hang_hoa)
+        public static BaoCaoPhanHoi bao_cao_phan_hoi_khach_hang(string bat_dau, int so_thang, decimal id_hang_hoa)
         {
             BaoCaoPhanHoi result = new BaoCaoPhanHoi();
             result.rating = tinh_rating(id_hang_hoa);
@@ -122,7 +122,7 @@ namespace WebService3
                     cm.id = item.ID;
                     cm.nguoi_commnet = p4;
                     cm.noi_dung = item.NHAN_XET;
-                    cm.thoi_gian = item.THOI_GIAN;
+                    cm.thoi_gian = item.THOI_GIAN.ToString();
                     result.Add(cm);
                 }
             }
@@ -149,7 +149,7 @@ namespace WebService3
                     p4.ten_khach_hang = item.DM_TAI_KHOAN.TEN_TAI_KHOAN;
                     //
                     lx.id = item.ID;
-                    lx.thoi_gian = item.THOI_GIAN;
+                    lx.thoi_gian = item.THOI_GIAN.ToString();
                     //
                     result.Add(lx);
                 }
@@ -209,7 +209,7 @@ namespace WebService3
 
         #region Chi tiết hàng hóa - Thông tin khuyến mãi
 
-        public static BaoCaoKhuyenMai bao_cao_khuyen_mai_san_pham(decimal id_san_pham, DateTime ngay_hien_tai)
+        public static BaoCaoKhuyenMai bao_cao_khuyen_mai_san_pham(decimal id_san_pham, string ngay_hien_tai)
         {
             BaoCaoKhuyenMai result = new BaoCaoKhuyenMai();
             result.lich_su = new List<DotKhuyenMai>();
@@ -217,7 +217,7 @@ namespace WebService3
             foreach (var item in list_dot_khuyen_mai)
             {
                 var dot_km = thong_tin_dot_khuyen_mai(id_san_pham, item);
-                if (dot_km.thoi_gian_bat_dau <= ngay_hien_tai & dot_km.thoi_gian_ket_thuc >= ngay_hien_tai)
+                if (Convert.ToDateTime(dot_km.thoi_gian_bat_dau) <= Convert.ToDateTime(ngay_hien_tai) & Convert.ToDateTime(dot_km.thoi_gian_ket_thuc) >= Convert.ToDateTime(ngay_hien_tai))
                 {
                     result.dot_khuyen_mai_hien_tai = dot_km;
                 }
@@ -239,8 +239,8 @@ namespace WebService3
                 result.id = p2.ID;
                 result.ma_dot = p2.MA_DOT;
                 result.mo_ta = p2.MO_TA;
-                result.thoi_gian_bat_dau = p2.THOI_GIAN_BAT_DAU;
-                result.thoi_gian_ket_thuc = p2.THOI_GIAN_KET_THUC;
+                result.thoi_gian_bat_dau = p2.THOI_GIAN_BAT_DAU.ToString();
+                result.thoi_gian_ket_thuc = p2.THOI_GIAN_KET_THUC.ToString();
                 result.muc_khuyen_mai = context.GD_KHUYEN_MAI_CHI_TIET.Where(s => s.ID_KHUYEN_MAI == id_dot_km & s.ID_HANG_HOA == id_san_pham).Select(s => s.MUC_KHUYEN_MAI).First();
                 //
                 result.luot_mua = get_luot_mua_san_pham_trong_dot_km(id_san_pham, id_dot_km);
