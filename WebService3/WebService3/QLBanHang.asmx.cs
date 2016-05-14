@@ -81,7 +81,7 @@ namespace WebService3
         #region Báo cáo chi tiết hàng hóa
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void TinhTrangKinhDoanhMatHang(decimal id_hang_hoa, DateTime thoi_gian_bat_dau, DateTime thoi_gian_ket_thuc)
+        public void TinhTrangKinhDoanhMatHang(decimal id_hang_hoa, string thoi_gian_bat_dau, string thoi_gian_ket_thuc)
         {
             try
             {
@@ -97,7 +97,7 @@ namespace WebService3
         }
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void BaoCaoPhanHoiKhachHang(DateTime bat_dau, int so_thang, decimal id_hang_hoa)
+        public void BaoCaoPhanHoiKhachHang(string bat_dau, int so_thang, decimal id_hang_hoa)
         {
             try
             {
@@ -113,7 +113,7 @@ namespace WebService3
         }
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void TinhTrangKinhDoanhHangHoa(decimal id_hang_hoa, DateTime bat_dau, DateTime ket_thuc)
+        public void TinhTrangKinhDoanhHangHoa(decimal id_hang_hoa, string bat_dau, string ket_thuc)
         {
             try
             {
@@ -129,7 +129,7 @@ namespace WebService3
         }
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void BaoCaoChiTietKhuyenMai(decimal id_san_pham, DateTime ngay_hien_tai)
+        public void BaoCaoChiTietKhuyenMai(decimal id_san_pham, string ngay_hien_tai)
         {
             try
             {
@@ -348,7 +348,7 @@ namespace WebService3
         #region Quản lý khuyến mại
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void ThemDotKhuyenMai(string ma_dot,string mo_ta,DateTime tg_bd,DateTime tg_kt)
+        public void ThemDotKhuyenMai(string ma_dot,string mo_ta,string tg_bd,string tg_kt)
         {
             try
             {
@@ -531,7 +531,7 @@ namespace WebService3
 
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void LayDanhSachPhieuNhap(DateTime nbd, DateTime nkt)
+        public void LayDanhSachPhieuNhap(string nbd, string nkt)
         {
             try
             {
@@ -568,7 +568,7 @@ namespace WebService3
         #region Quản lý hóa đơn
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void LayDanhSachKhachHang(DateTime ip_ngay_hien_tai)
+        public void LayDanhSachKhachHang(string ip_ngay_hien_tai)
         {
             try
             {
@@ -585,7 +585,7 @@ namespace WebService3
 
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void LayDanhSachHangHoaByCuaHangAndNgay(decimal ip_id_cua_hang, DateTime ip_ngay_hien_tai)
+        public void LayDanhSachHangHoaByCuaHangAndNgay(decimal ip_id_cua_hang, string ip_ngay_hien_tai)
         {
             try
             {
@@ -618,13 +618,23 @@ namespace WebService3
                 TraKetQua(result);
             }
         }
+
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void LayDanhSachHoaDon()
         {
             try
             {
-                var data = QuanLyHoaDon.danh_sach_hoa_don();
+                List<QuanLyHoaDon.HoaDon> data;
+                var ngay_hien_tai = Context.Request["ngay_hien_tai"];
+                if (ngay_hien_tai==null)
+                {
+                    data = QuanLyHoaDon.danh_sach_hoa_don(null);
+                }
+                else
+                {
+                    data = QuanLyHoaDon.danh_sach_hoa_don(string.Parse(ngay_hien_tai));
+                }
                 var result = new KetQuaTraVe(true, "Thành công", data);
                 TraKetQua(result);
             }
@@ -634,6 +644,7 @@ namespace WebService3
                 TraKetQua(result);
             }
         }
+
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void LayMaHoaDon()
@@ -650,12 +661,49 @@ namespace WebService3
                 TraKetQua(result);
             }
         }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void XoaHoaDon(string ma_hoa_don)
+        {
+            try
+            {
+                QuanLyHoaDon.xoa_hoa_don(ma_hoa_don);
+                var result = new KetQuaTraVe(true, "Thành công", null);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, e.Message, null);
+                TraKetQua(result);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void SuaHoaDon(string ip_hoa_don)
+        {
+            try
+            {
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                var hd = js.Deserialize<QuanLyHoaDon.HoaDon>(ip_hoa_don);
+                QuanLyHoaDon.sua_hoa_don(hd);
+                var result = new KetQuaTraVe(true, "Thành công", null);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, e.Message, null);
+                TraKetQua(result);
+            }
+        }
+
         #endregion
 
         #region Quản lý giá hàng hóa
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void LayBangGia(DateTime ip_ngay_hien_tai)
+        public void LayBangGia(string ip_ngay_hien_tai)
         {
             try
             {
@@ -693,7 +741,7 @@ namespace WebService3
         #region Báo cáo kinh doanh
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void LayDoanhThuDoanhSoTheoThang(DateTime thang_bd, DateTime thang_kt)
+        public void LayDoanhThuDoanhSoTheoThang(string thang_bd, string thang_kt)
         {
             try
             {

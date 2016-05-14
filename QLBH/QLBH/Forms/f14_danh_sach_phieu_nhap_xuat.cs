@@ -22,6 +22,7 @@ namespace QLBH.Forms
         }
 
         private List<PhieuNhap> m_data_phieu;
+
         private void set_define_event()
         {
             this.Load += F14_danh_sach_phieu_nhap_xuat_Load;
@@ -81,19 +82,23 @@ namespace QLBH.Forms
         {
             try
             {
-                if (m_grv_phieu_nhap.FocusedRowHandle < 0)
-                {
-                    XtraMessageBox.Show("Chọn phiếu để xem chi tiết");
-                    return;
-                }
-                PhieuNhap p = m_data_phieu[m_grv_phieu_nhap.FocusedRowHandle];
-                f15_phieu_nhap_chi_tiet v_f = new f15_phieu_nhap_chi_tiet();
-                v_f.display_update(p);
-                load_data_to_grid();
+                string dateString = @"""\/Date(1297367252340-0500)\/""";
+                string b = Convert.ToDateTime(dateString).ToString();
+                
+                //if (m_grv_phieu_nhap.FocusedRowHandle < 0)
+                //{
+                //    XtraMessageBox.Show("Chọn phiếu để xem chi tiết");
+                //    return;
+                //}
+                //PhieuNhap p = m_data_phieu[m_grv_phieu_nhap.FocusedRowHandle];
+                //f15_phieu_nhap_chi_tiet v_f = new f15_phieu_nhap_chi_tiet();
+                //v_f.display_update(p);
+                //load_data_to_grid();
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(ex.InnerException.Message);
+                //OnQueryContinueDrag;
+                //XtraMessageBox.Show(ex.InnerException.Message);
             }
         }
 

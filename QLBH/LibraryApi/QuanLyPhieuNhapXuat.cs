@@ -43,7 +43,7 @@ namespace LibraryApi
         public class PhieuNhap
         {
             public string ma_phieu { get; set; }
-            public DateTime ngay_nhap { get; set; }
+            public string ngay_nhap { get; set; }
             public string ten_tai_khoan { get; set; }
             public decimal id_cua_hang { get; set; }
             public List<HangHoa> list_hang_hoa { get; set; }

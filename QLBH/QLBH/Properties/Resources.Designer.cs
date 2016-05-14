@@ -433,6 +433,16 @@ namespace QLBH.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Ingredients_List_52 {
+            get {
+                object obj = ResourceManager.GetObject("Ingredients List-52", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Land_Sales_50 {
             get {
                 object obj = ResourceManager.GetObject("Land Sales-50", resourceCulture);

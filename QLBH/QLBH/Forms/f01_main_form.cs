@@ -25,7 +25,7 @@ namespace QLBH.Forms
     public partial class f01_main_form : Form
     {
         #region member
-        bool v_menu_detail_is_opened;
+        bool v_menu_detail_is_opened = false;
         public List<XtraTabPage> m_opening_control { get; set; } = new List<XtraTabPage>();
 
         #endregion
@@ -49,7 +49,7 @@ namespace QLBH.Forms
 
         private void set_init_form_load()
         {
-            v_menu_detail_is_opened = true;
+            v_menu_detail_is_opened = false;
             set_menu_detail_status();
             set_define_event();
         }

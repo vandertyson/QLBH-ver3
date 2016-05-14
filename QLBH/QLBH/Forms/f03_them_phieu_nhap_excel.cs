@@ -186,7 +186,7 @@ namespace QLBH.Forms
                         foreach (var item in list_phieu_theo_ngay)
                         {
                             PhieuNhap phieu = new PhieuNhap();
-                            phieu.ngay_nhap = Convert.ToDateTime(item);
+                            phieu.ngay_nhap = Convert.ToDateTime(item).ToString();
                             phieu.ten_tai_khoan = SystemInfo.ten_tai_khoan;
                             phieu.id_cua_hang = SystemInfo.id_cua_hang;
                             phieu.list_hang_hoa = new List<HangHoa>();
