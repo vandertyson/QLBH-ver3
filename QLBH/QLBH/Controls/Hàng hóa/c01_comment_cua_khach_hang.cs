@@ -21,6 +21,7 @@ namespace QLBH.Controls
         public c01_comment_cua_khach_hang(string username, string comment, DateTime thoi_gian_nhan_xet)
         {
             InitializeComponent();
+            
             v_nhan_xet = new NhanXet();
             v_nhan_xet.ten_tai_khoan = username;
             v_nhan_xet.nhan_xet = comment;

@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.m_tab_page_tag = new DevExpress.XtraTab.XtraTabPage();
             this.m_tab_page_nha_cung_cap = new DevExpress.XtraTab.XtraTabPage();
             this.m_tab_page_danh_muc_hang_hoa = new DevExpress.XtraTab.XtraTabPage();
             this.xtraScrollableControl1 = new DevExpress.XtraEditors.XtraScrollableControl();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.txtPage = new System.Windows.Forms.TextBox();
             this.table_danh_sach = new QLBH.Controls.Common_Controls.c0_table();
             this.panel6 = new System.Windows.Forms.Panel();
             this.searchBar = new QLBH.Controls.c01_search_box();
@@ -44,15 +45,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.m_pnl_danh_muc = new DevExpress.XtraEditors.PanelControl();
-            this.hangHoaBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.hangHoaBindingSource = new System.Windows.Forms.BindingSource();
             this.m_tab_control_quan_ly_hang_hoa = new DevExpress.XtraTab.XtraTabControl();
             this.gridSplitContainer1 = new DevExpress.XtraGrid.GridSplitContainer();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.txtPage = new System.Windows.Forms.TextBox();
             this.m_tab_page_danh_muc_hang_hoa.SuspendLayout();
             this.xtraScrollableControl1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -63,7 +63,6 @@
             this.m_tab_control_quan_ly_hang_hoa.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridSplitContainer1)).BeginInit();
             this.gridSplitContainer1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // m_tab_page_tag
@@ -204,12 +203,34 @@
             this.panel5.Size = new System.Drawing.Size(972, 494);
             this.panel5.TabIndex = 2;
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(67)))));
+            this.panel1.Controls.Add(this.txtPage);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 457);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(972, 37);
+            this.panel1.TabIndex = 2;
+            // 
+            // txtPage
+            // 
+            this.txtPage.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPage.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPage.Location = new System.Drawing.Point(281, 4);
+            this.txtPage.Name = "txtPage";
+            this.txtPage.Size = new System.Drawing.Size(100, 25);
+            this.txtPage.TabIndex = 0;
+            this.txtPage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtPage.Visible = false;
+            this.txtPage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPage_KeyDown);
+            // 
             // table_danh_sach
             // 
             this.table_danh_sach.BackColor = System.Drawing.Color.WhiteSmoke;
             this.table_danh_sach.Dock = System.Windows.Forms.DockStyle.Fill;
             this.table_danh_sach.Location = new System.Drawing.Point(0, 40);
-            this.table_danh_sach.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.table_danh_sach.Margin = new System.Windows.Forms.Padding(4);
             this.table_danh_sach.Name = "table_danh_sach";
             this.table_danh_sach.Size = new System.Drawing.Size(972, 454);
             this.table_danh_sach.Style = QLBH.Controls.Common_Controls.c0_table.ScrollStyle.Vertical;
@@ -331,27 +352,6 @@
             this.gridSplitContainer1.Size = new System.Drawing.Size(219, 532);
             this.gridSplitContainer1.TabIndex = 0;
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(67)))));
-            this.panel1.Controls.Add(this.txtPage);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 457);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(972, 37);
-            this.panel1.TabIndex = 2;
-            // 
-            // txtPage
-            // 
-            this.txtPage.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtPage.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPage.Location = new System.Drawing.Point(281, 4);
-            this.txtPage.Name = "txtPage";
-            this.txtPage.Size = new System.Drawing.Size(100, 25);
-            this.txtPage.TabIndex = 0;
-            this.txtPage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtPage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPage_KeyDown);
-            // 
             // c01_quan_ly_hang_hoa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -365,6 +365,8 @@
             this.xtraScrollableControl1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
@@ -376,8 +378,6 @@
             this.m_tab_control_quan_ly_hang_hoa.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridSplitContainer1)).EndInit();
             this.gridSplitContainer1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }

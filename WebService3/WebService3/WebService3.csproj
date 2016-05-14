@@ -192,6 +192,7 @@
       <DependentUpon>ModelQLBH.tt</DependentUpon>
     </Compile>
     <Compile Include="QuanLyDanhMucHangHoa.cs" />
+    <Compile Include="QuanLyGiaSanPham.cs" />
     <Compile Include="QuanLyHoaDon.cs" />
     <Compile Include="KetQuaTraVe.cs" />
     <Compile Include="ModelQLBH.Context.cs">

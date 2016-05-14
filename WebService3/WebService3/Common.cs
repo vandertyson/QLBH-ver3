@@ -29,7 +29,7 @@ namespace WebService3
             int nam = bat_dau.Year;
             for (int i = 0; i < so_thang; i++)
             {
-                thang += i;
+                thang += 1;
                 if (thang % 13 == 0)
                 {
                     thang = 1;

@@ -25,6 +25,20 @@ namespace QLBH.Controls.Cửa_hàng
             m_tile_nhap_kho.ItemClick += M_tile_nhap_kho_ItemClick;
             m_tile_tao_khuyen_mai.ItemClick += M_tile_tao_khuyen_mai_ItemClick;
             m_tile_them_hang_hoa.ItemClick += M_tile_them_hang_hoa_ItemClick;
+            m_tile_gia_excel.ItemClick += M_tile_gia_excel_ItemClick;
+            m_tile_thong_tin_ton_kho.ItemClick += M_tile_thong_tin_ton_kho_ItemClick;
+        }
+
+        private void M_tile_thong_tin_ton_kho_ItemClick(object sender, DevExpress.XtraEditors.TileItemEventArgs e)
+        {
+            f14_danh_sach_phieu_nhap_xuat v_f = new f14_danh_sach_phieu_nhap_xuat();
+            v_f.Show();
+        }
+
+        private void M_tile_gia_excel_ItemClick(object sender, DevExpress.XtraEditors.TileItemEventArgs e)
+        {
+            f12_gia_ban_excel v_f = new f12_gia_ban_excel();
+            v_f.Show();
         }
 
         private void M_tile_them_hang_hoa_ItemClick(object sender, DevExpress.XtraEditors.TileItemEventArgs e)

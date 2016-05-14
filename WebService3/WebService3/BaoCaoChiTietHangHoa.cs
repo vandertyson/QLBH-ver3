@@ -79,10 +79,11 @@ namespace WebService3
             BaoCaoPhanHoi result = new BaoCaoPhanHoi();
             result.rating = tinh_rating(id_hang_hoa);
             result.duoc_yeu_thich = so_khach_hang_yeu_thich(id_hang_hoa);
+            result.thong_ke_theo_thang = new List<ThongKeTheoThang>();
             var p = Common.lay_cac_thang_tiep_theo(bat_dau, so_thang);
             foreach (var item in p)
             {
-                result.thong_ke_theo_thang.Add(lay_thong_ke_theo_thang(item.nam, item.thang, id_hang_hoa));
+                result.thong_ke_theo_thang.Add(lay_thong_ke_theo_thang(item.thang, item.nam, id_hang_hoa));
             }
             result.comments = so_luot_comment_den_hien_tai(id_hang_hoa);
             result.views = so_luot_xem_den_thoi_diem_hien_tai(id_hang_hoa);
@@ -134,12 +135,12 @@ namespace WebService3
             using (var context = new TKHTQuanLyBanHangEntities())
             {
                 var p1 = context.GD_CLICK_HANG_HOA.Where(s => s.ID_HANG_HOA == id_hang_hoa & s.THOI_GIAN.Year == nam & s.THOI_GIAN.Month == thang).ToList();
-                var p2 = context.DM_LOAI_TAI_KHOAN.Where(s => s.MA_LOAI == "CUSTOMER").Select(s => s.ID).ToList();
+                var p2 = context.DM_LOAI_TAI_KHOAN.Where(s => s.MA_LOAI == "CUSTOMER").First();
                 foreach (var item in p1)
                 {
                     var p3 = item.DM_TAI_KHOAN.ID_LOAI_TAI_KHOAN;
                     //Kiem tra nguoi comment la khach hang
-                    if (!p2.Contains(p3)) continue;
+                    if (p2.ID == p3) continue;
                     //Lay comment
                     LuotXem lx = new LuotXem();
                     //Lay thong tin comment
@@ -189,8 +190,8 @@ namespace WebService3
             using (var context = new TKHTQuanLyBanHangEntities())
             {
                 var p1 = context.GD_NHAN_XET.Where(s => s.ID_HANG_HOA == id_hang_hoa).ToList();
-                var p2 = context.DM_LOAI_TAI_KHOAN.Where(s => s.MA_LOAI == "CUSTOMER").Select(s => s.ID).ToList();
-                return p1.Where(s => !p2.Contains(s.DM_TAI_KHOAN.ID_LOAI_TAI_KHOAN)).ToList().Count;
+                var p2 = context.DM_TAI_KHOAN.Where(s => s.ID_LOAI_TAI_KHOAN != 3).Select(s => s.ID).ToList();
+                return p1.Where(s => !p2.Contains(s.ID_TAI_KHOAN)).ToList().Count;
             }
         }
 
@@ -199,8 +200,8 @@ namespace WebService3
             using (var context = new TKHTQuanLyBanHangEntities())
             {
                 var p1 = context.GD_CLICK_HANG_HOA.Where(s => s.ID_HANG_HOA == id_hang_hoa).ToList();
-                var p2 = context.DM_LOAI_TAI_KHOAN.Where(s => s.MA_LOAI == "CUSTOMER").Select(s => s.ID).ToList();
-                return p1.Where(s => !p2.Contains(s.DM_TAI_KHOAN.ID_LOAI_TAI_KHOAN)).ToList().Count;
+                var p2 = context.DM_TAI_KHOAN.Where(s => s.ID_LOAI_TAI_KHOAN != 3).Select(s => s.ID).ToList();
+                return p1.Where(s => !p2.Contains(s.ID)).ToList().Count();
             }
         }
 
@@ -211,6 +212,7 @@ namespace WebService3
         public static BaoCaoKhuyenMai bao_cao_khuyen_mai_san_pham(decimal id_san_pham, DateTime ngay_hien_tai)
         {
             BaoCaoKhuyenMai result = new BaoCaoKhuyenMai();
+            result.lich_su = new List<DotKhuyenMai>();
             var list_dot_khuyen_mai = danh_sach_id_cac_dot_khuyen_mai_cua_san_pham(id_san_pham);
             foreach (var item in list_dot_khuyen_mai)
             {
@@ -254,18 +256,22 @@ namespace WebService3
         public static decimal get_tong_doanh_thu_dot_km(decimal id_dot_km)
         {
             decimal result = 0;
+
             using (var context = new TKHTQuanLyBanHangEntities())
             {
                 var ngay_bat_dau = context.GD_KHUYEN_MAI.Where(s => s.ID == id_dot_km).Select(s => s.THOI_GIAN_BAT_DAU).First();
                 var ngay_ket_thuc = context.GD_KHUYEN_MAI.Where(s => s.ID == id_dot_km).Select(s => s.THOI_GIAN_KET_THUC).First();
-                var list_hoa_don = context.GD_HOA_DON.Where(s => s.THOI_GIAN_TAO <= ngay_ket_thuc & s.THOI_GIAN_TAO >= ngay_bat_dau).Select(s => s.ID).ToList();
+                var list_hoa_don = context.GD_HOA_DON.Where(s => s.THOI_GIAN_TAO <= ngay_ket_thuc & s.THOI_GIAN_TAO >= ngay_bat_dau).ToList();
                 foreach (var item in list_hoa_don)
                 {
-                    var chi_tiet = context.GD_HOA_DON_CHI_TIET.Where(s => s.ID_HOA_DON == item).ToList();
+                    decimal tong_tien = 0;
+                    var chi_tiet = context.GD_HOA_DON_CHI_TIET.Where(s => s.ID_HOA_DON == item.ID).ToList();
                     foreach (var item2 in chi_tiet)
                     {
-                        result += item2.SO_LUONG * item2.GIA_BAN;
+                        tong_tien += item2.SO_LUONG * item2.GIA_BAN;
                     }
+                    tong_tien -= Convert.ToDecimal(item.GIAM_TRU);
+                    result += tong_tien;
                 }
             }
             return result;
@@ -298,11 +304,17 @@ namespace WebService3
             {
                 var ngay_bat_dau = context.GD_KHUYEN_MAI.Where(s => s.ID == id_dot_km).Select(s => s.THOI_GIAN_BAT_DAU).First();
                 var ngay_ket_thuc = context.GD_KHUYEN_MAI.Where(s => s.ID == id_dot_km).Select(s => s.THOI_GIAN_KET_THUC).First();
-                var list_hoa_don = context.GD_HOA_DON.Where(s => s.THOI_GIAN_TAO <= ngay_ket_thuc & s.THOI_GIAN_TAO >= ngay_bat_dau).Select(s => s.ID).ToList();
+                var list_hoa_don = context.GD_HOA_DON.Where(s => s.THOI_GIAN_TAO <= ngay_ket_thuc & s.THOI_GIAN_TAO >= ngay_bat_dau).ToList();
                 foreach (var item in list_hoa_don)
                 {
-                    var chi_tiet = context.GD_HOA_DON_CHI_TIET.Where(s => s.ID_HOA_DON == item & s.ID_HANG_HOA == id_san_pham).First();
-                    result += chi_tiet.SO_LUONG * chi_tiet.GIA_BAN;
+                    decimal tong_tien = 0;
+                    var chi_tiet = context.GD_HOA_DON_CHI_TIET.Where(s => s.ID_HOA_DON == item.ID & s.ID_HANG_HOA == id_san_pham).ToList();
+                    foreach (var tt in chi_tiet)
+                    {
+                        tong_tien += tt.SO_LUONG * tt.GIA_BAN;
+                    }
+                    tong_tien -= Convert.ToDecimal(item.GIAM_TRU);
+                    result += tong_tien;
                 }
             }
             return result;
@@ -318,8 +330,11 @@ namespace WebService3
                 var list_hoa_don = context.GD_HOA_DON.Where(s => s.THOI_GIAN_TAO <= ngay_ket_thuc & s.THOI_GIAN_TAO >= ngay_bat_dau).Select(s => s.ID).ToList();
                 foreach (var item in list_hoa_don)
                 {
-                    var chi_tiet = context.GD_HOA_DON_CHI_TIET.Where(s => s.ID_HOA_DON == item & s.ID_HANG_HOA == id_san_pham).First();
-                    result += (int)chi_tiet.SO_LUONG;
+                    var chi_tiet = context.GD_HOA_DON_CHI_TIET.Where(s => s.ID_HOA_DON == item & s.ID_HANG_HOA == id_san_pham).ToList();
+                    foreach (var tt in chi_tiet)
+                    {
+                        result += int.Parse(tt.SO_LUONG.ToString());
+                    }
                 }
             }
             return result;
@@ -344,7 +359,18 @@ namespace WebService3
             {
                 var ngay_bat_dau = context.GD_KHUYEN_MAI.Where(s => s.ID == id_dot_km).Select(s => s.THOI_GIAN_BAT_DAU).First();
                 var ngay_ket_thuc = context.GD_KHUYEN_MAI.Where(s => s.ID == id_dot_km).Select(s => s.THOI_GIAN_KET_THUC).First();
-                result = context.GD_HOA_DON.Where(s => s.THOI_GIAN_TAO <= ngay_ket_thuc & s.THOI_GIAN_TAO >= ngay_bat_dau).Select(s => s.ID).ToList().ToList().Count;
+                var hd = context.GD_HOA_DON.Where(s => s.THOI_GIAN_TAO <= ngay_ket_thuc & s.THOI_GIAN_TAO >= ngay_bat_dau).Select(s => s.ID).ToList();
+                foreach (var item in hd)
+                {
+                    var ct = context.GD_HOA_DON_CHI_TIET.Where(s => s.ID_HOA_DON == item).ToList();
+                    foreach (var tt in ct)
+                    {
+                        if (tt.ID_HANG_HOA == id_san_pham)
+                        {
+                            result += 1;
+                        }
+                    }
+                }
             }
             return result;
         }

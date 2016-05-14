@@ -39,13 +39,13 @@ namespace WebService3
                         var table_chi_tiet = context.GD_HOA_DON_CHI_TIET.Where(s => s.ID_HOA_DON == item.ID).ToList();
                         foreach (var item1 in table_chi_tiet)
                         {
-                            temp_tien += item1.GIA_BAN * item1.SO_LUONG;
+                            temp_tien += item1.GIA_BAN * item1.SO_LUONG * 1000;
                             temp_slsp += item1.SO_LUONG;
                         }
                         if (item.GIAM_TRU != null)
                         {
                             decimal giam_tru = Convert.ToDecimal(item.GIAM_TRU);
-                            tien += temp_tien + giam_tru;
+                            tien += temp_tien - giam_tru;
                         }
                         else tien += temp_tien;
                         slsp += temp_slsp; 

@@ -24,7 +24,7 @@ namespace QLBH.Forms
 
         private void set_define_event()
         {
-            m_btn_thoat.Click += M_btn_thoat_Click;
+           
         }
 
         private void M_btn_thoat_Click(object sender, EventArgs e)
@@ -43,8 +43,22 @@ namespace QLBH.Forms
         {
             m_curent_hang_hoa = v_hh;
             this.CenterToScreen();
-            m_c01_hang_hoa_chi_tiet = new c01_hang_hoa_chi_tiet(m_curent_hang_hoa);
             this.ShowDialog();
+        }
+
+        internal void display(QuanLyDanhMucHangHoa.HangHoaMaster hangHoaMaster)
+        {
+            this.CenterToScreen();
+            var p = new c01_hang_hoa_chi_tiet(hangHoaMaster.id);
+            p.Dock = DockStyle.Fill;
+            panelControl2.Controls.Add(p);
+            this.WindowState = FormWindowState.Maximized;
+            this.ShowDialog();
+        }
+
+        private void m_btn_thoat_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

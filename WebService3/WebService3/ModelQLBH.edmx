@@ -130,7 +130,7 @@
           <Property Name="ID" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_HANG_HOA" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="NGAY_LUU_HANH" Type="datetime" Nullable="false" />
-          <Property Name="GIA" Type="decimal" Precision="14" Scale="4" Nullable="false" />
+          <Property Name="GIA" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="GD_HANG_HOA_TAG">
           <Key>
@@ -151,6 +151,7 @@
           <Property Name="ID_TAI_KHOAN" Type="decimal" Precision="18" Scale="0" />
           <Property Name="LOAI_THANH_TOAN" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="GIAM_TRU" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ID_TAI_KHOAN_TAO" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="GD_HOA_DON_CHI_TIET">
           <Key>
@@ -160,7 +161,7 @@
           <Property Name="ID_HOA_DON" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="ID_HANG_HOA" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="SO_LUONG" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="GIA_BAN" Type="decimal" Precision="14" Scale="4" Nullable="false" />
+          <Property Name="GIA_BAN" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="DA_THANH_TOAN" Type="nvarchar" MaxLength="1" Nullable="false" />
           <Property Name="ID_SIZE" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
@@ -208,8 +209,8 @@
           <Property Name="ID" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_PHIEU_NHAP_XUAT" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="ID_HANG_HOA" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="GIA_NHAP" Type="decimal" Precision="18" Scale="4" Nullable="false" />
-          <Property Name="GIA_NHAP_BINH_QUAN" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="GIA_NHAP" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="GIA_NHAP_BINH_QUAN" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="GD_PHIEU_NHAP_XUAT">
           <Key>
@@ -1057,7 +1058,7 @@
           <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_HANG_HOA" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="NGAY_LUU_HANH" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="GIA" Type="Decimal" Precision="14" Scale="4" Nullable="false" />
+          <Property Name="GIA" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <NavigationProperty Name="DM_HANG_HOA" Relationship="Self.FK_GD_GIA_DM_HANG_HOA" FromRole="GD_GIA" ToRole="DM_HANG_HOA" />
         </EntityType>
         <EntityType Name="GD_HANG_HOA_TAG">
@@ -1084,6 +1085,7 @@
           <NavigationProperty Name="DM_TAI_KHOAN" Relationship="Self.FK_GD_HOA_DON_DM_TAI_KHOAN" FromRole="GD_HOA_DON" ToRole="DM_TAI_KHOAN" />
           <NavigationProperty Name="GD_HOA_DON_CHI_TIET" Relationship="Self.FK_GD_HOA_DON_CHI_TIET_GD_HOA_DON" FromRole="GD_HOA_DON" ToRole="GD_HOA_DON_CHI_TIET" />
           <Property Name="GIAM_TRU" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ID_TAI_KHOAN_TAO" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="GD_HOA_DON_CHI_TIET">
           <Key>
@@ -1093,7 +1095,7 @@
           <Property Name="ID_HOA_DON" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="ID_HANG_HOA" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="SO_LUONG" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="GIA_BAN" Type="Decimal" Precision="14" Scale="4" Nullable="false" />
+          <Property Name="GIA_BAN" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="DA_THANH_TOAN" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ID_SIZE" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <NavigationProperty Name="DM_HANG_HOA" Relationship="Self.FK_GD_HOA_DON_CHI_TIET_DM_HANG_HOA" FromRole="GD_HOA_DON_CHI_TIET" ToRole="DM_HANG_HOA" />
@@ -1151,8 +1153,8 @@
           <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_PHIEU_NHAP_XUAT" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="ID_HANG_HOA" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="GIA_NHAP" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
-          <Property Name="GIA_NHAP_BINH_QUAN" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="GIA_NHAP" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="GIA_NHAP_BINH_QUAN" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <NavigationProperty Name="DM_HANG_HOA" Relationship="Self.FK_GD_GIA_NHAP_BINH_QUAN_DM_HANG_HOA" FromRole="GD_PHIEU_NHAP_CHI_TIET" ToRole="DM_HANG_HOA" />
           <NavigationProperty Name="GD_PHIEU_NHAP_XUAT" Relationship="Self.FK_GD_GIA_NHAP_BINH_QUAN_GD_PHIEU_NHAP_XUAT" FromRole="GD_PHIEU_NHAP_CHI_TIET" ToRole="GD_PHIEU_NHAP_XUAT" />
         </EntityType>
@@ -2009,6 +2011,7 @@
           <EntitySetMapping Name="GD_HOA_DON">
             <EntityTypeMapping TypeName="TKHTQuanLyBanHangModel.GD_HOA_DON">
               <MappingFragment StoreEntitySet="GD_HOA_DON">
+                <ScalarProperty Name="ID_TAI_KHOAN_TAO" ColumnName="ID_TAI_KHOAN_TAO" />
                 <ScalarProperty Name="GIAM_TRU" ColumnName="GIAM_TRU" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="MA_HOA_DON" ColumnName="MA_HOA_DON" />

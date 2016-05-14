@@ -18,7 +18,14 @@ namespace QLBH.Controls
         {
             InitializeComponent();
         }
-
+        public c01_nhan_xet_khach_hang(BaoCaoPhanHoi v_bc)
+        {
+            InitializeComponent();
+            v_bao_cao_phan_hoi = v_bc;
+            data_to_chart();
+            data_to_nhan_xet_khach_hang();
+            data_to_thong_ke();
+        }
         public c01_nhan_xet_khach_hang(decimal id_hang_hoa, DateTime bat_dau, int so_thang)
         {
             InitializeComponent();
@@ -84,7 +91,7 @@ namespace QLBH.Controls
 
         public void data_to_thong_ke()
         {
-            m_lbl_rating.Text = v_bao_cao_phan_hoi.rating.ToString();
+            m_lbl_rating.Text = String.Format("{0:0.00}",v_bao_cao_phan_hoi.rating);
             m_lbl_tong_so_view.Text = v_bao_cao_phan_hoi.views.ToString();
             m_lbl_yeu_thich.Text = v_bao_cao_phan_hoi.duoc_yeu_thich.ToString();
         }

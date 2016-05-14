@@ -27,6 +27,7 @@ namespace WebService3
         public Nullable<decimal> ID_TAI_KHOAN { get; set; }
         public string LOAI_THANH_TOAN { get; set; }
         public Nullable<decimal> GIAM_TRU { get; set; }
+        public decimal ID_TAI_KHOAN_TAO { get; set; }
     
         public virtual DM_CUA_HANG DM_CUA_HANG { get; set; }
         public virtual DM_TAI_KHOAN DM_TAI_KHOAN { get; set; }
