@@ -26,7 +26,7 @@ namespace WebService3
         public class PhieuNhap
         {
             public string ma_phieu { get; set; }
-            public DateTime ngay_nhap { get; set; }
+            public string ngay_nhap { get; set; }
             public string ten_tai_khoan { get; set; }
             public decimal id_cua_hang { get; set; }
             public List<HangHoa> list_hang_hoa { get; set; }
@@ -50,7 +50,7 @@ namespace WebService3
                         gd_phieu_nhap_xuat.LOAI_PHIEU = "N";
                         gd_phieu_nhap_xuat.MA_PHIEU = p.ma_phieu;
                         gd_phieu_nhap_xuat.ID_TAI_KHOAN = context.DM_TAI_KHOAN.Where(s => s.TEN_TAI_KHOAN == p.ten_tai_khoan).First().ID;
-                        gd_phieu_nhap_xuat.NGAY_NHAP = p.ngay_nhap;
+                        gd_phieu_nhap_xuat.NGAY_NHAP = Convert.ToDateTime(p.ngay_nhap);
                         gd_phieu_nhap_xuat.ID_CUA_HANG = p.id_cua_hang;
                         context.GD_PHIEU_NHAP_XUAT.Add(gd_phieu_nhap_xuat);
                         context.SaveChanges();
@@ -135,7 +135,7 @@ namespace WebService3
                             var maMoi = Common.GenMa("P", 7, maCu);
                             gd_phieu_nhap_xuat.MA_PHIEU = maMoi;
                             gd_phieu_nhap_xuat.ID_TAI_KHOAN = context.DM_TAI_KHOAN.Where(s => s.TEN_TAI_KHOAN == item.ten_tai_khoan).First().ID;
-                            gd_phieu_nhap_xuat.NGAY_NHAP = item.ngay_nhap;
+                            gd_phieu_nhap_xuat.NGAY_NHAP = Convert.ToDateTime(item.ngay_nhap);
                             var id_cua_hang = item.id_cua_hang;
                             gd_phieu_nhap_xuat.ID_CUA_HANG = id_cua_hang;
                             context.GD_PHIEU_NHAP_XUAT.Add(gd_phieu_nhap_xuat);
@@ -235,7 +235,7 @@ namespace WebService3
                 {
                     PhieuNhap p = new PhieuNhap();
                     p.ma_phieu = phieu.MA_PHIEU;
-                    p.ngay_nhap = phieu.NGAY_NHAP;
+                    p.ngay_nhap = phieu.NGAY_NHAP.ToString();
                     p.id_cua_hang = phieu.ID_CUA_HANG;
                     p.ten_tai_khoan = context.DM_TAI_KHOAN.Where(s => s.ID == phieu.ID_TAI_KHOAN).First().TEN_TAI_KHOAN;
                     p.list_hang_hoa = new List<HangHoa>();

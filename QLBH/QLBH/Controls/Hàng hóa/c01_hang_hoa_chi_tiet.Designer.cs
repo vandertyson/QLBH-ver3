@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.m_xtra_scroll = new DevExpress.XtraEditors.XtraScrollableControl();
-            this.nhanXetBindingSource = new System.Windows.Forms.BindingSource();
+            this.nhanXetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.m_lbl_ten_san_pham = new DevExpress.XtraEditors.LabelControl();
-            this.m_lbl_hang_hoa_master = new DevExpress.XtraEditors.LabelControl();
             this.m_lbl_tag = new DevExpress.XtraEditors.LabelControl();
+            this.m_lbl_hang_hoa_master = new DevExpress.XtraEditors.LabelControl();
+            this.m_lbl_ten_san_pham = new DevExpress.XtraEditors.LabelControl();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.m_btn_xoa_san_pham = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.nhanXetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
@@ -68,6 +69,37 @@
             this.panelControl2.Size = new System.Drawing.Size(647, 96);
             this.panelControl2.TabIndex = 11;
             // 
+            // m_lbl_tag
+            // 
+            this.m_lbl_tag.Appearance.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.m_lbl_tag.Appearance.ForeColor = System.Drawing.Color.OldLace;
+            this.m_lbl_tag.Dock = System.Windows.Forms.DockStyle.Top;
+            this.m_lbl_tag.Location = new System.Drawing.Point(5, 67);
+            this.m_lbl_tag.Name = "m_lbl_tag";
+            this.m_lbl_tag.Size = new System.Drawing.Size(0, 20);
+            this.m_lbl_tag.TabIndex = 16;
+            // 
+            // m_lbl_hang_hoa_master
+            // 
+            this.m_lbl_hang_hoa_master.Appearance.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.m_lbl_hang_hoa_master.Appearance.ForeColor = System.Drawing.Color.OldLace;
+            this.m_lbl_hang_hoa_master.Dock = System.Windows.Forms.DockStyle.Top;
+            this.m_lbl_hang_hoa_master.Location = new System.Drawing.Point(5, 47);
+            this.m_lbl_hang_hoa_master.Name = "m_lbl_hang_hoa_master";
+            this.m_lbl_hang_hoa_master.Size = new System.Drawing.Size(0, 20);
+            this.m_lbl_hang_hoa_master.TabIndex = 15;
+            // 
+            // m_lbl_ten_san_pham
+            // 
+            this.m_lbl_ten_san_pham.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.m_lbl_ten_san_pham.Appearance.Font = new System.Drawing.Font("Sitka Text", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.m_lbl_ten_san_pham.Appearance.ForeColor = System.Drawing.Color.White;
+            this.m_lbl_ten_san_pham.Dock = System.Windows.Forms.DockStyle.Top;
+            this.m_lbl_ten_san_pham.Location = new System.Drawing.Point(5, 5);
+            this.m_lbl_ten_san_pham.Name = "m_lbl_ten_san_pham";
+            this.m_lbl_ten_san_pham.Size = new System.Drawing.Size(0, 42);
+            this.m_lbl_ten_san_pham.TabIndex = 11;
+            // 
             // panelControl1
             // 
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
@@ -78,40 +110,6 @@
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(934, 96);
             this.panelControl1.TabIndex = 8;
-            // 
-            // m_lbl_ten_san_pham
-            // 
-            this.m_lbl_ten_san_pham.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.m_lbl_ten_san_pham.Appearance.Font = new System.Drawing.Font("Sitka Text", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.m_lbl_ten_san_pham.Appearance.ForeColor = System.Drawing.Color.White;
-            this.m_lbl_ten_san_pham.Dock = System.Windows.Forms.DockStyle.Top;
-            this.m_lbl_ten_san_pham.Location = new System.Drawing.Point(5, 5);
-            this.m_lbl_ten_san_pham.Name = "m_lbl_ten_san_pham";
-            this.m_lbl_ten_san_pham.Size = new System.Drawing.Size(348, 42);
-            this.m_lbl_ten_san_pham.TabIndex = 11;
-            this.m_lbl_ten_san_pham.Text = "ÁO CHOÀNG NỮ CHANEL";
-            // 
-            // m_lbl_hang_hoa_master
-            // 
-            this.m_lbl_hang_hoa_master.Appearance.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.m_lbl_hang_hoa_master.Appearance.ForeColor = System.Drawing.Color.OldLace;
-            this.m_lbl_hang_hoa_master.Dock = System.Windows.Forms.DockStyle.Top;
-            this.m_lbl_hang_hoa_master.Location = new System.Drawing.Point(5, 47);
-            this.m_lbl_hang_hoa_master.Name = "m_lbl_hang_hoa_master";
-            this.m_lbl_hang_hoa_master.Size = new System.Drawing.Size(360, 20);
-            this.m_lbl_hang_hoa_master.TabIndex = 15;
-            this.m_lbl_hang_hoa_master.Text = "Mã sản phẩm:  MH0006 - Xuất sứ: Đài Loan - Vải lụa";
-            // 
-            // m_lbl_tag
-            // 
-            this.m_lbl_tag.Appearance.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.m_lbl_tag.Appearance.ForeColor = System.Drawing.Color.OldLace;
-            this.m_lbl_tag.Dock = System.Windows.Forms.DockStyle.Top;
-            this.m_lbl_tag.Location = new System.Drawing.Point(5, 67);
-            this.m_lbl_tag.Name = "m_lbl_tag";
-            this.m_lbl_tag.Size = new System.Drawing.Size(360, 20);
-            this.m_lbl_tag.TabIndex = 16;
-            this.m_lbl_tag.Text = "Mã sản phẩm:  MH0006 - Xuất sứ: Đài Loan - Vải lụa";
             // 
             // m_btn_xoa_san_pham
             // 

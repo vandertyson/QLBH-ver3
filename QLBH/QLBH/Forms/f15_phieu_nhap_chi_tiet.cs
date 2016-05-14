@@ -16,11 +16,11 @@ namespace QLBH.Forms
 {
     public partial class f15_phieu_nhap_chi_tiet : Form
     {
-
         #region Public Interfaces
         public f15_phieu_nhap_chi_tiet()
         {
             InitializeComponent();
+            this.CenterToScreen();
             set_define_event();
         }
 
@@ -290,7 +290,7 @@ namespace QLBH.Forms
             {
                 m_phieu_nhap = new PhieuNhap();
                 m_phieu_nhap.ma_phieu = m_lbl_ma_phieu.Text;
-                m_phieu_nhap.ngay_nhap = m_dat_ngay_lap.DateTime;
+                m_phieu_nhap.ngay_nhap = m_dat_ngay_lap.DateTime.ToString();
                 m_phieu_nhap.ten_tai_khoan = SystemInfo.ten_tai_khoan;
                 m_phieu_nhap.id_cua_hang = SystemInfo.id_cua_hang;
                 m_phieu_nhap.list_hang_hoa = new List<HangHoa>();

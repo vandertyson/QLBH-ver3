@@ -7,6 +7,9 @@ using RestSharp;
 using System.Windows;
 using Newtonsoft.Json;
 using System.Windows.Forms;
+using System.Web.Services;
+using System.Web.Script.Serialization;
+using System.Web.Script.Services;
 namespace LibraryApi
 {
     public class MyNetwork
@@ -51,7 +54,9 @@ namespace LibraryApi
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        var jsonObject = JsonConvert.DeserializeObject<TraVe<T>>(response.Content);
+                        //var jsonObject = JsonConvert.DeserializeObject<TraVe<T>>(response.Content);
+                        JavaScriptSerializer js = new JavaScriptSerializer();
+                        var jsonObject = js.Deserialize<TraVe<T>>(response.Content);
                         if (f!=null)
                         {
                             f.Invoke(new Action(() =>
