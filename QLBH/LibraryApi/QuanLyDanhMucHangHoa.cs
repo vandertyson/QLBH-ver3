@@ -17,8 +17,16 @@ namespace LibraryApi
         public const string URL_TIM_KIEM_HANG_HOA = MyNetwork.URL_SERVICE + @"TimKiemHangHoa";
         public const string URL_LAY_DANH_SACH_NHA_CUNG_CAP = MyNetwork.URL_SERVICE + @"LayDanhSachNhaCungCap";
         private static string URL_THEM_HANG_HOA_EXCEL = MyNetwork.URL_SERVICE + @"ThemHangHoa";
+        private static string URL_CHI_TIET_HANG_HOA = MyNetwork.URL_SERVICE + @"ChiTietHangHoa";
+        public const string URL_LAY_DANH_SACH_HANG_HOA_VA_MA_TRA_CUU = MyNetwork.URL_SERVICE + @"LayHangHoaVaMaTraCuu";
+
         #endregion
         #region Struct
+        public class HangHoaVaMa
+        {
+            public string ten_hang_hoa { get; set; }
+            public string ma_tra_cuu { get; set; }
+        }
         public class LoaiHang
         {
             public decimal id { get; set; }
@@ -190,5 +198,18 @@ namespace LibraryApi
             param["list_hang_hoa"] = JsonConvert.SerializeObject(list_hang_hoa);
             MyNetwork.requestDataWithParam(param, URL_THEM_HANG_HOA_EXCEL, f, MyDelegate);
         }
+        public static void ChiTietHangHoa(decimal id_hang_hoa, Form f, MyNetwork.CompleteHandle<MyNetwork.TraVe<LibraryApi.HangHoa>> MyDelegate)
+        {
+            Dictionary<string, object> param = new Dictionary<string, object>();
+            param["id_hang_hoa"] = id_hang_hoa;
+            MyNetwork.requestDataWithParam(param, URL_CHI_TIET_HANG_HOA, f, MyDelegate);
+        }
+
+        public static void LayDanhSachHangVaMaTraCuu(Form f, MyNetwork.CompleteHandle<MyNetwork.TraVe<List<HangHoaVaMa>>> MyDelegate)
+        {
+            Dictionary<string, object> param = new Dictionary<string, object>();
+            MyNetwork.requestDataWithParam(param, URL_LAY_DANH_SACH_HANG_HOA_VA_MA_TRA_CUU, f, MyDelegate);
+        }
+
     }
 }

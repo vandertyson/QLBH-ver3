@@ -30,19 +30,19 @@ namespace QLBH.Forms
 
         #region Member
         private string m_file_name;
-        public List<PhieuNhapExcel> data_from_excel { get; private set; }
+        public List<NhieuPhieuNhapExcel> data_from_excel { get; private set; }
         #endregion
 
         #region Private Methods
        
-        private List<PhieuNhapExcel> to_list()
+        private List<NhieuPhieuNhapExcel> to_list()
         {
-            List<PhieuNhapExcel> result = new List<PhieuNhapExcel>();
+            List<NhieuPhieuNhapExcel> result = new List<NhieuPhieuNhapExcel>();
             var data = m_grc_phieu_nhap.DataSource as DataTable;
             foreach (var row in data.Rows)
             {
                 DataRow dt_row = row as DataRow;
-                PhieuNhapExcel phieu = new PhieuNhapExcel();
+                NhieuPhieuNhapExcel phieu = new NhieuPhieuNhapExcel();
                 phieu.ngay_nhap = dt_row["ngay_nhap"].ToString();
                 phieu.ma_tra_cuu = dt_row["ma_tra_cuu"].ToString();
                 phieu.S = dt_row["S"].ToString();
@@ -78,7 +78,7 @@ namespace QLBH.Forms
         private void load_data_to_grid()
         {
             List<string> prop_name = new List<string> { "ngay_nhap", "ma_tra_cuu", "S", "M", "L", "XL", "XXL","gia_nhap" };
-            m_grc_phieu_nhap.DataSource = CommonFunction.convert_list_to_data_table<PhieuNhapExcel>(prop_name, data_from_excel);
+            m_grc_phieu_nhap.DataSource = CommonFunction.convert_list_to_data_table<NhieuPhieuNhapExcel>(prop_name, data_from_excel);
             m_grv_phieu_nhap.BestFitColumns();
         }
 
@@ -98,7 +98,7 @@ namespace QLBH.Forms
             }
             m_file_name = opf.FileName;
             var excel = new ExcelQueryFactory(m_file_name);
-            data_from_excel = (from a in excel.Worksheet<PhieuNhapExcel>("PHIEU_NHAP")
+            data_from_excel = (from a in excel.Worksheet<NhieuPhieuNhapExcel>("PHIEU_NHAP")
                                select a).Where(s => !String.IsNullOrEmpty(s.ngay_nhap)).ToList();
             //bat buoc phai co ma tra cuu va gia nhap. thieu phat end luon
             load_data_to_grid();

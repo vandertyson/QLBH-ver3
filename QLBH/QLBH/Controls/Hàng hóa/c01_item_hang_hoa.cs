@@ -42,7 +42,14 @@ namespace QLBH.Controls.Hàng_hóa
         }
         public void setIcon(string link)
         {
-            picIcon.Load(link);
+            if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+            {
+                picIcon.LoadAsync(link);
+            }
+            else
+            {
+                picIcon.LoadAsync(@"C:\Users\Son Pham\Desktop\Quan ly ban hang\QLBH-ver3\QLBH\QLBH\Template\ao-so-mi.jpg");
+            }
         }
         public void setMaTraCuu(string ma)
         {

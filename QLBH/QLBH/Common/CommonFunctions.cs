@@ -22,7 +22,11 @@ namespace QLBH.Common
         {
             if (String.IsNullOrEmpty(link))
             {
-                return Image.FromFile(@"");
+                return Image.FromFile(@"C:\Users\Son Pham\Desktop\Quan ly ban hang\QLBH-ver3\QLBH\QLBH\Template\ao-so-mi.jpg");
+            }
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+            {
+                return Image.FromFile(@"C:\Users\Son Pham\Desktop\Quan ly ban hang\QLBH-ver3\QLBH\QLBH\Template\ao-so-mi.jpg");
             }
             using (WebClient webClient = new WebClient())
             {
@@ -35,56 +39,6 @@ namespace QLBH.Common
             }
         }
 
-        //public static DataTable list_to_data_table<T>(List<T> ip_list)
-        //{
-        //    DataTable result = new DataTable();
-        //    var type = typeof(T);
-        //    var coltype = type.GetProperties();
-        //    foreach (var item in coltype)
-        //    {
-        //        DataColumn col = new DataColumn();
-        //        col.ColumnName = item.Name;
-        //        col.DataType = item.PropertyType;
-        //        result.Columns.Add(col);
-        //    }
-        //    foreach (var data in ip_list)
-        //    {
-        //        var values = new object[coltype.Length];
-        //        for (int i = 0; i < coltype.Length; i++)
-        //        {
-        //            values[i] = coltype[i].GetValue(data, null);
-        //        }
-        //        result.Rows.Add(values);
-        //    }
-        //    return result;
-        //}
-
-        //public static DataTable convert_list_to_data_table<T>(List<string> PropertyNames, List<T> input_list)
-        //{
-        //    DataTable result = new DataTable();
-        //    foreach (var item in typeof(T).GetProperties())
-        //    {
-        //        if (PropertyNames.Contains(item.Name))
-        //        {
-        //            DataColumn col = new DataColumn();
-        //            col.ColumnName = item.Name;
-        //            col.DataType = item.PropertyType;
-        //            result.Columns.Add(col);
-        //        }
-        //    }
-        //    foreach (var obj in input_list)
-        //    {
-        //        List<object> data_row_value = new List<object>();
-        //        var prop = obj.GetType().GetProperties();
-        //        foreach (var prop_name in PropertyNames)
-        //        {
-        //            var value = obj.GetType().GetProperty(prop_name).GetValue(obj, null);
-        //            data_row_value.Add(value);
-        //        }
-        //        result.Rows.Add(data_row_value.ToArray());
-        //    }
-        //    return result;
-        //}
     
         internal static string download_docx_file_from_link(string mo_ta, string file_name)
         {
@@ -228,41 +182,7 @@ namespace QLBH.Common
             v_Result = XtraMessageBox.Show(message, title, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Error);
             return v_Result;
         }
-
-        public static List<T> DataTableToList<T>(DataTable table) where T : class, new()
-        {
-            try
-            {
-                List<T> list = new List<T>();
-
-                foreach (var row in table.AsEnumerable())
-                {
-                    T obj = new T();
-
-                    foreach (var prop in obj.GetType().GetProperties())
-                    {
-                        try
-                        {
-                            PropertyInfo propertyInfo = obj.GetType().GetProperty(prop.Name);
-                            propertyInfo.SetValue(obj, Convert.ChangeType(row[prop.Name], propertyInfo.PropertyType), null);
-                        }
-                        catch
-                        {
-                            continue;
-                        }
-                    }
-
-                    list.Add(obj);
-                }
-
-                return list;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
+       
         public static DataTable create_table_form_struct(Type type)
         {
 

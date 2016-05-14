@@ -140,6 +140,12 @@ namespace WebService3
             public string ten_nha_cung_cap { get; set; }
             public string dia_chi { get; set; }
         }
+        public class HangHoaVaMa
+        {
+            public string ten_hang_hoa { get; set; }
+            public string ma_tra_cuu { get; set; }
+        }
+
         #endregion
 
         #region Functions
@@ -161,6 +167,7 @@ namespace WebService3
                 return listDs;
             }
         }
+
         public static List<HangHoaMaster> TimKiemHangHoa(string keyword, int length, int page)
         {
             keyword = keyword.ToLower();
@@ -211,7 +218,9 @@ namespace WebService3
                 return ketQua;
             }
         }
+
         delegate bool bangNhau<T>(T t1, T t2);
+
         static bool kiemTraNamTrong<T>(List<T> list1, List<T> list2, bangNhau<T> bangNhau)
         {
             for (int i = 0; i < list1.Count; i++)
@@ -232,6 +241,7 @@ namespace WebService3
             }
             return true;
         }
+
         static HangHoaMaster toHangHoaMaster(DM_HANG_HOA hh)
         {
             using (var context = new TKHTQuanLyBanHangEntities())
@@ -360,6 +370,24 @@ namespace WebService3
                 }
             }
         }
+
+        public static List<HangHoaVaMa> lay_danh_sach_hang_va_ma_tra_cuu()
+        {
+            List<HangHoaVaMa> result = new List<HangHoaVaMa>();
+            using (var context = new TKHTQuanLyBanHangEntities())
+            {
+                var hanghoa = context.DM_HANG_HOA.Where(s => s.DA_XOA == "N").ToList();
+                foreach (var item in hanghoa)
+                {
+                    var temp = new HangHoaVaMa();
+                    temp.ma_tra_cuu = item.MA_TRA_CUU;
+                    temp.ten_hang_hoa = item.TEN_HANG_HOA;
+                    result.Add(temp);
+                }
+                return result;
+            }
+        }
+
         #endregion
     }
 }

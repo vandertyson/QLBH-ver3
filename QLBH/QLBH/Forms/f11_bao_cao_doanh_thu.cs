@@ -21,13 +21,26 @@ namespace QLBH.Forms
             InitializeComponent();
             this.CenterToScreen();
             set_defined_event();
-            
+
         }
         private void set_defined_event()
         {
+            this.Load += F11_bao_cao_doanh_thu_Load;
             m_btn_in_bao_cao.Click += M_btn_in_bao_cao_Click;
             m_btn_thoat.Click += M_btn_thoat_Click;
             m_btn_xem_bao_cao.Click += M_btn_xem_bao_cao_Click;
+        }
+
+        private void F11_bao_cao_doanh_thu_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+            catch (Exception)
+            {
+                XtraMessageBox.Show(CommonMessage.MESSAGE_EXCEPTION);
+            }
         }
 
         private void M_btn_xem_bao_cao_Click(object sender, EventArgs e)
@@ -38,7 +51,7 @@ namespace QLBH.Forms
                 {
                     if (!data.Success)
                     {
-                        XtraMessageBox.Show("Xảy ra lỗi vui lòng kiểm tra lại đầu vào");
+                        XtraMessageBox.Show(CommonMessage.USER_INPUT_ERROR);
                     }
                     else
                     {
@@ -48,25 +61,33 @@ namespace QLBH.Forms
             }
             catch (Exception)
             {
-
-                throw;
+                XtraMessageBox.Show(CommonMessage.MESSAGE_EXCEPTION);
             }
-            
+
         }
 
         private void data_to_chart(List<BaoCaoDoanhThu.BaoCaoDoanhThuDoanhSo> data)
         {
             var table = CommonFunction.list_to_data_table<BaoCaoDoanhThu.BaoCaoDoanhThuDoanhSo>(data);
-            m_chart_bao_cao.DataSource = table;
             //doanh so
+            m_chart_bao_cao.Series[0].Points.Clear();
+            m_chart_bao_cao_1.Series[0].Points.Clear();
+            //
+            XYDiagram diagram = m_chart_bao_cao.Diagram as XYDiagram;
+            diagram.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Month;
+            diagram.AxisX.Label.TextPattern = "{V:MM/yyyy}";
+
+            XYDiagram diagram1 = m_chart_bao_cao_1.Diagram as XYDiagram;
+            diagram.AxisX.DateTimeScaleOptions.MeasureUnit = DateTimeMeasureUnit.Month;
+            diagram.AxisX.Label.TextPattern = "{V:MM/yyyy}";
+            //
             foreach (var item in data)
             {
-                m_chart_bao_cao.Series[0].Points.Add(new SeriesPoint(item.thang, item.tong_doanh_so));
-                          //doanh thu
-                m_chart_bao_cao_1.Series[0].Points.Add(new SeriesPoint(item.thang, item.tong_doanh_thu));
-               
+                //doanh so
+                m_chart_bao_cao.Series[0].Points.Add(new SeriesPoint((item.thang + "-" + item.nam).ToString(), item.tong_doanh_so));
+                //doanh thu
+                m_chart_bao_cao_1.Series[0].Points.Add(new SeriesPoint((item.thang + "-" + item.nam).ToString(), item.tong_doanh_thu));
             }
-           
         }
 
 
@@ -88,18 +109,18 @@ namespace QLBH.Forms
             try
             {
                 SaveFileDialog t = new SaveFileDialog();
-                if (t == null)
+                t.Filter = "PDF files (*.pdf)|*.pdf|All files (*.*)|*.*";
+                t.RestoreDirectory = true;
+                if (t.ShowDialog() == DialogResult.OK)
                 {
-                    return;
+                    m_chart_bao_cao.ExportToPdf(t.FileName);
+                    XtraMessageBox.Show(CommonMessage.EXPORT_SUCCESS);
                 }
-                m_chart_bao_cao.ExportToPdf(t.FileName);
             }
             catch (Exception)
             {
-
-                throw;
+                XtraMessageBox.Show(CommonMessage.MESSAGE_EXCEPTION);
             }
-            
         }
 
         private void m_chart_bao_cao_Click(object sender, EventArgs e)

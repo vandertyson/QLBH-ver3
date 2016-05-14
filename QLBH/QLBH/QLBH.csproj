@@ -102,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\CommonFunctions.cs" />
+    <Compile Include="Common\CommonMessage.cs" />
     <Compile Include="Controls\Common Controls\c0_cua_hang_simple.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -288,6 +289,12 @@
     <Compile Include="Controls\Khách hàng\c04_quan_ly_khach_hang.Designer.cs">
       <DependentUpon>c04_quan_ly_khach_hang.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Kinh doanh\c05_bao_cao_kinh_doanh.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Kinh doanh\c05_bao_cao_kinh_doanh.Designer.cs">
+      <DependentUpon>c05_bao_cao_kinh_doanh.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\f02_them_hoa_don_v2.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -359,6 +366,24 @@
     </Compile>
     <Compile Include="Forms\f11_bao_cao_doanh_thu.Designer.cs">
       <DependentUpon>f11_bao_cao_doanh_thu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\f12_gia_ban_excel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\f12_gia_ban_excel.Designer.cs">
+      <DependentUpon>f12_gia_ban_excel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\f14_danh_sach_phieu_nhap_xuat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\f14_danh_sach_phieu_nhap_xuat.Designer.cs">
+      <DependentUpon>f14_danh_sach_phieu_nhap_xuat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\f15_phieu_nhap_chi_tiet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\f15_phieu_nhap_chi_tiet.Designer.cs">
+      <DependentUpon>f15_phieu_nhap_chi_tiet.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -457,6 +482,9 @@
     <EmbeddedResource Include="Controls\Khách hàng\c04_quan_ly_khach_hang.resx">
       <DependentUpon>c04_quan_ly_khach_hang.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Kinh doanh\c05_bao_cao_kinh_doanh.resx">
+      <DependentUpon>c05_bao_cao_kinh_doanh.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\f02_them_hoa_don_v2.resx">
       <DependentUpon>f02_them_hoa_don_v2.cs</DependentUpon>
     </EmbeddedResource>
@@ -486,6 +514,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\f10_them_hang_hoa_excal.resx">
       <DependentUpon>f10_them_hang_hoa_excal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\f11_bao_cao_doanh_thu.resx">
+      <DependentUpon>f11_bao_cao_doanh_thu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\f12_gia_ban_excel.resx">
+      <DependentUpon>f12_gia_ban_excel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\f14_danh_sach_phieu_nhap_xuat.resx">
+      <DependentUpon>f14_danh_sach_phieu_nhap_xuat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\f15_phieu_nhap_chi_tiet.resx">
+      <DependentUpon>f15_phieu_nhap_chi_tiet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Test.resx">
       <DependentUpon>Test.cs</DependentUpon>
@@ -629,6 +669,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Land Sales-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\New-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\New-48 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bar Chart-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ao_so_mi.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Price Tag USD-52.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

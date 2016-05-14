@@ -77,7 +77,7 @@
             // picIcon
             // 
             this.picIcon.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picIcon.Image = global::QLBH.Properties.Resources.ao_so_mi;
+            //this.picIcon.Image = global::QLBH.Properties.Resources.ao_so_mi;
             this.picIcon.Location = new System.Drawing.Point(0, 0);
             this.picIcon.Name = "picIcon";
             this.picIcon.Size = new System.Drawing.Size(177, 157);

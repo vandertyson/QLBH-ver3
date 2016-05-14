@@ -17,6 +17,7 @@ using DevExpress.XtraTab.ViewInfo;
 using DevExpress.XtraEditors;
 using QLBH.Common;
 using QLBH.Controls.Cửa_hàng;
+using QLBH.Controls.Kinh_doanh;
 
 
 namespace QLBH.Forms
@@ -48,7 +49,7 @@ namespace QLBH.Forms
 
         private void set_init_form_load()
         {
-            v_menu_detail_is_opened = false;
+            v_menu_detail_is_opened = true;
             set_menu_detail_status();
             set_define_event();
         }
@@ -132,11 +133,17 @@ namespace QLBH.Forms
         {
             try
             {
-
+                XtraTabPage vtp = new XtraTabPage();
+                vtp.Name = typeof(c05_bao_cao_kinh_doanh).ToString();
+                m_tabcontrol_main_view.TabPages.Add(vtp);
+                vtp.Text = "Báo cáo kinh doanh";
+                m_opening_control.Add(vtp);
+                c05_bao_cao_kinh_doanh v_ql = new c05_bao_cao_kinh_doanh();
+                vtp.Controls.Add(v_ql);
+                v_ql.Dock = DockStyle.Fill;
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -230,15 +237,8 @@ namespace QLBH.Forms
 
         private void m_btn_open_menu_Click(object sender, EventArgs e)
         {
-            if (v_menu_detail_is_opened)
-            {
-                m_pnl_menu_detail.Visible = true;
-            }
-            else
-            {
-                m_pnl_menu_detail.Visible = false;
-            }
             v_menu_detail_is_opened = !v_menu_detail_is_opened;
+            set_menu_detail_status();
         }
 
         private void m_tabcontrol_main_view_CloseButtonClick(object sender, EventArgs e)

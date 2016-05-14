@@ -30,7 +30,7 @@ namespace QLBH.Forms
         #region Member
         private string m_file_name;
         public List<ThemHangHoaExcel> data_from_excel { get; private set; }
-        private List<LibraryApi.QuanLyHoaDon.HangHoa> m_list_hang_hoa { get; set; }
+        private List<HangHoaVaMa> m_list_hang_hoa { get; set; }
         #endregion
 
         #region Private Methods
@@ -71,9 +71,9 @@ namespace QLBH.Forms
             }
         }
 
-
         private void load_data_to_grid()
         {
+            data_from_excel.RemoveAll(s => s.Ten == null);
             m_grc_phieu_nhap.DataSource = CommonFunction.list_to_data_table<ThemHangHoaExcel>(data_from_excel);
             m_grv_phieu_nhap.BestFitColumns();
         }
@@ -95,7 +95,7 @@ namespace QLBH.Forms
             m_file_name = opf.FileName;
             var excel = new ExcelQueryFactory(m_file_name);
             data_from_excel = (from a in excel.Worksheet<ThemHangHoaExcel>("HANG_HOA")
-                               select a).Where(s => !String.IsNullOrEmpty(s.Ten)).ToList();
+                               select a).ToList();
             //bat buoc phai co ten. thieu phat end luon
             load_data_to_grid();
         }
@@ -126,12 +126,20 @@ namespace QLBH.Forms
         {
             foreach (var item in m_list_hang_hoa)
             {
-                if (item.ma_hang_hoa == ma)
+                if (item.ma_tra_cuu == ma)
                 {
                     return true;
                 }
             }
             return false;
+        }
+
+        private void get_data_ma_hang_hoa()
+        {
+            LibraryApi.QuanLyDanhMucHangHoa.LayDanhSachHangVaMaTraCuu(this, data =>
+            {
+                m_list_hang_hoa = data.Data;
+            });
         }
 
         #endregion
@@ -170,14 +178,6 @@ namespace QLBH.Forms
             {
                 CommonFunction.exception_handle(ex);
             }
-        }
-
-        private void get_data_ma_hang_hoa()
-        {
-            LibraryApi.QuanLyHoaDon.LayDanhSachHangHoa(SystemInfo.id_cua_hang, DateTime.Now, this, data =>
-            {
-                m_list_hang_hoa = data.Data;
-            });
         }
 
         private void M_btn_save_Click(object sender, EventArgs e)

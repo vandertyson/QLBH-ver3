@@ -25,6 +25,24 @@ namespace QLBH.Controls
             set_define_event();
         }
 
+        public c01_chi_tiet_khuyen_mai(BaoCaoKhuyenMai v_bc, LibraryApi.HangHoa hang_hoa)
+        {
+            InitializeComponent();
+            set_define_event();
+            this.v_bao_cao_km = v_bc;
+            m_hang_hoa = hang_hoa;
+            if (v_bao_cao_km.dot_khuyen_mai_hien_tai == null)
+            {
+                var p = v_bao_cao_km.lich_su.OrderByDescending(s => s.thoi_gian_ket_thuc).First();
+                m_current_lich_su = p;
+            }
+            else
+            {
+                m_current_lich_su = v_bao_cao_km.dot_khuyen_mai_hien_tai;
+            }
+            data_to_hien_tai();
+            data_to_lich_su();
+        }
         public c01_chi_tiet_khuyen_mai(LibraryApi.HangHoa hang)
         {
             InitializeComponent();
@@ -36,7 +54,6 @@ namespace QLBH.Controls
                 data_to_hien_tai();
                 data_to_lich_su();
             });
-
         }
 
         private void set_define_event()
@@ -50,7 +67,8 @@ namespace QLBH.Controls
             {
                 if (m_sle_chon_dot_km.EditValue == null)
                 {
-                    m_current_lich_su = v_bao_cao_km.dot_khuyen_mai_hien_tai;
+                    var p = v_bao_cao_km.lich_su.OrderByDescending(s => s.thoi_gian_ket_thuc).First();
+                    m_current_lich_su = p;
                     data_2_chart();
                     return;
                 }
@@ -85,24 +103,26 @@ namespace QLBH.Controls
 
         private void data_2_chart()
         {
+            
             //
             m_lbl_so_luot_mua.Text = m_current_lich_su.luot_mua.ToString();
             m_lbl_so_luot_xem.Text = m_current_lich_su.luot_xem.ToString();
-            m_lbl_so_tien_ban_duoc.Text = m_current_lich_su.tong_doanh_thu.ToString() + " VND";
+            m_lbl_so_tien_ban_duoc.Text = String.Format("{0:#,##0 VND}", m_current_lich_su.so_tien_ban_duoc);
             //
             //doanh so
-
+            m_chart_khuyen_mai.Series[0].Points.Clear();
             m_chart_khuyen_mai.Series[0].Points.Add(new SeriesPoint(m_hang_hoa.ten, m_current_lich_su.so_luong_ban_duoc));
             m_chart_khuyen_mai.Series[0].Points.Add(new SeriesPoint("Phần còn lại", m_current_lich_su.tong_doanh_so - m_current_lich_su.so_luong_ban_duoc));
 
             //doanh thu
+            m_chart_khuyen_mai.Series[1].Points.Clear();
             m_chart_khuyen_mai.Series[1].Points.Add(new SeriesPoint(m_hang_hoa.ten, m_current_lich_su.so_tien_ban_duoc));
             m_chart_khuyen_mai.Series[1].Points.Add(new SeriesPoint("Phần còn lại", m_current_lich_su.tong_doanh_thu - m_current_lich_su.so_tien_ban_duoc));
         }
 
         private void data_2_sle_dot_km()
         {
-            if (v_bao_cao_km.dot_khuyen_mai_hien_tai.id > 0)
+            if (v_bao_cao_km.dot_khuyen_mai_hien_tai != null)
             {
                 v_bao_cao_km.lich_su.Add(v_bao_cao_km.dot_khuyen_mai_hien_tai);
             }
@@ -115,6 +135,14 @@ namespace QLBH.Controls
 
         private void data_to_hien_tai()
         {
+            if (v_bao_cao_km.dot_khuyen_mai_hien_tai == null)
+            {
+                m_lbl_muc_khuyen_mai.Text = "0%";
+                m_lbl_ten_dot_km.Text = "Không có đợt khuyến mãi nào";
+                m_lbl_thoi_gian_ap_dung.Text = "Không có đợt khuyến mãi nào";
+
+                return;
+            }
             m_lbl_muc_khuyen_mai.Text = v_bao_cao_km.dot_khuyen_mai_hien_tai.muc_khuyen_mai.ToString();
             m_lbl_ten_dot_km.Text = v_bao_cao_km.dot_khuyen_mai_hien_tai.mo_ta;
             m_lbl_thoi_gian_ap_dung.Text = v_bao_cao_km.dot_khuyen_mai_hien_tai.thoi_gian_bat_dau.Date + " - " + v_bao_cao_km.dot_khuyen_mai_hien_tai.thoi_gian_ket_thuc;

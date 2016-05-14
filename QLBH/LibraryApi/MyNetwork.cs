@@ -46,9 +46,9 @@ namespace LibraryApi
                 {
                     request.AddParameter(pair.Key, pair.Value);
                 }
+                
                 client.ExecuteAsync(request, response =>
                 {
-
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         var jsonObject = JsonConvert.DeserializeObject<TraVe<T>>(response.Content);
@@ -66,13 +66,16 @@ namespace LibraryApi
                     }
                     else
                     {
-                        throw new Exception(response.ErrorMessage);
+                        MessageBox.Show("Đã có lỗi xảy ra do một số chức năng đang hoàn thiện");
+                        MessageBox.Show(response.ErrorException.InnerException.Message);
+                        //throw new Exception(response.ErrorMessage);
                     }
                 });
             }
             catch (Exception e)
             {
-                throw e;
+                MessageBox.Show("Đã có lỗi xảy ra do một số chức năng đang hoàn thiện");
+                MessageBox.Show(e.InnerException.Message);
             }
         }
 
@@ -87,7 +90,6 @@ namespace LibraryApi
             requestDataWithParam(param, URL_LAY_DANH_SACH_HANG_THEO_LOAI_HANG, f, MyDelegate);
         }
         #region Chi tiết hàng hóa
-       
        
         #endregion
         #endregion

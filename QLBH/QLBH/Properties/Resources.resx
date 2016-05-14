@@ -172,14 +172,14 @@
   <data name="28" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\28.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Delete-48" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Delete-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Box Filled-50" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Box Filled-50.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Bill Filled-50 (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Bill Filled-50 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="New-48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\New-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Menu-50" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Menu-50.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -250,6 +250,9 @@
   <data name="Appointment Reminders Filled-50 (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Appointment Reminders Filled-50 (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Bar Chart-48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Bar Chart-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Sale-48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sale-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -271,6 +274,9 @@
   <data name="Comments-48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Control icons\Comments-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="New-48 (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\New-48 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Document Filled-50 (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Document Filled-50 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -279,6 +285,9 @@
   </data>
   <data name="Cloakroom Filled-50" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Cloakroom Filled-50.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Shopping Cart-48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Shopping Cart-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Exit-521" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Exit-521.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -301,8 +310,11 @@
   <data name="Shop-48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Shop-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Shopping Cart-48" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Shopping Cart-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Land Sales-50" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Land Sales-50.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Delete-48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Delete-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Combo Chart-48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Combo Chart-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -322,7 +334,7 @@
   <data name="Manager-52" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Manager-52.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Land Sales-50" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Land Sales-50.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Price Tag USD-52" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Price Tag USD-52.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

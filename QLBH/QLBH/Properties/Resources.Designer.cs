@@ -113,16 +113,6 @@ namespace QLBH.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ao_so_mi {
-            get {
-                object obj = ResourceManager.GetObject("ao-so-mi", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Appointment_Reminders_Filled_50 {
             get {
                 object obj = ResourceManager.GetObject("Appointment Reminders Filled-50", resourceCulture);
@@ -166,6 +156,16 @@ namespace QLBH.Properties {
         internal static System.Drawing.Bitmap Appointment_Reminders_Filled_50__4_ {
             get {
                 object obj = ResourceManager.GetObject("Appointment Reminders Filled-50 (4)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Bar_Chart_48 {
+            get {
+                object obj = ResourceManager.GetObject("Bar Chart-48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -543,9 +543,39 @@ namespace QLBH.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap New_48 {
+            get {
+                object obj = ResourceManager.GetObject("New-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap New_48__1_ {
+            get {
+                object obj = ResourceManager.GetObject("New-48 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Price_Tag_Filled_50 {
             get {
                 object obj = ResourceManager.GetObject("Price Tag Filled-50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Price_Tag_USD_52 {
+            get {
+                object obj = ResourceManager.GetObject("Price Tag USD-52", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

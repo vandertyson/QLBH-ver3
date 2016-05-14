@@ -256,6 +256,22 @@ namespace WebService3
             var result = new KetQuaTraVe(true, "Thành công", data);
             TraKetQua(result);
         }
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void LayHangHoaVaMaTraCuu()
+        {
+            try
+            {
+                var data = QuanLyDanhMucHangHoa.lay_danh_sach_hang_va_ma_tra_cuu();
+                var result = new KetQuaTraVe(true, "Thành công", data);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, e.Message, null);
+                TraKetQua(result);
+            }
+        }
         #endregion
 
         #region Quản lý tag hàng hóa
@@ -457,6 +473,96 @@ namespace WebService3
                 TraKetQua(result);
             }
         }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void XoaPhieuNhap(string ma_phieu)
+        {
+            try
+            {
+                QuanLyPhieuNhapXuat.xoa_phieu_nhap_xuat(ma_phieu);
+                var result = new KetQuaTraVe(true, "Thành công", null);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, e.Message, null);
+                TraKetQua(result);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void SuaPhieuNhap(string phieu)
+        {
+            try
+            {
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                var listPhieu = js.Deserialize<QuanLyPhieuNhapXuat.PhieuNhap>(phieu);
+                QuanLyPhieuNhapXuat.sua_phieu_nhap_xuat(listPhieu);
+                var result = new KetQuaTraVe(true, "Thành công", null);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, e.Message, null);
+                TraKetQua(result);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void ThemMotPhieuNhap(string phieu)
+        {
+            try
+            {
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                var listPhieu = js.Deserialize<QuanLyPhieuNhapXuat.PhieuNhap>(phieu);
+                QuanLyPhieuNhapXuat.ThemMotPhieuNhap(listPhieu);
+                var result = new KetQuaTraVe(true, "Thành công", null);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, e.Message, null);
+                TraKetQua(result);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void LayDanhSachPhieuNhap(DateTime nbd, DateTime nkt)
+        {
+            try
+            {
+                var data = QuanLyPhieuNhapXuat.lay_danh_sach_phieu_nhap(nbd,nkt);
+                var result = new KetQuaTraVe(true, "Thành công", data);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, e.Message, null);
+                TraKetQua(result);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void LayMaPhieuMoi()
+        {
+            try
+            {
+                var data = QuanLyPhieuNhapXuat.lay_ma_phieu_nhap_moi();
+                var result = new KetQuaTraVe(true, "Thành công", data);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, e.Message, null);
+                TraKetQua(result);
+            }
+        }
+
         #endregion
 
         #region Quản lý hóa đơn
@@ -536,6 +642,44 @@ namespace WebService3
             {
                 var data = QuanLyHoaDon.get_ma_hoa_don();
                 var result = new KetQuaTraVe(true, "Thành công", data);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, e.Message, null);
+                TraKetQua(result);
+            }
+        }
+        #endregion
+
+        #region Quản lý giá hàng hóa
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void LayBangGia(DateTime ip_ngay_hien_tai)
+        {
+            try
+            {
+                var data = QuanLyGiaSanPham.get_bang_gia(ip_ngay_hien_tai);
+                var result = new KetQuaTraVe(true, "Thành công", data);
+                TraKetQua(result);
+            }
+            catch (Exception e)
+            {
+                var result = new KetQuaTraVe(false, e.Message, null);
+                TraKetQua(result);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void ThemGiaExcel(string ip_gia)
+        {
+            try
+            {
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                var hd = js.Deserialize<List<QuanLyGiaSanPham.ThemGiaExcel>>(ip_gia);
+                QuanLyGiaSanPham.thay_doi_gia_exel(hd);
+                var result = new KetQuaTraVe(true, "Thành công", null);
                 TraKetQua(result);
             }
             catch (Exception e)

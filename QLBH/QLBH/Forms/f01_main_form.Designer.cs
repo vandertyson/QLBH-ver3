@@ -113,7 +113,6 @@
             this.m_btn_exit.TabIndex = 10;
             this.m_btn_exit.ToolTip = "Menu";
             this.m_btn_exit.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Hand;
-
             // 
             // m_btn_he_thong
             // 
@@ -259,7 +258,6 @@
             this.m_btn_hang_hoa.TabIndex = 4;
             this.m_btn_hang_hoa.ToolTip = "Menu";
             this.m_btn_hang_hoa.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Hand;
-            
             // 
             // m_bnt_hang_hoa
             // 
@@ -346,8 +344,6 @@
             this.m_btn_open_menu.TabIndex = 1;
             this.m_btn_open_menu.ToolTip = "Menu";
             this.m_btn_open_menu.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Hand;
-            this.m_btn_open_menu.Click += new System.EventHandler(this.m_btn_open_menu_Click);
-          
             // 
             // m_pnl_menu_detail
             // 
@@ -560,7 +556,6 @@
             this.m_btn_menu_hang_hoa.Text = "Hàng hóa";
             this.m_btn_menu_hang_hoa.ToolTip = "Menu";
             this.m_btn_menu_hang_hoa.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Hand;
-            
             // 
             // m_btn_menu_tong_quan
             // 
@@ -592,14 +587,13 @@
             this.m_btn_menu_tong_quan.Text = "Tổng quan";
             this.m_btn_menu_tong_quan.ToolTip = "Menu";
             this.m_btn_menu_tong_quan.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Hand;
-
             // 
             // m_btn_user_login
             // 
             this.m_btn_user_login.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.m_btn_user_login.Appearance.BackColor2 = System.Drawing.Color.Transparent;
             this.m_btn_user_login.Appearance.BorderColor = System.Drawing.Color.Transparent;
-            this.m_btn_user_login.Appearance.Font = new System.Drawing.Font("Tahoma", 29.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.m_btn_user_login.Appearance.Font = new System.Drawing.Font("Tahoma", 30.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.m_btn_user_login.Appearance.FontSizeDelta = 1;
             this.m_btn_user_login.Appearance.FontStyleDelta = System.Drawing.FontStyle.Bold;
             this.m_btn_user_login.Appearance.ForeColor = System.Drawing.Color.Snow;

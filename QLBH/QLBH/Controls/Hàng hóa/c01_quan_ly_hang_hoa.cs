@@ -11,6 +11,7 @@ using LibraryApi;
 using QLBH.Common;
 using QLBH.Controls.Hàng_hóa;
 using System.Threading;
+using QLBH.Forms;
 
 namespace QLBH.Controls
 {
@@ -33,7 +34,8 @@ namespace QLBH.Controls
 
         #endregion
 
-        #region public method
+        
+            #region public method
         public c01_quan_ly_hang_hoa()
         {
             InitializeComponent();
@@ -84,7 +86,7 @@ namespace QLBH.Controls
 
         void moLoaiHang(string keyword,int page)
         {
-            QuanLyDanhMucHangHoa.TimKiemHangHoa(keyword,20, page, this, data =>
+            QuanLyDanhMucHangHoa.TimKiemHangHoa(keyword,100, page, this, data =>
             {
                 var l = data.Data;
                 if (l.Count==0)
@@ -108,7 +110,11 @@ namespace QLBH.Controls
                 };
                 table_danh_sach.DidSelectCellAtIndex = (i, sender) =>
                 {
-                    MessageBox.Show("click " + i.ToString());
+                    //MessageBox.Show("click " + i.ToString());
+                    f05_chi_tiet_hang_hoa v_f = new f05_chi_tiet_hang_hoa();
+                    QuanLyDanhMucHangHoa.HangHoaMaster hh = new QuanLyDanhMucHangHoa.HangHoaMaster();
+                    var l1 = data.Data;
+                    v_f.display(l1[i]);
                 };
                 table_danh_sach.Init();
             });
@@ -124,14 +130,14 @@ namespace QLBH.Controls
         {
             try
             {
-                xtraScrollableControl1.Controls.Clear();
-                int id_hang_hoa = Convert.ToInt16(sender);
-                HangHoa p = v_c01_danh_muc_hang_hoa.v_list_hang_hoa.Where(s => s.id == id_hang_hoa).First();
-                v_c01_chi_tiet_hang_hoa = new c01_hang_hoa_chi_tiet(p);
-                // m_tab_page_danh_muc_hang_hoa.Controls.Add(v_c01_chi_tiet_hang_hoa);
-                xtraScrollableControl1.Controls.Add(v_c01_chi_tiet_hang_hoa);
-                v_c01_chi_tiet_hang_hoa.Dock = DockStyle.Fill;
-                v_c01_chi_tiet_hang_hoa.ButtonDeleteClick += V_c_ButtonDeleteClick;
+                //xtraScrollableControl1.Controls.Clear();
+                //int id_hang_hoa = Convert.ToInt16(sender);
+                //HangHoa p = v_c01_danh_muc_hang_hoa.v_list_hang_hoa.Where(s => s.id == id_hang_hoa).First();
+                //v_c01_chi_tiet_hang_hoa = new c01_hang_hoa_chi_tiet(p);
+                //// m_tab_page_danh_muc_hang_hoa.Controls.Add(v_c01_chi_tiet_hang_hoa);
+                //xtraScrollableControl1.Controls.Add(v_c01_chi_tiet_hang_hoa);
+                //v_c01_chi_tiet_hang_hoa.Dock = DockStyle.Fill;
+                //v_c01_chi_tiet_hang_hoa.ButtonDeleteClick += V_c_ButtonDeleteClick;
             }
             catch (Exception v_e)
             {

@@ -17,8 +17,9 @@ namespace QLBH
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new f11_bao_cao_doanh_thu());
+            //Application.Run(new f11_bao_cao_doanh_thu());
             //Application.Run(new Test());
+            Application.Run(new f01_main_form());
         }
     }
 }

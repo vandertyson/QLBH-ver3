@@ -7,14 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using LibraryApi;
 using QLBH.Common;
+using LibraryApi;
+
 namespace QLBH.Controls
 {
     public partial class c01_hinh_anh_minh_hoa : UserControl
     {
         #region DataBindingType
         public HangHoa v_hang_hoa;
+        private HangHoaMaster v_hang_hoa_master;
+        private LibraryApi.HangHoa v_hang_hoa1;
         #endregion
         #region public event handler
         public event EventHandler ButtonEditClick;
@@ -31,10 +34,24 @@ namespace QLBH.Controls
             data_2_image_slider(v_hh);
         }
 
+        public c01_hinh_anh_minh_hoa(HangHoaMaster v_hang_hoa_master)
+        {
+            this.v_hang_hoa_master = v_hang_hoa_master;
+        }
+
+
         public void data_2_image_slider(HangHoa v_hh)
         {
             m_img_slider.Images.Clear();
             foreach (var item in v_hh.link_anh)
+            {
+                m_img_slider.Images.Add(CommonFunction.get_image(item));
+            }
+        }
+        public void data_2_image_slider(HangHoaMaster v_hh)
+        {
+            m_img_slider.Images.Clear();
+            foreach (var item in v_hh.ds_link)
             {
                 m_img_slider.Images.Add(CommonFunction.get_image(item));
             }

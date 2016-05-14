@@ -79,6 +79,7 @@ namespace LibraryApi
             public string ma_hoa_don { get; set; }
             public DateTime thoi_gian_tao { get; set; }
             public decimal id_cua_hang { get; set; }
+            public decimal id_nguoi_tao { get; set; }
             public KhachHang khach { get; set; }
             public string loai_thanh_toan { get; set; }
             public decimal giam_tru { get; set; }

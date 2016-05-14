@@ -32,18 +32,10 @@
             DevExpress.XtraCharts.RectangleGradientFillOptions rectangleGradientFillOptions1 = new DevExpress.XtraCharts.RectangleGradientFillOptions();
             DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series();
             DevExpress.XtraCharts.PieSeriesLabel pieSeriesLabel1 = new DevExpress.XtraCharts.PieSeriesLabel();
-            DevExpress.XtraCharts.SeriesPoint seriesPoint1 = new DevExpress.XtraCharts.SeriesPoint("1", new object[] {
-            ((object)(2D))}, 0);
-            DevExpress.XtraCharts.SeriesPoint seriesPoint2 = new DevExpress.XtraCharts.SeriesPoint("2", new object[] {
-            ((object)(8D))}, 1);
-            DevExpress.XtraCharts.PieSeriesView pieSeriesView1 = new DevExpress.XtraCharts.PieSeriesView(new int[0]);
+            DevExpress.XtraCharts.PieSeriesView pieSeriesView1 = new DevExpress.XtraCharts.PieSeriesView();
             DevExpress.XtraCharts.SeriesTitle seriesTitle1 = new DevExpress.XtraCharts.SeriesTitle();
             DevExpress.XtraCharts.Series series2 = new DevExpress.XtraCharts.Series();
             DevExpress.XtraCharts.PieSeriesLabel pieSeriesLabel2 = new DevExpress.XtraCharts.PieSeriesLabel();
-            DevExpress.XtraCharts.SeriesPoint seriesPoint3 = new DevExpress.XtraCharts.SeriesPoint("1", new object[] {
-            ((object)(3D))}, 0);
-            DevExpress.XtraCharts.SeriesPoint seriesPoint4 = new DevExpress.XtraCharts.SeriesPoint("2", new object[] {
-            ((object)(6D))}, 1);
             DevExpress.XtraCharts.PieSeriesView pieSeriesView2 = new DevExpress.XtraCharts.PieSeriesView();
             DevExpress.XtraCharts.SeriesTitle seriesTitle2 = new DevExpress.XtraCharts.SeriesTitle();
             DevExpress.XtraCharts.PieSeriesView pieSeriesView3 = new DevExpress.XtraCharts.PieSeriesView();
@@ -89,6 +81,10 @@
             this.xtraScrollableControl1 = new DevExpress.XtraEditors.XtraScrollableControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.m_btn_edit = new DevExpress.XtraEditors.SimpleButton();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.m_group_gia.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
@@ -507,7 +503,7 @@
             // m_sle_chon_dot_km
             // 
             this.m_sle_chon_dot_km.Dock = System.Windows.Forms.DockStyle.Right;
-            this.m_sle_chon_dot_km.Location = new System.Drawing.Point(89, 29);
+            this.m_sle_chon_dot_km.Location = new System.Drawing.Point(28, 29);
             this.m_sle_chon_dot_km.Name = "m_sle_chon_dot_km";
             this.m_sle_chon_dot_km.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.m_sle_chon_dot_km.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -517,12 +513,18 @@
             this.m_sle_chon_dot_km.Properties.Appearance.Options.UseForeColor = true;
             this.m_sle_chon_dot_km.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.m_sle_chon_dot_km.Properties.NullText = "";
             this.m_sle_chon_dot_km.Properties.View = this.searchLookUpEdit1View;
-            this.m_sle_chon_dot_km.Size = new System.Drawing.Size(176, 26);
+            this.m_sle_chon_dot_km.Size = new System.Drawing.Size(237, 26);
             this.m_sle_chon_dot_km.TabIndex = 9;
             // 
             // searchLookUpEdit1View
             // 
+            this.searchLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn1,
+            this.gridColumn2,
+            this.gridColumn3,
+            this.gridColumn4});
             this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
             this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -570,36 +572,26 @@
             this.m_chart_khuyen_mai.PaletteBaseColorNumber = 6;
             this.m_chart_khuyen_mai.PaletteName = "Default";
             pieSeriesLabel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(67)))));
+            pieSeriesLabel1.TextPattern = "{V:#,#}";
             series1.Label = pieSeriesLabel1;
+            series1.LegendText = "Tỉ lệ";
+            series1.LegendTextPattern = "{A}-{VP:0.00%}";
             series1.Name = "Doanh số";
-            series1.Points.AddRange(new DevExpress.XtraCharts.SeriesPoint[] {
-            seriesPoint1,
-            seriesPoint2});
-            pieSeriesView1.Border.Color = System.Drawing.Color.Transparent;
-            pieSeriesView1.ExplodedDistancePercentage = 14D;
-            pieSeriesView1.ExplodeMode = DevExpress.XtraCharts.PieExplodeMode.UsePoints;
-            pieSeriesView1.Rotation = 1;
+            pieSeriesView1.Border.Visibility = DevExpress.Utils.DefaultBoolean.True;
             pieSeriesView1.RuntimeExploding = false;
             pieSeriesView1.SweepDirection = DevExpress.XtraCharts.PieSweepDirection.Counterclockwise;
             seriesTitle1.Dock = DevExpress.XtraCharts.ChartTitleDockStyle.Bottom;
-            seriesTitle1.Indent = 20;
-            seriesTitle1.Text = "Doanh số bán ra";
-            seriesTitle1.TextColor = System.Drawing.Color.WhiteSmoke;
             pieSeriesView1.Titles.AddRange(new DevExpress.XtraCharts.SeriesTitle[] {
             seriesTitle1});
             series1.View = pieSeriesView1;
             pieSeriesLabel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(67)))));
+            pieSeriesLabel2.TextPattern = "{V:0,0. VND}";
             series2.Label = pieSeriesLabel2;
+            series2.LegendTextPattern = "{A}-{VP:0.00%}";
             series2.Name = "Doanh thu";
-            series2.Points.AddRange(new DevExpress.XtraCharts.SeriesPoint[] {
-            seriesPoint3,
-            seriesPoint4});
             pieSeriesView2.RuntimeExploding = false;
             pieSeriesView2.SweepDirection = DevExpress.XtraCharts.PieSweepDirection.Counterclockwise;
             seriesTitle2.Dock = DevExpress.XtraCharts.ChartTitleDockStyle.Bottom;
-            seriesTitle2.Indent = 17;
-            seriesTitle2.Text = "Doanh thu";
-            seriesTitle2.TextColor = System.Drawing.Color.WhiteSmoke;
             pieSeriesView2.Titles.AddRange(new DevExpress.XtraCharts.SeriesTitle[] {
             seriesTitle2});
             series2.View = pieSeriesView2;
@@ -678,6 +670,38 @@
             this.m_btn_edit.Name = "m_btn_edit";
             this.m_btn_edit.Size = new System.Drawing.Size(55, 37);
             this.m_btn_edit.TabIndex = 3;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "Mô tả";
+            this.gridColumn1.FieldName = "mo_ta";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "Bắt đầu";
+            this.gridColumn2.FieldName = "thoi_gian_bat_dau";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "Kết thúc";
+            this.gridColumn3.FieldName = "thoi_gian_ket_thuc";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 2;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "Mã đợt";
+            this.gridColumn4.FieldName = "ma_dot";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 3;
             // 
             // c01_chi_tiet_khuyen_mai
             // 
@@ -783,5 +807,9 @@
         private DevExpress.XtraEditors.XtraScrollableControl xtraScrollableControl1;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.SimpleButton m_btn_edit;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
     }
 }
