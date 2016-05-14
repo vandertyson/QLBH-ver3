@@ -162,7 +162,6 @@ namespace QLBH.Controls.Common_Controls
             {
                 int index = (int)(sender as Control).Tag;
                 DidSelectCellAtIndex(index, table.Controls[index]);
-                setHighlight(index);
             }
         }
 
@@ -204,7 +203,7 @@ namespace QLBH.Controls.Common_Controls
             Add(control, length);
         }
         // Private
-        void setHighlight(int index)
+        public void SetOneItemHighlight(int index)
         {
             if (ItemNormal != null)
             {
@@ -218,6 +217,14 @@ namespace QLBH.Controls.Common_Controls
                 }
             }
             ItemHighlight?.Invoke(table.Controls[index]);
+        }
+        public void SetItemHighLight(int index)
+        {
+            ItemHighlight?.Invoke(table.Controls[index]);
+        }
+        public void SetItemNormal(int index)
+        {
+            ItemNormal?.Invoke(table.Controls[index]);
         }
         private void FillEvent(Control control, int index)
         {

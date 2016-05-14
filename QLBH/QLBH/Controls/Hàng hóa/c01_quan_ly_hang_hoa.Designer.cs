@@ -28,24 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, null, true, true, DevExpress.XtraSplashScreen.ParentType.UserControl);
             this.m_tab_page_tag = new DevExpress.XtraTab.XtraTabPage();
             this.m_tab_page_nha_cung_cap = new DevExpress.XtraTab.XtraTabPage();
             this.m_tab_page_danh_muc_hang_hoa = new DevExpress.XtraTab.XtraTabPage();
             this.xtraScrollableControl1 = new DevExpress.XtraEditors.XtraScrollableControl();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.table_danh_sach = new QLBH.Controls.Common_Controls.c0_flowLayout();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.txtPage = new System.Windows.Forms.TextBox();
-            this.table_danh_sach = new QLBH.Controls.Common_Controls.c0_table();
             this.panel6 = new System.Windows.Forms.Panel();
             this.searchBar = new QLBH.Controls.c01_search_box();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.table_danh_muc = new QLBH.Controls.Common_Controls.c0_table();
+            this.table_danh_muc = new QLBH.Controls.Common_Controls.c0_flowLayout();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.m_pnl_danh_muc = new DevExpress.XtraEditors.PanelControl();
-            this.hangHoaBindingSource = new System.Windows.Forms.BindingSource();
+            this.hangHoaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.m_tab_control_quan_ly_hang_hoa = new DevExpress.XtraTab.XtraTabControl();
             this.gridSplitContainer1 = new DevExpress.XtraGrid.GridSplitContainer();
             this.m_tab_page_danh_muc_hang_hoa.SuspendLayout();
@@ -194,36 +197,14 @@
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.panel1);
             this.panel5.Controls.Add(this.table_danh_sach);
+            this.panel5.Controls.Add(this.panel1);
             this.panel5.Controls.Add(this.panel6);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(250, 0);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(972, 494);
             this.panel5.TabIndex = 2;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(67)))));
-            this.panel1.Controls.Add(this.txtPage);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 457);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(972, 37);
-            this.panel1.TabIndex = 2;
-            // 
-            // txtPage
-            // 
-            this.txtPage.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtPage.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPage.Location = new System.Drawing.Point(281, 4);
-            this.txtPage.Name = "txtPage";
-            this.txtPage.Size = new System.Drawing.Size(100, 25);
-            this.txtPage.TabIndex = 0;
-            this.txtPage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtPage.Visible = false;
-            this.txtPage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPage_KeyDown);
             // 
             // table_danh_sach
             // 
@@ -232,9 +213,44 @@
             this.table_danh_sach.Location = new System.Drawing.Point(0, 40);
             this.table_danh_sach.Margin = new System.Windows.Forms.Padding(4);
             this.table_danh_sach.Name = "table_danh_sach";
-            this.table_danh_sach.Size = new System.Drawing.Size(972, 454);
-            this.table_danh_sach.Style = QLBH.Controls.Common_Controls.c0_table.ScrollStyle.Vertical;
-            this.table_danh_sach.TabIndex = 1;
+            this.table_danh_sach.Size = new System.Drawing.Size(972, 417);
+            this.table_danh_sach.TabIndex = 3;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(67)))), ((int)(((byte)(67)))));
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.txtPage);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 457);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(972, 37);
+            this.panel1.TabIndex = 2;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(828, 7);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(51, 21);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Trang";
+            // 
+            // txtPage
+            // 
+            this.txtPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPage.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPage.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPage.Location = new System.Drawing.Point(886, 6);
+            this.txtPage.Name = "txtPage";
+            this.txtPage.Size = new System.Drawing.Size(73, 25);
+            this.txtPage.TabIndex = 0;
+            this.txtPage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtPage.Visible = false;
+            this.txtPage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPage_KeyDown);
             // 
             // panel6
             // 
@@ -274,7 +290,6 @@
             this.table_danh_muc.Margin = new System.Windows.Forms.Padding(4);
             this.table_danh_muc.Name = "table_danh_muc";
             this.table_danh_muc.Size = new System.Drawing.Size(250, 454);
-            this.table_danh_muc.Style = QLBH.Controls.Common_Controls.c0_table.ScrollStyle.Vertical;
             this.table_danh_muc.TabIndex = 1;
             // 
             // panel7
@@ -394,15 +409,16 @@
         private DevExpress.XtraEditors.PanelControl m_pnl_danh_muc;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel5;
-        private Common_Controls.c0_table table_danh_sach;
         private System.Windows.Forms.Panel panel6;
         private c01_search_box searchBar;
         private System.Windows.Forms.Panel panel4;
-        private Common_Controls.c0_table table_danh_muc;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox txtPage;
+        private Common_Controls.c0_flowLayout table_danh_muc;
+        private Common_Controls.c0_flowLayout table_danh_sach;
+        private System.Windows.Forms.Label label2;
     }
 }

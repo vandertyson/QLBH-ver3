@@ -58,7 +58,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(177, 157);
+            this.panel1.Size = new System.Drawing.Size(148, 157);
             this.panel1.TabIndex = 0;
             // 
             // txtGiamGia
@@ -67,7 +67,7 @@
             this.txtGiamGia.BackColor = System.Drawing.Color.White;
             this.txtGiamGia.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtGiamGia.ForeColor = System.Drawing.Color.Red;
-            this.txtGiamGia.Location = new System.Drawing.Point(123, 13);
+            this.txtGiamGia.Location = new System.Drawing.Point(94, 13);
             this.txtGiamGia.Name = "txtGiamGia";
             this.txtGiamGia.ReadOnly = true;
             this.txtGiamGia.Size = new System.Drawing.Size(51, 28);
@@ -77,10 +77,9 @@
             // picIcon
             // 
             this.picIcon.Dock = System.Windows.Forms.DockStyle.Fill;
-            //this.picIcon.Image = global::QLBH.Properties.Resources.ao_so_mi;
             this.picIcon.Location = new System.Drawing.Point(0, 0);
             this.picIcon.Name = "picIcon";
-            this.picIcon.Size = new System.Drawing.Size(177, 157);
+            this.picIcon.Size = new System.Drawing.Size(148, 157);
             this.picIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picIcon.TabIndex = 0;
             this.picIcon.TabStop = false;
@@ -92,7 +91,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 157);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(177, 23);
+            this.panel2.Size = new System.Drawing.Size(148, 23);
             this.panel2.TabIndex = 1;
             // 
             // lblMaTraCuu
@@ -101,7 +100,7 @@
             this.lblMaTraCuu.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblMaTraCuu.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMaTraCuu.ForeColor = System.Drawing.Color.ForestGreen;
-            this.lblMaTraCuu.Location = new System.Drawing.Point(100, 0);
+            this.lblMaTraCuu.Location = new System.Drawing.Point(71, 0);
             this.lblMaTraCuu.Name = "lblMaTraCuu";
             this.lblMaTraCuu.Size = new System.Drawing.Size(77, 23);
             this.lblMaTraCuu.TabIndex = 1;
@@ -132,7 +131,7 @@
             this.txtName.Multiline = true;
             this.txtName.Name = "txtName";
             this.txtName.ReadOnly = true;
-            this.txtName.Size = new System.Drawing.Size(177, 58);
+            this.txtName.Size = new System.Drawing.Size(148, 58);
             this.txtName.TabIndex = 2;
             this.txtName.Text = "Áo sơ mi ống loe";
             this.txtName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -148,7 +147,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel3.Location = new System.Drawing.Point(0, 244);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(177, 23);
+            this.panel3.Size = new System.Drawing.Size(148, 23);
             this.panel3.TabIndex = 3;
             // 
             // lblDiem
@@ -222,7 +221,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "c01_item_hang_hoa";
-            this.Size = new System.Drawing.Size(177, 267);
+            this.Size = new System.Drawing.Size(148, 267);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picIcon)).EndInit();

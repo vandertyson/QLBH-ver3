@@ -62,8 +62,9 @@ namespace QLBH.Controls
                 cell.SetName(loai_hang[i].ten_tag);
                 return cell;
             };
-            table_danh_muc.DidSelectCellAtIndex = (i, sender) =>
+            table_danh_muc.DidSelectCellAtIndex = (i, sender,e) =>
             {
+                table_danh_muc.SetOneItemHighlight(i);
                 moLoaiHang(loai_hang[i].ten_tag,0);                
             };
             table_danh_muc.ItemHighlight = sender =>
@@ -94,7 +95,6 @@ namespace QLBH.Controls
                     MessageBox.Show("Không có luôn");
                     return;
                 }
-                table_danh_sach.NumberOfCellPerLine = () => { return 5; };
                 table_danh_sach.Length = () => { return l.Count; };
                 table_danh_sach.CellAtIndex = i =>
                 {
@@ -108,13 +108,36 @@ namespace QLBH.Controls
                         cell.setSoComment(l[i].so_comment);
                     return cell;
                 };
-                table_danh_sach.DidSelectCellAtIndex = (i, sender) =>
+                table_danh_sach.DidSelectCellAtIndex = (i, sender,e) =>
                 {
                     //MessageBox.Show("click " + i.ToString());
-                    f05_chi_tiet_hang_hoa v_f = new f05_chi_tiet_hang_hoa();
-                    QuanLyDanhMucHangHoa.HangHoaMaster hh = new QuanLyDanhMucHangHoa.HangHoaMaster();
-                    var l1 = data.Data;
-                    v_f.display(l1[i]);
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        f05_chi_tiet_hang_hoa v_f = new f05_chi_tiet_hang_hoa();
+                        QuanLyDanhMucHangHoa.HangHoaMaster hh = new QuanLyDanhMucHangHoa.HangHoaMaster();
+                        var l1 = data.Data;
+                        v_f.display(l1[i]);
+                    }
+                    if (e.Button == MouseButtons.Right)
+                    {
+                        var control = sender as c01_item_hang_hoa;
+                        if (control.IsHighLight)
+                        {
+                            table_danh_sach.SetItemNormal(i);
+                        }
+                        else
+                        {
+                            table_danh_sach.SetItemHighLight(i);
+                        }
+                    }
+                };
+                table_danh_sach.ItemHighlight = item => 
+                {
+                    (item as c01_item_hang_hoa).setHighLight();
+                };
+                table_danh_sach.ItemNormal = item =>
+                {
+                    (item as c01_item_hang_hoa).setNormal();
                 };
                 table_danh_sach.Init();
             });

@@ -16,6 +16,17 @@ namespace QLBH.Controls.Hàng_hóa
         {
             InitializeComponent();
         }
+        public bool IsHighLight { get; set; } = false;
+        public void setHighLight()
+        {
+            IsHighLight = true;
+            this.BackColor = Color.Violet;
+        }
+        public void setNormal()
+        {
+            IsHighLight = false;
+            this.BackColor = Color.White;
+        }
         public void setName(string name)
         {
             txtName.Text = name;
